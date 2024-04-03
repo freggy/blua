@@ -1,0 +1,5 @@
+name: ll
+author: freggy
+version: 1.0
+main: dev.freggy.ll.Main
+api-version: 1.20
