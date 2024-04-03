@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,gradle
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,gradle
 
+.DS_Store
+
 ### Java ###
 # Compiled class file
 *.class
