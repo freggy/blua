@@ -25,8 +25,8 @@ fun main(args: Array<String>) {
     // "" searches through all available packages
     // within the directory passed by --in
     root.parse("") { _, _, result ->
-        result.result.ifPresent { cu ->
-            cu.types.forEach { t ->
+        result.result.ifPresent { compilationUnit ->
+            compilationUnit.types.forEach { t ->
                 val methods = mutableListOf<Method>()
                 for (m in t.methods) {
                     val doc = m.javadoc
