@@ -102,13 +102,6 @@ fun javadocOrEmpty(opt: Optional<Javadoc>, f: (Javadoc) -> (String)):  String{
     }
 }
 
-/**
- *
- *
- * @param solver
- * @param type
- * @param cu
- */
 fun fqcn(
     solver: JavaParserFacade,
     t: Type,
