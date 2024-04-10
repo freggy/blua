@@ -13,6 +13,9 @@
 # BlueJ files
 *.ctxt
 
+# javadump output
+dump.json
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
