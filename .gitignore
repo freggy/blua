@@ -3,6 +3,9 @@
 
 .DS_Store
 
+# fetch-sources work dir
+wrk/
+
 ### Java ###
 # Compiled class file
 *.class
