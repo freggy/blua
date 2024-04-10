@@ -1,12 +1,19 @@
 package dev.freggy.ll.javadump
 
+import com.github.javaparser.ast.CompilationUnit
+import com.github.javaparser.ast.type.Type
 import com.github.javaparser.javadoc.Javadoc
 import com.github.javaparser.javadoc.JavadocBlockTag
+import com.github.javaparser.resolution.UnsolvedSymbolException
+import com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade
+import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver
+import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver
+import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver
 import com.github.javaparser.utils.SourceRoot
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
-import java.util.Optional
+import java.util.*
 import kotlin.io.path.Path
 import kotlin.jvm.optionals.getOrNull
 import kotlin.system.exitProcess
@@ -21,10 +28,30 @@ fun main(args: Array<String>) {
 
     val classes = mutableListOf<Class>()
     val root = SourceRoot(Path(inputDir!!))
+    val solver = JavaParserFacade.get(
+        CombinedTypeSolver(
+            JavaParserTypeSolver("/Users/yannic/wrk/adventure/api/src/main/java"),
+            JavaParserTypeSolver("/Users/yannic/wrk/adventure/key/src/main/java"),
+            JavaParserTypeSolver("/Users/yannic/wrk/adventure/text-logger-slf4j/src/main/java"),
+            JavaParserTypeSolver("/Users/yannic/wrk/adventure/text-serializer-gson/src/main/java"),
+            JavaParserTypeSolver("/Users/yannic/wrk/adventure/text-serializer-legacy/src/main/java"),
+            JavaParserTypeSolver("/Users/yannic/wrk/adventure/text-serializer-plain/src/main/java"),
+            JavaParserTypeSolver("/Users/yannic/wrk/BungeeCord/chat/src/main/java"),
+            JavaParserTypeSolver("/Users/yannic/wrk/blua/wrk/jomlsrc"),
+            JavaParserTypeSolver("/Users/yannic/wrk/blua/wrk/log4jsrc"),
+            JavaParserTypeSolver("/Users/yannic/wrk/blua/wrk/slf4jsrc"),
+            JavaParserTypeSolver("/Users/yannic/wrk/blua/wrk/guavasrc"),
+            JavaParserTypeSolver(inputDir),
+            ReflectionTypeSolver(),
+        )
+    )
+
+    // TODO: enums
+    // TODO: records
 
     // "" searches through all available packages
     // within the directory passed by --in
-    root.parse("") { _, _, result ->
+    root.parse("") { _, pa, result ->
         result.result.ifPresent { compilationUnit ->
             compilationUnit.types.forEach { t ->
                 val methods = mutableListOf<Method>()
@@ -33,7 +60,7 @@ fun main(args: Array<String>) {
                     val params = m.parameters.map { p ->
                         Param(
                             p.nameAsString,
-                            p.typeAsString,
+                            fqcn(solver, p.type, compilationUnit),
                             javadocOrEmpty(doc) { getParamText(it, p.nameAsString) }
                         )
                     }.toList()
@@ -42,6 +69,7 @@ fun main(args: Array<String>) {
                             m.nameAsString,
                             params,
                             javadocOrEmpty(doc) { it.description.toText() },
+                            fqcn(solver, m.type, compilationUnit),
                             javadocOrEmpty(doc) { getReturnText(it) }
                         )
                     )
@@ -53,7 +81,6 @@ fun main(args: Array<String>) {
                         javadocOrEmpty(t.javadoc) { t.javadoc.get().description.toText() }
                     )
                 )
-                println(t.fullyQualifiedName.getOrNull())
             }
         }
         // we are parsing a lot of classes,
@@ -61,14 +88,69 @@ fun main(args: Array<String>) {
         // the compilation unit from being cached.
         return@parse SourceRoot.Callback.Result.DONT_SAVE
     }
-
-    File(outFile!!).writeText(Json.encodeToString(classes))
+    val json = Json {
+        prettyPrint = true
+        prettyPrintIndent = "  " // 2
+    }
+    File(outFile!!).writeText(json.encodeToString(classes))
 }
 
-fun javadocOrEmpty(opt: Optional<Javadoc>, f: (Javadoc) -> (String)):  {
+fun javadocOrEmpty(opt: Optional<Javadoc>, f: (Javadoc) -> (String)):  String{
     return when (opt.isPresent) {
         true -> f(opt.get())
         else -> ""
+    }
+}
+
+fun fqcn(
+    solver: JavaParserFacade,
+    t: Type,
+    cu: CompilationUnit,
+): String {
+    try {
+        val rt = solver.convertToUsage(t)
+        if (rt.isReferenceType) {
+            return rt.asReferenceType().qualifiedName
+        }
+        // no FQCN needed return simple type name
+        // this the case if we have primitives
+        // for example: byte, boolean, void etc.
+        return t.asString()
+    } catch (e: Exception) {
+        when(e) {
+            // those indicate that we have record that cannot be parsed.
+            // currently, it is enough to only search in the current
+            // compilation unit for record declarations. in the future
+            // it might be necessary to expand the search.
+            is UnsupportedOperationException, is IllegalArgumentException -> {
+                val topLevelRecords = cu.types
+                    .filter { it.isRecordDeclaration }
+                    .map { it.asRecordDeclaration() }
+                    .toList()
+                // we are only interested in one layer deep records.
+                // everything else should be pretty rare, so we can
+                // ignore it for now.
+                val nestedRecords = cu.types
+                    .asSequence()
+                    .filter { !it.isRecordDeclaration }
+                    .map { it.members }
+                    .toList()
+                    .flatten() // merge all members of all types together to avoid List<List<Member>>
+                    .filter { it.isRecordDeclaration }
+                    .map { it.asRecordDeclaration() }
+                    .toList()
+                val record = listOf(topLevelRecords, nestedRecords)
+                    .flatten()
+                    .first { it.nameAsString == t.asString() }
+                return record.fullyQualifiedName.orElse("<rec-not-found>")
+            }
+            is UnsolvedSymbolException -> {
+                return "<unresolved>"
+            }
+            // if we cannot resolve fqcn fail here,
+            // so we know something is up
+            else -> throw e
+        }
     }
 }
 

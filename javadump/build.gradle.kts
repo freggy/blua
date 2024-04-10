@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     implementation("com.github.javaparser:javaparser-core:3.25.9")
+    implementation("com.github.javaparser:javaparser-symbol-solver-core:3.25.9")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }
 
