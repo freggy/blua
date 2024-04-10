@@ -6,7 +6,8 @@ local {{ $className }} = {}
 
 {{- range .Methods }}
 {{- range .Params }}
----@param {{ .Name }} {{ .Type }} {{ .Doc }}
+---@param {{ .Name }} {{ .Type }} {{ .Desc }}
 {{- end }}
+---@return {{ .RetTypeFQCN }} # {{ .RetDesc }}
 function {{ $className }}.{{ .Name }}({{ .JoinedParams }}) end
 {{ end }}
