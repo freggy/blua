@@ -1,4 +1,4 @@
-package dev.freggy.ll.javadump
+package dev.freggy.blua.javadump
 
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.type.Type

@@ -1,4 +1,4 @@
-package dev.freggy.ll.javadump
+package dev.freggy.blua.javadump
 
 import kotlinx.serialization.Serializable
 
