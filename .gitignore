@@ -6,6 +6,9 @@
 # fetch-sources work dir
 wrk/
 
+# output dir
+out/
+
 ### Java ###
 # Compiled class file
 *.class
