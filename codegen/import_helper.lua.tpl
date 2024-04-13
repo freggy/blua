@@ -1,12 +1,13 @@
 {{ range .Classes }}
-{{ $name := replace .FQCN '.' '_' }}
+{{- $name := replace .FQCN "." "_" }}
 
+---@return {{ .FQCN }} # returns the imported class
 function {{ $name }}()
-  return import "{{ $name }}"
+  return import "{{ .FQCN }}"
 end
 {{ end }}
 
 ---@return org.bukkit.Bukkit
-function import_org_bukkit_Bukkit()
+function org_bukkit_Bukkit()
   return import "org.bukkit.Difficulty"
 end

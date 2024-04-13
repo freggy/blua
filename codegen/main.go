@@ -2,10 +2,12 @@ package main
 
 import (
 	_ "embed"
+	"encoding/json"
 	"flag"
 	"fmt"
-	"log"
+	"io"
 	"os"
+	"strings"
 	"text/template"
 )
 
@@ -21,7 +23,7 @@ type Method struct {
 	Params       []Param `json:"params"`
 	Desc         string  `json:"desc"`
 	RetDesc      string  `json:"retDesc"`
-	RetTypeFQCN  string  `json:"retType"`
+	RetTypeFQCN  string  `json:"retTypeFQCN"`
 	JoinedParams string
 }
 
@@ -31,8 +33,12 @@ type Param struct {
 	Desc string `json:"desc"`
 }
 
-//go:embed class_def.lua.tpl
-var definitionTemplate string
+var (
+	//go:embed class_meta.lua.tpl
+	classMetaTemplate string
+	//go:embed import_helper.lua.tpl
+	importHelperTemplate string
+)
 
 func main() {
 	var (
@@ -42,20 +48,89 @@ func main() {
 		usage = "usage: codegen --in <path/to/javadump.json> --out <path/to/output>"
 	)
 	if err := fs.Parse(os.Args[1:]); err != nil {
-		log.Fatalf("parse args: %v", err)
+		die("parse args: %v", err)
 	}
 	if *in == "" || *out == "" {
-		fmt.Println(usage)
-		os.Exit(1)
+		die(usage)
 	}
-	// TODO:
-	// * read json
-	// * fill in fields where values need to be computed (joinedParam, Name)
-	tpl, err := template.New("definition").Parse(definitionTemplate)
+	data, err := os.ReadFile(*in)
 	if err != nil {
-		log.Fatalf("parse template: %v", err)
+		die("read file: %v", err)
 	}
-	if err := tpl.Execute(os.Stdout, c); err != nil {
-		log.Fatalf("exec template: %v", err)
+	var classes []Class
+	if err := json.Unmarshal(data, &classes); err != nil {
+		die("unmarshal json: %v\n", err)
 	}
+	var (
+		importTpl = parseTemplateOrDie("importhelper", importHelperTemplate)
+		classTpl  = parseTemplateOrDie("classmeta", classMetaTemplate)
+		f         = createFileOrDie("import_helper.lua")
+	)
+	if err := genImportHelpers(importTpl, f, classes); err != nil {
+		die("generate helpers: %v", err)
+	}
+	for _, c := range classes {
+		f := createFileOrDie(fmt.Sprintf("%s/%s.lua", *out, c.FQCN))
+		if err := genClassMeta(classTpl, f, c); err != nil {
+			die("gen class doc: %v", err)
+		}
+	}
+}
+
+func genImportHelpers(tpl *template.Template, w io.Writer, classes []Class) error {
+	t := struct {
+		Classes []Class
+	}{
+		Classes: classes,
+	}
+	if err := tpl.Execute(w, t); err != nil {
+		return fmt.Errorf("execute template: %w", err)
+	}
+	return nil
+}
+
+func genClassMeta(tpl *template.Template, w io.Writer, class Class) error {
+	parts := strings.Split(class.FQCN, ".")
+	class.Name = parts[len(parts)-1]
+	for i, m := range class.Methods {
+		class.Methods[i].JoinedParams = concatParams(m.Params)
+	}
+	if err := tpl.Execute(w, class); err != nil {
+		return fmt.Errorf("exec template: %w", err)
+	}
+	return nil
+}
+
+func createFileOrDie(path string) *os.File {
+	f, err := os.Create(path)
+	if err != nil {
+		die("create file: %v", err)
+	}
+	return f
+}
+
+func parseTemplateOrDie(name string, text string) *template.Template {
+	funcs := template.FuncMap{
+		"replace": func(input, from, to string) string {
+			return strings.Replace(input, from, to, -1)
+		},
+	}
+	tpl, err := template.New(name).Funcs(funcs).Parse(text)
+	if err != nil {
+		die("could not parse template %s: %v", name, err)
+	}
+	return tpl
+}
+
+func concatParams(params []Param) string {
+	names := make([]string, 0, len(params))
+	for _, p := range params {
+		names = append(names, p.Name)
+	}
+	return strings.Join(names, ",")
+}
+
+func die(format string, args ...any) {
+	fmt.Printf(format+"\n", args)
+	os.Exit(1)
 }
