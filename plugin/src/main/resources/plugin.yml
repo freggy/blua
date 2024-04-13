@@ -1,5 +1,5 @@
-name: ll
+name: blua
 author: freggy
 version: 1.0
-main: dev.freggy.ll.Main
+main: dev.freggy.blua.Main
 api-version: 1.20

@@ -48,6 +48,7 @@ fun main(args: Array<String>) {
 
     // TODO: enums
     // TODO: records
+    // TODO: nested classes
 
     // "" searches through all available packages
     // within the directory passed by --in
@@ -90,7 +91,7 @@ fun main(args: Array<String>) {
     }
     val json = Json {
         prettyPrint = true
-        prettyPrintIndent = "  " // 2
+        prettyPrintIndent = "  " // 2 spaces
     }
     File(outFile!!).writeText(json.encodeToString(classes))
 }
