@@ -3,3 +3,12 @@
     * handle return type List<SomeType>
     * records cannot be parsed
         * see https://github.com/javaparser/javaparser/issues/3556#issuecomment-1102609775
+    * generate dumps for
+        * adventure
+        * some jdk classes (java.util.Logger for example)
+* plugin
+    * bukkit scheduler support
+    * implement instanceOf
+    * onScriptLoad
+    * onScriptDestroy
+    * event handling
