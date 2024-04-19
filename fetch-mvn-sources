@@ -1,0 +1,103 @@
+#!/usr/bin/env lua
+local xml2lua = require "xml2lua"
+local paperapi_pom = require "xmlhandler.tree"
+local request = require "http.request"
+
+--
+-- functions
+--
+
+local function do_req(url, code, timeout)
+    local headers, stream = request.new_from_uri(url):go(timeout)
+    local status = headers:get(":status")
+    if status ~= code then
+        return {}, string.format("expected status %s got %s", code, status)
+    end
+    return stream, nil
+end
+
+local function die(...)
+    print(string.format(...))
+    os.exit(1)
+end
+
+local function dep_mgmt_entry(pom, dep)
+    for _, d in pairs(pom.root.project.dependencyManagement.dependencies) do
+        if d.groupId == dep.groupId then
+            return d
+        end
+    end
+    return nil
+end
+
+--
+-- main script part
+--
+
+local TIMEOUT = 30
+local HTTP_OK = "200"
+
+-- script configuration
+-- TODO: pass version and ci_stuff as script args
+local version = "1.20.4-R0.1"
+local ci_stuff = "20240416.195429-165"
+local paper = "https://repo.papermc.io/repository/maven-releases/%s/%s/%s/%s-%s-sources.jar"
+local central = "https://repo1.maven.org/maven2/%s/%s/%s/%s-%s-sources.jar"
+-- what groups where sources should be downloaded
+local download = {
+    ["com.google.guava"] = central,
+    ["org.apache.logging.log4j"] = central,
+    ["org.slf4j"] = central,
+    ["org.joml"] = central,
+    ["net.kyori"] = central,
+    ["net.md-5"] = paper
+}
+
+local paperapi_pom_url = string.format(
+    "https://repo.papermc.io/repository/maven-public/io/papermc/paper/paper-api/%s-SNAPSHOT/paper-api-%s-%s.pom",
+    version,
+    version,
+    ci_stuff
+)
+
+local stream, err = do_req(paperapi_pom_url, HTTP_OK, TIMEOUT)
+if err then
+    die("fetch pom: %s", err)
+end
+
+local parser = xml2lua.parser(paperapi_pom)
+parser:parse(stream:get_body_as_string())
+
+for _, dep in pairs(paperapi_pom.root.project.dependencies.dependency) do
+    local url_fmt = download[dep.groupId]
+    if not url_fmt then
+        goto continue
+    end
+    -- use version of entry we find in project.dependencyManagement.dependencies,
+    -- if project.dependencies entry as no version specified. this is currently the case for
+    -- the adventure libraries.
+    local entry = dep_mgmt_entry(paperapi_pom, dep)
+    if entry and not dep.version then
+        dep.version = entry.version
+    end
+    local url = string.format(
+        url_fmt,
+        dep.groupId:gsub("%.", "/"),
+        dep.artifactId,
+        dep.version,
+        dep.artifactId,
+        dep.version
+    )
+    print(url)
+    local stream, err = do_req(url, HTTP_OK, TIMEOUT)
+    if err then
+        die("fetch sources: %s", err)
+    end
+    local name = string.format("%s-%s", dep.groupId, dep.artifactId)
+    local cmd = string.format("tar -xzvf wrk/%s.jar -C wrk/%s-src", name, name)
+    local f = io.open(string.format("wrk/%s.jar", name), "w")
+    stream:save_body_to_file(f, TIMEOUT)
+    os.execute(string.format("mkdir wrk/%s-src", name))
+    os.execute(cmd)
+    ::continue::
+end
