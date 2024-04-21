@@ -1,0 +1,10 @@
+#!/bin/bash
+mkdir wrk
+cd wrk
+echo "===FETCH GIT SOURCES==="
+../fetch-git-sources
+echo "===FETCH MVN SOURCES==="
+../fetch-mvn-sources
+echo "===APPLY PAPER API PATCHES==="
+cd paper && ./gradlew :applyApiPatches
+cd -
