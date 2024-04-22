@@ -57,7 +57,10 @@ fun main(args: Array<String>) {
                             Method(
                                 m.nameAsString,
                                 params,
-                                javadocOrEmpty(doc) { it.description.toText().replace("\n", " ") },
+                                javadocOrEmpty(doc) {
+                                    // \n breaks codegen generated files. this is just a workaround for now
+                                    it.description.toText().replace("\n", " ")
+                                },
                                 fqcn(solver, m.type, compilationUnit),
                                 javadocOrEmpty(doc) { getReturnText(it) }
                             )
@@ -67,7 +70,10 @@ fun main(args: Array<String>) {
                         Class(
                             t.fullyQualifiedName.get(),
                             methods,
-                            javadocOrEmpty(t.javadoc) { t.javadoc.get().description.toText().replace("\n", " ") }
+                            javadocOrEmpty(t.javadoc) {
+                                // \n breaks codegen generated files. this is just a workaround for now
+                                t.javadoc.get().description.toText().replace("\n", " ")
+                            }
                         )
                     )
                 }
@@ -155,6 +161,7 @@ fun getParamText(doc: Javadoc, param: String): String {
         .filter { tag -> tag.type == JavadocBlockTag.Type.PARAM }
         .firstOrNull { tag -> tag.name.getOrNull() == param }
     tag ?: return ""
+    // \n breaks codegen generated files. this is just a workaround for now
     return tag.content.toText().replace("\n", " ")
 }
 
@@ -166,6 +173,7 @@ fun getParamText(doc: Javadoc, param: String): String {
 fun getReturnText(doc: Javadoc): String {
     val tag = doc.blockTags.firstOrNull { tag -> tag.type == JavadocBlockTag.Type.RETURN }
     tag ?: return ""
+    // \n breaks codegen generated files. this is just a workaround for now
     return tag.content.toText().replace("\n", " ")
 }
 
