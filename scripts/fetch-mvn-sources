@@ -94,10 +94,10 @@ for _, dep in pairs(paperapi_pom.root.project.dependencies.dependency) do
         die("fetch sources: %s", err)
     end
     local name = string.format("%s-%s", dep.groupId, dep.artifactId)
-    local cmd = string.format("tar -xzvf wrk/%s.jar -C wrk/%s-src", name, name)
-    local f = io.open(string.format("wrk/%s.jar", name), "w")
+    local cmd = string.format("tar -xzvf %s.jar -C %s-src", name, name)
+    local f = io.open(string.format("%s.jar", name), "w")
     stream:save_body_to_file(f, TIMEOUT)
-    os.execute(string.format("mkdir wrk/%s-src", name))
+    os.execute(string.format("mkdir %s-src", name))
     os.execute(cmd)
     ::continue::
 end

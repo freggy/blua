@@ -9,6 +9,9 @@ wrk/
 # output dir
 out/
 
+# javadump output files
+*_dump.json
+
 ### Java ###
 # Compiled class file
 *.class

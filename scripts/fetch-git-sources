@@ -1,0 +1,8 @@
+#!/usr/bin/env lua
+local repos = {
+    ["git@github.com:openjdk/jdk17.git"] = "jdk17",
+    ["git@github.com:PaperMC/Paper.git"] = "paper"
+}
+for k, v in pairs(repos) do
+    os.execute(string.format("git clone %s %s", k, v))
+end

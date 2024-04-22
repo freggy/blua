@@ -41,3 +41,15 @@ data class Class(
     val methods: List<Method>,
     val desc: String,
 )
+
+/**
+ * @param solverSources paths to java source used for FQCN lookup
+ * @param source path to folder containing java source that should be dumped
+ * @param output path to where json file containing the dump should be stored
+ */
+@Serializable
+class Config(
+    val solverSources: List<String>,
+    val source: String,
+    val output: String,
+)

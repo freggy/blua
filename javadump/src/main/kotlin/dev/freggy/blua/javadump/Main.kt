@@ -20,80 +20,75 @@ import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
     val argsMap = args.toList().chunked(2).associate { it[0] to it[1] }
-    val inputDir = argsMap["--in"]
-    val outFile = argsMap["--out"]
+    val configFile = argsMap["--config"]
 
-    dieWhenNull(inputDir)
-    dieWhenNull(outFile)
+    dieWhenNull(configFile)
+    val config = Json.decodeFromString<List<Config>>(File(configFile!!).readText())
 
-    val classes = mutableListOf<Class>()
-    val root = SourceRoot(Path(inputDir!!))
-    val solver = JavaParserFacade.get(
-        CombinedTypeSolver(
-            JavaParserTypeSolver("/Users/yannic/wrk/adventure/api/src/main/java"),
-            JavaParserTypeSolver("/Users/yannic/wrk/adventure/key/src/main/java"),
-            JavaParserTypeSolver("/Users/yannic/wrk/adventure/text-logger-slf4j/src/main/java"),
-            JavaParserTypeSolver("/Users/yannic/wrk/adventure/text-serializer-gson/src/main/java"),
-            JavaParserTypeSolver("/Users/yannic/wrk/adventure/text-serializer-legacy/src/main/java"),
-            JavaParserTypeSolver("/Users/yannic/wrk/adventure/text-serializer-plain/src/main/java"),
-            JavaParserTypeSolver("/Users/yannic/wrk/BungeeCord/chat/src/main/java"),
-            JavaParserTypeSolver("/Users/yannic/wrk/blua/wrk/jomlsrc"),
-            JavaParserTypeSolver("/Users/yannic/wrk/blua/wrk/log4jsrc"),
-            JavaParserTypeSolver("/Users/yannic/wrk/blua/wrk/slf4jsrc"),
-            JavaParserTypeSolver("/Users/yannic/wrk/blua/wrk/guavasrc"),
-            JavaParserTypeSolver(inputDir),
+    config.forEach {
+        val classes = mutableListOf<Class>()
+        val root = SourceRoot(Path(it.source))
+        val solver = JavaParserFacade.get(CombinedTypeSolver(
+            *it.solverSources.map { JavaParserTypeSolver(it) }.toTypedArray(),
+            JavaParserTypeSolver(it.source),
             ReflectionTypeSolver(),
-        )
-    )
+        ))
 
-    // TODO: enums
-    // TODO: records
-    // TODO: nested classes
+        // TODO: enums
+        // TODO: records
+        // TODO: nested classes
 
-    // "" searches through all available packages
-    // within the directory passed by --in
-    root.parse("") { _, pa, result ->
-        result.result.ifPresent { compilationUnit ->
-            compilationUnit.types.forEach { t ->
-                val methods = mutableListOf<Method>()
-                for (m in t.methods) {
-                    val doc = m.javadoc
-                    val params = m.parameters.map { p ->
-                        Param(
-                            p.nameAsString,
-                            fqcn(solver, p.type, compilationUnit),
-                            javadocOrEmpty(doc) { getParamText(it, p.nameAsString) }
+        // "" searches through all available packages
+        // within the directory passed via config.source
+        root.parse("") { _, _, result ->
+            result.result.ifPresent { compilationUnit ->
+                compilationUnit.types.forEach { t ->
+                    val methods = mutableListOf<Method>()
+                    for (m in t.methods) {
+                        val doc = m.javadoc
+                        val params = m.parameters.map { p ->
+                            Param(
+                                p.nameAsString,
+                                fqcn(solver, p.type, compilationUnit),
+                                javadocOrEmpty(doc) { getParamText(it, p.nameAsString) }
+                            )
+                        }.toList()
+                        methods.add(
+                            Method(
+                                m.nameAsString,
+                                params,
+                                javadocOrEmpty(doc) {
+                                    // \n breaks codegen generated files. this is just a workaround for now
+                                    it.description.toText().replace("\n", " ")
+                                },
+                                fqcn(solver, m.type, compilationUnit),
+                                javadocOrEmpty(doc) { getReturnText(it) }
+                            )
                         )
-                    }.toList()
-                    methods.add(
-                        Method(
-                            m.nameAsString,
-                            params,
-                            javadocOrEmpty(doc) { it.description.toText() },
-                            fqcn(solver, m.type, compilationUnit),
-                            javadocOrEmpty(doc) { getReturnText(it) }
+                    }
+                    classes.add(
+                        Class(
+                            t.fullyQualifiedName.get(),
+                            methods,
+                            javadocOrEmpty(t.javadoc) {
+                                // \n breaks codegen generated files. this is just a workaround for now
+                                t.javadoc.get().description.toText().replace("\n", " ")
+                            }
                         )
                     )
                 }
-                classes.add(
-                    Class(
-                        t.fullyQualifiedName.get(),
-                        methods,
-                        javadocOrEmpty(t.javadoc) { t.javadoc.get().description.toText() }
-                    )
-                )
             }
+            // we are parsing a lot of classes,
+            // so return DONT_SAVE here to prevent
+            // the compilation unit from being cached.
+            return@parse SourceRoot.Callback.Result.DONT_SAVE
         }
-        // we are parsing a lot of classes,
-        // so return DONT_SAVE here to prevent
-        // the compilation unit from being cached.
-        return@parse SourceRoot.Callback.Result.DONT_SAVE
+        val json = Json {
+            prettyPrint = true
+            prettyPrintIndent = "  " // 2 spaces
+        }
+        File(it.output).writeText(json.encodeToString(classes))
     }
-    val json = Json {
-        prettyPrint = true
-        prettyPrintIndent = "  " // 2 spaces
-    }
-    File(outFile!!).writeText(json.encodeToString(classes))
 }
 
 fun javadocOrEmpty(opt: Optional<Javadoc>, f: (Javadoc) -> (String)):  String{
@@ -166,7 +161,8 @@ fun getParamText(doc: Javadoc, param: String): String {
         .filter { tag -> tag.type == JavadocBlockTag.Type.PARAM }
         .firstOrNull { tag -> tag.name.getOrNull() == param }
     tag ?: return ""
-    return tag.content.toText()
+    // \n breaks codegen generated files. this is just a workaround for now
+    return tag.content.toText().replace("\n", " ")
 }
 
 /**
@@ -177,7 +173,8 @@ fun getParamText(doc: Javadoc, param: String): String {
 fun getReturnText(doc: Javadoc): String {
     val tag = doc.blockTags.firstOrNull { tag -> tag.type == JavadocBlockTag.Type.RETURN }
     tag ?: return ""
-    return tag.content.toText()
+    // \n breaks codegen generated files. this is just a workaround for now
+    return tag.content.toText().replace("\n", " ")
 }
 
 fun dieWhenNull(arg: String?) {
