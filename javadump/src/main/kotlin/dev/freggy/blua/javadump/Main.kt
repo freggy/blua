@@ -66,6 +66,25 @@ fun main(args: Array<String>) {
                             )
                         )
                     }
+                    // some types aren't a ClassOrInterfaceDeclaration
+                    // we ignore them for now, because it covers most
+                    // it seems.
+                    val parentTypeFQCN = when (t.isClassOrInterfaceDeclaration) {
+                        true -> {
+                            var fqcn = ""
+                            val types = t.asClassOrInterfaceDeclaration().extendedTypes
+                            if (types.isNotEmpty()) {
+                                fqcn = fqcn(
+                                    solver,
+                                    // luals annotations allow us to only specify a single type
+                                    types.first(),
+                                    compilationUnit
+                                )
+                            }
+                            fqcn
+                        }
+                        else -> ""
+                    }
                     classes.add(
                         Class(
                             t.fullyQualifiedName.get(),
@@ -73,7 +92,8 @@ fun main(args: Array<String>) {
                             javadocOrEmpty(t.javadoc) {
                                 // \n breaks codegen generated files. this is just a workaround for now
                                 t.javadoc.get().description.toText().replace("\n", " ")
-                            }
+                            },
+                            parentTypeFQCN,
                         )
                     )
                 }
@@ -81,7 +101,7 @@ fun main(args: Array<String>) {
             // we are parsing a lot of classes,
             // so return DONT_SAVE here to prevent
             // the compilation unit from being cached.
-            return@parse SourceRoot.Callback.Result.DONT_SAVE
+            return@parse SourceRoot.Callback.Result.SAVE
         }
         val json = Json {
             prettyPrint = true
