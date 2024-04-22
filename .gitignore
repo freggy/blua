@@ -7,7 +7,7 @@
 wrk/
 
 # output dir
-out/
+completion/addon/
 
 # javadump output files
 *_dump.json
