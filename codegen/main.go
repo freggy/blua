@@ -11,11 +11,24 @@ import (
 	"text/template"
 )
 
+type Dump struct {
+	Classes []Class
+	Enums   []Enum
+}
+
 type Class struct {
+	FQCN           string   `json:"FQCN"`
+	Methods        []Method `json:"methods"`
+	Desc           string   `json:"desc"`
+	ParentTypeFQCN string   `json:"parentTypeFQCN"`
+	Name           string
+}
+
+type Enum struct {
 	FQCN    string   `json:"FQCN"`
+	Entries []string `json:"entries"`
 	Methods []Method `json:"methods"`
 	Desc    string   `json:"desc"`
-	ParentTypeFQCN string `json:"parentTypeFQCN"`
 	Name    string
 }
 
@@ -37,6 +50,8 @@ type Param struct {
 var (
 	//go:embed class_meta.lua.tpl
 	classMetaTemplate string
+	//go:embed enum_meta.lua.tpl
+	enumMetaTemplate string
 	//go:embed import_helper.lua.tpl
 	importHelperTemplate string
 )
@@ -58,33 +73,35 @@ func main() {
 	if err != nil {
 		die("read file: %v", err)
 	}
-	var classes []Class
-	if err := json.Unmarshal(data, &classes); err != nil {
+	var dump Dump
+	if err := json.Unmarshal(data, &dump); err != nil {
 		die("unmarshal json: %v\n", err)
 	}
 	var (
 		importTpl = parseTemplateOrDie("importhelper", importHelperTemplate)
 		classTpl  = parseTemplateOrDie("classmeta", classMetaTemplate)
+		enumTpl   = parseTemplateOrDie("enummeta", enumMetaTemplate)
 		f         = createFileOrDie("import_helper.lua")
 	)
-	if err := genImportHelpers(importTpl, f, classes); err != nil {
+	if err := genImportHelpers(importTpl, f, dump); err != nil {
 		die("generate helpers: %v", err)
 	}
-	for _, c := range classes {
+	for _, c := range dump.Classes {
 		f := createFileOrDie(fmt.Sprintf("%s/%s.lua", *out, c.FQCN))
 		if err := genClassMeta(classTpl, f, c); err != nil {
-			die("gen class doc: %v", err)
+			die("gen class meta: %v", err)
+		}
+	}
+	for _, e := range dump.Enums {
+		f := createFileOrDie(fmt.Sprintf("%s/%s.lua", *out, e.FQCN))
+		if err := genEnumMeta(enumTpl, f, e); err != nil {
+			die("gen enum meta: %v", err)
 		}
 	}
 }
 
-func genImportHelpers(tpl *template.Template, w io.Writer, classes []Class) error {
-	t := struct {
-		Classes []Class
-	}{
-		Classes: classes,
-	}
-	if err := tpl.Execute(w, t); err != nil {
+func genImportHelpers(tpl *template.Template, w io.Writer, dump Dump) error {
+	if err := tpl.Execute(w, dump); err != nil {
 		return fmt.Errorf("execute template: %w", err)
 	}
 	return nil
@@ -97,6 +114,18 @@ func genClassMeta(tpl *template.Template, w io.Writer, class Class) error {
 		class.Methods[i].JoinedParams = concatParams(m.Params)
 	}
 	if err := tpl.Execute(w, class); err != nil {
+		return fmt.Errorf("exec template: %w", err)
+	}
+	return nil
+}
+
+func genEnumMeta(tpl *template.Template, w io.Writer, enum Enum) error {
+	parts := strings.Split(enum.FQCN, ".")
+	enum.Name = parts[len(parts)-1]
+	for i, m := range enum.Methods {
+		enum.Methods[i].JoinedParams = concatParams(m.Params)
+	}
+	if err := tpl.Execute(w, enum); err != nil {
 		return fmt.Errorf("exec template: %w", err)
 	}
 	return nil

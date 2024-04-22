@@ -32,7 +32,7 @@ data class Method(
 
 /**
  * @param FQCN fully qualified class name e.g. org.bukkit.Bukkit
- * @param methods mehtods belonging to this class
+ * @param methods methods belonging to this class
  * @param desc comment part of its javadoc, not containing block tags
  */
 @Serializable
@@ -44,13 +44,33 @@ data class Class(
 )
 
 /**
+ * @param FQCN fully qualified class name e.g. org.bukkit.Bukkit
+ * @param entries names of enum entries
+ * @param methods methods belonging to this enum
+ * @param desc comment part of its javadoc, not containing block tags
+ */
+@Serializable
+data class Enum(
+    val FQCN: String,
+    val entries: List<String>,
+    val methods: List<Method>,
+    val desc: String,
+)
+
+/**
  * @param solverSources paths to java source used for FQCN lookup
  * @param source path to folder containing java source that should be dumped
  * @param output path to where json file containing the dump should be stored
  */
 @Serializable
-class Config(
+data class Config(
     val solverSources: List<String>,
     val source: String,
     val output: String,
+)
+
+@Serializable
+data class Dump(
+    val classes: List<Class>,
+    val enums: List<Enum>,
 )

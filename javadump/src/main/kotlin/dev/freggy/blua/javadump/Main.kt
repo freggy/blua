@@ -1,6 +1,9 @@
 package dev.freggy.blua.javadump
 
 import com.github.javaparser.ast.CompilationUnit
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration
+import com.github.javaparser.ast.body.EnumDeclaration
+import com.github.javaparser.ast.body.TypeDeclaration
 import com.github.javaparser.ast.type.Type
 import com.github.javaparser.javadoc.Javadoc
 import com.github.javaparser.javadoc.JavadocBlockTag
@@ -27,6 +30,7 @@ fun main(args: Array<String>) {
 
     config.forEach {
         val classes = mutableListOf<Class>()
+        val enums = mutableListOf<Enum>()
         val root = SourceRoot(Path(it.source))
         val solver = JavaParserFacade.get(CombinedTypeSolver(
             *it.solverSources.map { JavaParserTypeSolver(it) }.toTypedArray(),
@@ -34,7 +38,6 @@ fun main(args: Array<String>) {
             ReflectionTypeSolver(),
         ))
 
-        // TODO: enums
         // TODO: records
         // TODO: nested classes
 
@@ -43,59 +46,12 @@ fun main(args: Array<String>) {
         root.parse("") { _, _, result ->
             result.result.ifPresent { compilationUnit ->
                 compilationUnit.types.forEach { t ->
-                    val methods = mutableListOf<Method>()
-                    for (m in t.methods) {
-                        val doc = m.javadoc
-                        val params = m.parameters.map { p ->
-                            Param(
-                                p.nameAsString,
-                                fqcn(solver, p.type, compilationUnit),
-                                javadocOrEmpty(doc) { getParamText(it, p.nameAsString) }
-                            )
-                        }.toList()
-                        methods.add(
-                            Method(
-                                m.nameAsString,
-                                params,
-                                javadocOrEmpty(doc) {
-                                    // \n breaks codegen generated files. this is just a workaround for now
-                                    it.description.toText().replace("\n", " ")
-                                },
-                                fqcn(solver, m.type, compilationUnit),
-                                javadocOrEmpty(doc) { getReturnText(it) }
-                            )
-                        )
+                    if (t.isEnumDeclaration) {
+                        enums.add(enum(t.asEnumDeclaration(), solver, compilationUnit))
                     }
-                    // some types aren't a ClassOrInterfaceDeclaration
-                    // we ignore them for now, because it covers most
-                    // it seems.
-                    val parentTypeFQCN = when (t.isClassOrInterfaceDeclaration) {
-                        true -> {
-                            var fqcn = ""
-                            val types = t.asClassOrInterfaceDeclaration().extendedTypes
-                            if (types.isNotEmpty()) {
-                                fqcn = fqcn(
-                                    solver,
-                                    // luals annotations allow us to only specify a single type
-                                    types.first(),
-                                    compilationUnit
-                                )
-                            }
-                            fqcn
-                        }
-                        else -> ""
+                    if (t.isClassOrInterfaceDeclaration) {
+                        classes.add(clazz(t.asClassOrInterfaceDeclaration(), solver, compilationUnit))
                     }
-                    classes.add(
-                        Class(
-                            t.fullyQualifiedName.get(),
-                            methods,
-                            javadocOrEmpty(t.javadoc) {
-                                // \n breaks codegen generated files. this is just a workaround for now
-                                t.javadoc.get().description.toText().replace("\n", " ")
-                            },
-                            parentTypeFQCN,
-                        )
-                    )
                 }
             }
             // we are parsing a lot of classes,
@@ -107,8 +63,72 @@ fun main(args: Array<String>) {
             prettyPrint = true
             prettyPrintIndent = "  " // 2 spaces
         }
-        File(it.output).writeText(json.encodeToString(classes))
+        File(it.output).writeText(json.encodeToString(Dump(classes, enums)))
     }
+}
+
+fun enum(t: EnumDeclaration, solver: JavaParserFacade, compilationUnit: CompilationUnit): Enum {
+    return Enum(
+        t.fullyQualifiedName.get(),
+        t.entries.map { it.name.asString() }.toList(),
+        methods(t, solver, compilationUnit),
+        javadocOrEmpty(t.javadoc) {
+            // \n breaks codegen generated files. this is just a workaround for now
+            t.javadoc.get().description.toText().replace("\n", " ")
+        }
+    )
+}
+
+fun clazz(t: ClassOrInterfaceDeclaration, solver: JavaParserFacade, compilationUnit: CompilationUnit): Class {
+    // some types aren't a ClassOrInterfaceDeclaration
+    // we ignore them for now, because it covers most
+    // it seems.
+    val parentTypeFQCN = when (t.extendedTypes.isNotEmpty()) {
+        true -> fqcn(
+            solver,
+            // luals annotations allow us to only specify a single type
+            t.extendedTypes.first(),
+            compilationUnit
+        )
+        else -> ""
+    }
+    return Class(
+        t.fullyQualifiedName.get(),
+        methods(t, solver, compilationUnit),
+        javadocOrEmpty(t.javadoc) {
+            // \n breaks codegen generated files. this is just a workaround for now
+            t.javadoc.get().description.toText().replace("\n", " ")
+        },
+        parentTypeFQCN,
+    )
+}
+
+
+fun methods(t: TypeDeclaration<*>, solver: JavaParserFacade, compilationUnit: CompilationUnit): List<Method> {
+    val methods = mutableListOf<Method>()
+    for (m in t.methods) {
+        val doc = m.javadoc
+        val params = m.parameters.map { p ->
+            Param(
+                p.nameAsString,
+                fqcn(solver, p.type, compilationUnit),
+                javadocOrEmpty(doc) { getParamText(it, p.nameAsString) }
+            )
+        }.toList()
+        methods.add(
+            Method(
+                m.nameAsString,
+                params,
+                javadocOrEmpty(doc) {
+                    // \n breaks codegen generated files. this is just a workaround for now
+                    it.description.toText().replace("\n", " ")
+                },
+                fqcn(solver, m.type, compilationUnit),
+                javadocOrEmpty(doc) { getReturnText(it) }
+            )
+        )
+    }
+    return methods
 }
 
 fun javadocOrEmpty(opt: Optional<Javadoc>, f: (Javadoc) -> (String)):  String{
