@@ -4,8 +4,8 @@
 
 ---@class {{ $fqcn }}
 {{- range .Entries }}
----@field {{ .Name }} {{ $fqcn }}
-{{ end }}
+---@field {{ . }} {{ $fqcn }}
+{{- end }}
 local {{ $enumName }} = {}
 
 {{- range .Methods }}
@@ -13,5 +13,5 @@ local {{ $enumName }} = {}
 ---@param {{ .Name }} {{ .Type }} {{ .Desc }}
 {{- end }}
 ---@return {{ .RetTypeFQCN }} # {{ .RetDesc }}
-function {{ $className }}.{{ .Name }}({{ .JoinedParams }}) end
+function {{ $enumName }}.{{ .Name }}({{ .JoinedParams }}) end
 {{ end }}
