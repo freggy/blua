@@ -1,6 +1,6 @@
 [
   {
-    "source":  "wrk/paper/Paper-API/src/main/java",
+    "source": "wrk/paper/Paper-API/src/main/java",
     "output": "paper_dump.json",
     "solverSources": [
       "wrk/com.google.guava-guava-src",
@@ -18,8 +18,13 @@
     ]
   },
   {
-    "source":  "wrk/jdk17/src/java.base/share/classes",
+    "source": "wrk/jdk17/src/java.base/share/classes",
     "output": "java_base_dump.json",
+    "solverSources": []
+  },
+  {
+    "source": "wrk/jdk17/src/java.logging/share/classes",
+    "output": "java_logging_dump.json",
     "solverSources": []
   }
 ]
