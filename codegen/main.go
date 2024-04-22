@@ -15,6 +15,7 @@ type Class struct {
 	FQCN    string   `json:"FQCN"`
 	Methods []Method `json:"methods"`
 	Desc    string   `json:"desc"`
+	ParentTypeFQCN string `json:"parentTypeFQCN"`
 	Name    string
 }
 
