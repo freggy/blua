@@ -9,7 +9,7 @@ group = "dev.freggy"
 version = "1.0-SNAPSHOT"
 
 application {
-    mainClass = "dev.freggy.ll.javadump.MainKt"
+    mainClass = "dev.freggy.blua.javadump.MainKt"
 }
 
 repositories {

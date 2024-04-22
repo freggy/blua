@@ -41,3 +41,10 @@ data class Class(
     val methods: List<Method>,
     val desc: String,
 )
+
+@Serializable
+class Config(
+    val solverSources: List<String>,
+    val source: String,
+    val output: String,
+)
