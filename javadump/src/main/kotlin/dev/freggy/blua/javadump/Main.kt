@@ -57,7 +57,7 @@ fun main(args: Array<String>) {
             // we are parsing a lot of classes,
             // so return DONT_SAVE here to prevent
             // the compilation unit from being cached.
-            return@parse SourceRoot.Callback.Result.SAVE
+            return@parse SourceRoot.Callback.Result.DONT_SAVE
         }
         val json = Json {
             prettyPrint = true
