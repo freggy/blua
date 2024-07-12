@@ -39,8 +39,8 @@ local HTTP_OK = "200"
 
 -- script configuration
 -- TODO: pass version and ci_stuff as script args
-local version = "1.20.4-R0.1"
-local ci_stuff = "20240416.195429-165"
+local version = "1.21-R0.1"
+local ci_stuff = "20240712.185542-65"
 local paper = "https://repo.papermc.io/repository/maven-releases/%s/%s/%s/%s-%s-sources.jar"
 local central = "https://repo1.maven.org/maven2/%s/%s/%s/%s-%s-sources.jar"
 -- what groups where sources should be downloaded
