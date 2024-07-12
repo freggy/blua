@@ -143,6 +143,7 @@ fun fqcn(
     t: Type,
     cu: CompilationUnit,
 ): String {
+    println(String.format("cu: %s type %s", cu.primaryTypeName, t.asString()))
     try {
         val rt = solver.convertToUsage(t)
         if (rt.isReferenceType) {
@@ -161,8 +162,10 @@ fun fqcn(
             is UnsupportedOperationException, is IllegalArgumentException -> {
                 val topLevelRecords = cu.types
                     .filter { it.isRecordDeclaration }
+                    .filter { it.isPublic }
                     .map { it.asRecordDeclaration() }
                     .toList()
+
                 // we are only interested in one layer deep records.
                 // everything else should be pretty rare, so we can
                 // ignore it for now.
@@ -174,10 +177,24 @@ fun fqcn(
                     .flatten() // merge all members of all types together to avoid List<List<Member>>
                     .filter { it.isRecordDeclaration }
                     .map { it.asRecordDeclaration() }
+                    .filter { it.isPublic }
                     .toList()
-                val record = listOf(topLevelRecords, nestedRecords)
-                    .flatten()
-                    .first { it.nameAsString == t.asString() }
+
+                val merged = listOf(topLevelRecords, nestedRecords).flatten()
+
+                // HANDLE EDGE CASE:
+                // cu -> ThreadFlock, t -> ScopedValueContainer.BindingsSnapshot
+                // somehow leads to this list being empty, but we can simpy return
+                // the type name
+                if (merged.isEmpty()) {
+                    return t.asString()
+                }
+
+                val record = merged.first {
+                    // HANDLE EDGE CASE:
+                    // * match when t is = List<Record>
+                    t.asString().contains(it.nameAsString)
+                }
                 return record.fullyQualifiedName.orElse("<rec-not-found>")
             }
             is UnsolvedSymbolException -> {
