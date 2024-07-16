@@ -1,5 +1,8 @@
 package dev.freggy.blua
 
+import dev.freggy.blua.runtime.DeleteFunc
+import dev.freggy.blua.runtime.EventCallbacks
+import dev.freggy.blua.runtime.ListenFunc
 import party.iroiro.luajava.Lua
 import party.iroiro.luajava.luajit.LuaJit
 
@@ -10,11 +13,21 @@ import party.iroiro.luajava.luajit.LuaJit
  * @param text content of the script
  * @param L [Lua] implementation to use defaults to [LuaJit]
  */
-class Script(val name: String, val text: String, val L: Lua = LuaJit()) {
+class Script(
+    val name: String,
+    val text: String,
+    val eventCbs: EventCallbacks,
+    val L: Lua = LuaJit(),
+) {
     /**
+     * Runs the script. Additionally, registers blua runtime functions and libraries
      * @see [Lua.run]
      */
-    fun run() = L.run(this.text)
+    fun run() {
+        this.L.register("listen", ListenFunc(this.eventCbs))
+        this.L.register("delete", DeleteFunc(this.eventCbs))
+        this.L.run(this.text)
+    }
 
     /**
      * @see [Lua.close]
