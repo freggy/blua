@@ -15,7 +15,7 @@ class Main : JavaPlugin(), Listener {
         this.dataFolder.mkdir()
         val found = this.dataFolder
             .listFiles { _, name -> name.endsWith(".lua") }
-            ?.map { Script(it.name, it.readText(), this.eventCallbacks) }
+            ?.map { Script(it.name, it.readText(), this.eventCallbacks, this) }
         if (found == null) {
            logger.warning("no lua files found in ${this.dataFolder.absolutePath}")
             return
