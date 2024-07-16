@@ -1,0 +1,6 @@
+{
+  "name" : "bluajava",
+  "settings" : {
+    "Lua.runtime.version" : "LuaJIT"
+  }
+}
