@@ -1,22 +1,11 @@
-package dev.freggy.blua.runtime
+package dev.freggy.blua.runtime.builtin
 
+import dev.freggy.blua.runtime.EventCallbacks
 import party.iroiro.luajava.Lua
 import party.iroiro.luajava.value.LuaFunction
 import party.iroiro.luajava.value.LuaValue
 
-class DeleteFunc(private val eventCbs: EventCallbacks) : LuaFunction {
-    override fun call(L: Lua, args: Array<out LuaValue>): Array<LuaValue>? {
-        if (args.isEmpty()) {
-            return null
-        }
-        val cbd = args[0]
-        if (cbd.type() != Lua.LuaType.STRING) {
-            return null
-        }
-        this.eventCbs.remove(cbd.toString())
-        return null
-    }
-}
+// TODO: fire(event) function
 
 class ListenFunc(private val eventCbs: EventCallbacks) : LuaFunction {
     override fun call(L: Lua, args: Array<out LuaValue>): Array<LuaValue>? {
