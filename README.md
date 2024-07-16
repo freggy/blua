@@ -6,9 +6,9 @@
 * `plugin/`
   * plugin embedding luajit, so we can run lua code on the minecraft server
 
-
-
-### generate mappings
-* 
+### generate code completions
+* when using macos install lua and luarocks using macports
+  * `sudo port install lua lua-luarocks`
 * run `./prepare-work`in `scripts` directory
-* then `java -jar javadump.jar --config javadump.json`
+* `java -jar javadump.jar --config javadump.json`
+* `./codegen --in javadump.json --out lib`
