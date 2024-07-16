@@ -81,7 +81,7 @@ func main() {
 		importTpl = parseTemplateOrDie("importhelper", importHelperTemplate)
 		classTpl  = parseTemplateOrDie("classmeta", classMetaTemplate)
 		enumTpl   = parseTemplateOrDie("enummeta", enumMetaTemplate)
-		f         = createFileOrDie("import_helper.lua")
+		f         = createFileOrDie(fmt.Sprintf("%s/%s_imports.lua", *out, *in))
 	)
 	if err := genImportHelpers(importTpl, f, dump); err != nil {
 		die("generate helpers: %v", err)
