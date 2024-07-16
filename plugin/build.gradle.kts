@@ -14,8 +14,9 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
-    implementation("party.iroiro.luajava:luajit:3.5.0")
-    implementation("party.iroiro.luajava:luajit-platform:3.5.0:natives-desktop")
+    implementation("party.iroiro.luajava:luajava:4.0.1")
+    implementation("party.iroiro.luajava:luajit:4.0.1")
+    implementation("party.iroiro.luajava:luajit-platform:4.0.1:natives-desktop")
 }
 
 kotlin {
