@@ -4,6 +4,9 @@ import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
+import org.bukkit.potion.PotionEffectTypeWrapper
 import party.iroiro.luajava.value.LuaValue
 import java.util.UUID
 
@@ -20,6 +23,11 @@ class EventCallbacks(private val plugin: Plugin, private val listener: Listener)
         if (!this.cbToEvent.containsKey(eventFQCN)) {
             val clazz = Class.forName(eventFQCN)
             // TODO: catch if `as Class<out Event>` fails
+            // FIXME: this could possibly pollute memory
+            //        because, events might have an executor registered
+            //        even-though there are no callbacks registered to
+            //        the event. this can happen when a callback is
+            //        removed using delete() call
             this.plugin.server.pluginManager.registerEvent(
                 clazz as Class<out Event>,
                 this.listener,

@@ -1,11 +1,9 @@
 package dev.freggy.blua
 
-import dev.freggy.blua.runtime.builtin.DeleteFunc
 import dev.freggy.blua.runtime.EventCallbacks
-import dev.freggy.blua.runtime.builtin.ListenFunc
-import dev.freggy.blua.runtime.builtin.SchedLater
-import dev.freggy.blua.runtime.builtin.SchedSync
+import dev.freggy.blua.runtime.builtin.*
 import org.bukkit.plugin.Plugin
+import party.iroiro.luajava.JFunction
 import party.iroiro.luajava.Lua
 import party.iroiro.luajava.luajit.LuaJit
 
@@ -28,10 +26,19 @@ class Script(
      * @see [Lua.run]
      */
     fun run() {
+        this.L.openLibrary("math")
+        this.L.openLibrary("string")
+
+        this.registerJFunc("getplayers", GetPlayersFunc())
+        this.registerJFunc("location", LocationFunc())
+        this.registerJFunc("effect", EffectFunc())
+
+        this.L.register("schedsync", SchedSync(this.plugin))
+        this.L.register("schedlater", SchedLater(this.plugin))
         this.L.register("listen", ListenFunc(this.eventCbs))
         this.L.register("delete", DeleteFunc(this.eventCbs))
-        this.L.register("schedSync", SchedSync(this.plugin))
-        this.L.register("schedLater", SchedLater(this.plugin))
+        this.L.register("print", PrintFunc())
+
         this.L.run(this.text)
     }
 
@@ -53,5 +60,10 @@ class Script(
             message = this.L.toString(-1)
         }
         return message ?: ""
+    }
+
+    private fun registerJFunc(name: String, func: JFunction) {
+        this.L.push(func)
+        this.L.setGlobal(name)
     }
 }

@@ -1,10 +1,98 @@
 package dev.freggy.blua.runtime.builtin
 
 import dev.freggy.blua.runtime.EventCallbacks
+import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.Location
+import org.bukkit.NamespacedKey
+import org.bukkit.entity.Player
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
+import party.iroiro.luajava.JFunction
 import party.iroiro.luajava.Lua
 import party.iroiro.luajava.value.LuaFunction
 import party.iroiro.luajava.value.LuaValue
+
+
+class EffectFunc : JFunction {
+    override fun __call(L: Lua): Int {
+        val args = popArgs(L)
+        if (args.size < 3)
+            return 0
+        val key = args[0]!!
+        val dur = args[1]!!
+        val amp = args[2]!!
+        if (key.type() != Lua.LuaType.STRING
+            || dur.type() != Lua.LuaType.NUMBER
+            || amp.type() != Lua.LuaType.NUMBER)
+            return 0
+        val type = PotionEffectType.getByKey(NamespacedKey.fromString(key.toString()))!!
+        L.pushJavaObject(
+            type.createEffect(dur.toInteger().toInt(), amp.toInteger().toInt())
+        )
+        return 1
+    }
+}
+
+class GetPlayersFunc : JFunction {
+    override fun __call(L: Lua): Int {
+        L.pushArray(Bukkit.getOnlinePlayers().toTypedArray())
+        return 1
+    }
+}
+
+class LocationFunc : JFunction {
+    override fun __call(L: Lua): Int {
+        val args = popArgs(L)
+
+        if (args.size < 4)
+            return 0
+
+        // required args
+        val world = args[0]!!
+        val x = args[1]!!
+        val y = args[2]!!
+        val z = args[3]!!
+
+        if (world.type() != Lua.LuaType.STRING
+            || x.type() != Lua.LuaType.NUMBER
+            || y.type() != Lua.LuaType.NUMBER
+            || z.type() != Lua.LuaType.NUMBER)
+            return 0
+
+        val loc = Location(
+            Bukkit.getWorld(world.toString()),
+            x.toNumber(),
+            y.toNumber(),
+            z.toNumber()
+        )
+
+        // yaw and pitch are optional
+        if (args.size >= 5) {
+            val yaw = args[4]!!
+            if (yaw.type() == Lua.LuaType.NUMBER)
+                loc.yaw = yaw.toNumber().toFloat()
+        }
+
+        if (args.size >= 6) {
+            val pitch = args[5]!!
+            if (pitch.type() == Lua.LuaType.NUMBER)
+                loc.pitch = pitch.toNumber().toFloat()
+        }
+
+        L.pushJavaObject(loc)
+        return 1
+    }
+}
+
+class PrintFunc : LuaFunction {
+    override fun call(L: Lua, args: Array<out LuaValue>): Array<LuaValue>? {
+        args.forEach {
+            Bukkit.getServer().sendMessage(Component.text(it.toJavaObject().toString()))
+        }
+        return null
+    }
+}
 
 class DeleteFunc(private val eventCbs: EventCallbacks) : LuaFunction {
     override fun call(L: Lua, args: Array<out LuaValue>): Array<LuaValue>? {
@@ -36,4 +124,12 @@ class DeleteFunc(private val eventCbs: EventCallbacks) : LuaFunction {
         }
         return null
     }
+}
+
+fun popArgs(L: Lua): Array<LuaValue?> {
+    val args = arrayOfNulls<LuaValue>(L.top)
+    for (i in args.indices) {
+        args[args.size - i - 1] = L.get()
+    }
+    return args
 }
