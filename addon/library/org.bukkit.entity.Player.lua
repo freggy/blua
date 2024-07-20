@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.entity.Player: org.bukkit.entity.HumanEntity 
+---@class org.bukkit.entity.Player: org.bukkit.entity.HumanEntity
 local Player = {}
 ---@return net.kyori.adventure.identity.Identity # 
 function Player.identity() end

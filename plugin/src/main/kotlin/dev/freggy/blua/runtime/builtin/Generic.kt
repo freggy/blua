@@ -5,8 +5,6 @@ import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.NamespacedKey
-import org.bukkit.entity.Player
-import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import party.iroiro.luajava.JFunction
 import party.iroiro.luajava.Lua
@@ -70,14 +68,14 @@ class LocationFunc : JFunction {
         // yaw and pitch are optional
         if (args.size >= 5) {
             val yaw = args[4]!!
-            if (yaw.type() == Lua.LuaType.NUMBER)
-                loc.yaw = yaw.toNumber().toFloat()
+            if (yaw.type() != Lua.LuaType.NUMBER) return 0
+            loc.yaw = yaw.toNumber().toFloat()
         }
 
         if (args.size >= 6) {
             val pitch = args[5]!!
-            if (pitch.type() == Lua.LuaType.NUMBER)
-                loc.pitch = pitch.toNumber().toFloat()
+            if (pitch.type() != Lua.LuaType.NUMBER) return 0
+            loc.pitch = pitch.toNumber().toFloat()
         }
 
         L.pushJavaObject(loc)
