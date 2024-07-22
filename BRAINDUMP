@@ -5,13 +5,31 @@
         * see https://github.com/javaparser/javaparser/issues/3556#issuecomment-1102609775
     * generate dumps for
         * adventure
-    * add parent interfaces to dumps
-        * we need them, because luals only displays functions of
-          directly parent we have configured currently. so also add
-          all interfaces the class implements
 * plugin
     * implement instanceOf
     * onDisable()
-    * itemstack support
-    * code completion for runtime calls
     * document calls with examples
+    * command support
+    * proper minimessage support
+
+## NEXT STEPS
+* add list of all events to `event` param in listen() call
+  like this:
+  ```
+  ---@param event string
+  ---|"'org.bukkit.event.player.PlayerInteractEvent'"  # comment 1
+  ---|"'org.bukkit.event.player.PlayerMoveEvent'" # comment 2
+  function listen(event, callback) end
+  ```
+* add parent interfaces to dumps
+    * we need them, because luals only displays functions of
+      directly parent we have configured currently. so also add
+      all interfaces the class implements
+
+* restructure addon folder:
+  library/
+    builtin.lua
+    import.lua
+    javadump/
+      org.bukkit.Location.lua
+      ....
