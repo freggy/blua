@@ -4,13 +4,42 @@ import dev.freggy.blua.runtime.EventCallbacks
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Location
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.entity.Entity
+import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffectType
 import party.iroiro.luajava.JFunction
 import party.iroiro.luajava.Lua
 import party.iroiro.luajava.value.LuaFunction
 import party.iroiro.luajava.value.LuaValue
+import java.util.WeakHashMap
 
+class ItemStackFunc : JFunction {
+    override fun __call(L: Lua): Int {
+        val args = popArgs(L)
+        if (args.isEmpty()) return 0
+
+        val mat = args[0]!!
+        if (mat.type() != Lua.LuaType.STRING) return 0
+
+        val stack = ItemStack(Material.valueOf(mat.toString()))
+
+        if (args.size < 2) {
+            L.pushJavaObject(stack)
+            return 1
+        }
+
+        val amount = args[1]!!
+        if (mat.type() != Lua.LuaType.NUMBER) {
+            L.pushJavaObject(stack)
+            return 1
+        }
+
+        stack.amount = amount.toInteger().toInt()
+        return 1
+    }
+}
 
 class EffectFunc : JFunction {
     override fun __call(L: Lua): Int {
@@ -83,10 +112,56 @@ class LocationFunc : JFunction {
     }
 }
 
+val entityMetadata = WeakHashMap<Entity, MutableMap<String, Any?>>()
+
+class SetMetaFunc : JFunction {
+    override fun __call(L: Lua): Int {
+        val args = popArgs(L)
+        if (args.size < 3) return 0
+
+        val entity = args[0]!!
+        val key = args[1]!!
+        val value = args[2]!!
+
+        if (entity.type() != Lua.LuaType.USERDATA
+            || key.type() != Lua.LuaType.STRING)
+            return 0
+        // TODO: check that we have an entity here
+        val data = entityMetadata.computeIfAbsent(entity.toJavaObject() as Entity) { hashMapOf() }
+
+        println(value.toJavaObject())
+        data[key.toString()] = value.toJavaObject()
+        return 0
+    }
+}
+
+class GetMetaFunc : JFunction {
+    override fun __call(L: Lua): Int {
+        val args = popArgs(L)
+        if (args.size < 2) return 0
+
+        val entity = args[0]!!
+        val key = args[1]!!
+
+        if (entity.type() != Lua.LuaType.USERDATA
+            || key.type() != Lua.LuaType.STRING)
+            return 0
+
+        // TODO: check that we have an entity here
+        val data = entityMetadata[entity.toJavaObject()] ?: return 0
+        val value = data[key.toString()] ?: return 0
+
+        // just doing L.pushJavaObject() seems not to be working
+        // in case of value being of type Map<>.
+        L.push(value, Lua.Conversion.FULL)
+        return 1
+    }
+}
+
 class PrintFunc : LuaFunction {
     override fun call(L: Lua, args: Array<out LuaValue>): Array<LuaValue>? {
         args.forEach {
-            Bukkit.getServer().sendMessage(Component.text(it.toJavaObject().toString()))
+            Bukkit.getServer().broadcast(Component.text(it.toJavaObject().toString()))
         }
         return null
     }

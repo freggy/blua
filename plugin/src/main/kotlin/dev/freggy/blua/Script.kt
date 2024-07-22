@@ -32,6 +32,9 @@ class Script(
         this.registerJFunc("getplayers", GetPlayersFunc())
         this.registerJFunc("location", LocationFunc())
         this.registerJFunc("effect", EffectFunc())
+        this.registerJFunc("itemstack", ItemStackFunc())
+        this.registerJFunc("setmeta", SetMetaFunc())
+        this.registerJFunc("getmeta", GetMetaFunc())
 
         this.L.register("schedsync", SchedSync(this.plugin))
         this.L.register("schedlater", SchedLater(this.plugin))
