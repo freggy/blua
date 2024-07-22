@@ -1,5 +1,11 @@
 {
-  "name" : "bluajava",
+  "name" : "blua-paper",
+  "words": [
+    "schedsync%(",
+    "schedlater%(",
+    "getplayers%(",
+    "itemstack%("
+  ],
   "settings" : {
     "Lua.runtime.version" : "LuaJIT"
   }
