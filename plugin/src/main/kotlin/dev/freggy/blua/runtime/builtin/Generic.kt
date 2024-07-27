@@ -8,12 +8,31 @@ import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Entity
 import org.bukkit.inventory.ItemStack
+import org.bukkit.plugin.Plugin
 import org.bukkit.potion.PotionEffectType
+import org.bukkit.util.Consumer
 import party.iroiro.luajava.JFunction
 import party.iroiro.luajava.Lua
 import party.iroiro.luajava.value.LuaFunction
 import party.iroiro.luajava.value.LuaValue
 import java.util.WeakHashMap
+
+class ShutdownFunc(private val plugin: Plugin) : LuaFunction {
+    override fun call(L: Lua, args: Array<out LuaValue>): Array<LuaValue>? {
+        if (args.isEmpty()) {
+            Bukkit.getServer().shutdown()
+            return null
+        }
+
+        val ticks = args[0]
+        if (ticks.type() != Lua.LuaType.NUMBER) return null
+
+        Bukkit.getScheduler().runTaskLater(this.plugin, Runnable {
+            Bukkit.getServer().shutdown()
+        }, ticks.toNumber().toLong())
+        return null
+    }
+}
 
 class ItemStackFunc : JFunction {
     override fun __call(L: Lua): Int {

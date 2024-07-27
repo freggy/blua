@@ -28,6 +28,7 @@ class Script(
     fun run() {
         this.L.openLibrary("math")
         this.L.openLibrary("string")
+        this.L.openLibrary("os")
 
         this.registerJFunc("getplayers", GetPlayersFunc())
         this.registerJFunc("location", LocationFunc())
@@ -38,6 +39,7 @@ class Script(
 
         this.L.register("schedsync", SchedSync(this.plugin))
         this.L.register("schedlater", SchedLater(this.plugin))
+        this.L.register("shutdown", ShutdownFunc(this.plugin))
         this.L.register("listen", ListenFunc(this.eventCbs))
         this.L.register("delete", DeleteFunc(this.eventCbs))
         this.L.register("print", PrintFunc())
