@@ -9,5 +9,5 @@ local {{ $className }} = {}
 ---@param {{ .Name }} {{ .Type }} {{ .Desc }}
 {{- end }}
 ---@return {{ .RetTypeFQCN }} # {{ .RetDesc }}
-function {{ $className }}.{{ .Name }}({{ .JoinedParams }}) end
+function {{ $className }}.{{ .Name }}(self, {{ .JoinedParams }}) end
 {{ end }}
