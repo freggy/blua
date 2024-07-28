@@ -4,7 +4,7 @@ learn a new API, because you can interact with the Bukkit/Paper API like its Jav
 
 For example, you could write the following example script
 
-```
+```lua
 local bukkit = java.import "org.bukkit.Bukkit"
 local component = java.import "net.kyori.adventure.text.Component"
 
