@@ -40,7 +40,7 @@ data class Class(
     val FQCN: String,
     val methods: List<Method>,
     val desc: String,
-    val parentTypeFQCN: String,
+    val parentTypeFQCNs: List<String>,
 )
 
 /**
