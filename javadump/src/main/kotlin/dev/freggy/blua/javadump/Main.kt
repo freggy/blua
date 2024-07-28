@@ -80,18 +80,13 @@ fun enum(t: EnumDeclaration, solver: JavaParserFacade, compilationUnit: Compilat
 }
 
 fun clazz(t: ClassOrInterfaceDeclaration, solver: JavaParserFacade, compilationUnit: CompilationUnit): Class {
-    // some types aren't a ClassOrInterfaceDeclaration
-    // we ignore them for now, because it covers most
-    // it seems.
-    val parentTypeFQCN = when (t.extendedTypes.isNotEmpty()) {
-        true -> fqcn(
+    val parentTypeFQCNs = t.extendedTypes.map {
+        fqcn(
             solver,
-            // luals annotations allow us to only specify a single type
-            t.extendedTypes.first(),
+            it,
             compilationUnit
         )
-        else -> ""
-    }
+    }.toList()
     return Class(
         t.fullyQualifiedName.get(),
         methods(t, solver, compilationUnit),
@@ -99,7 +94,7 @@ fun clazz(t: ClassOrInterfaceDeclaration, solver: JavaParserFacade, compilationU
             // \n breaks codegen generated files. this is just a workaround for now
             t.javadoc.get().description.toText().replace("\n", " ")
         },
-        parentTypeFQCN,
+        parentTypeFQCNs,
     )
 }
 

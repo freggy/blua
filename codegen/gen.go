@@ -3,10 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/freggy/blua/codegen/tpl"
-	"io"
 	"os"
 	"strings"
-	"text/template"
 )
 
 type Dump struct {
@@ -21,11 +19,14 @@ type templateData struct {
 }
 
 type Class struct {
-	FQCN           string   `json:"FQCN"`
-	Methods        []Method `json:"methods"`
-	Desc           string   `json:"desc"`
-	ParentTypeFQCN string   `json:"parentTypeFQCN"`
-	Name           string
+	FQCN            string   `json:"FQCN"`
+	Methods         []Method `json:"methods"`
+	Desc            string   `json:"desc"`
+	ParentTypeFQCNs []string `json:"parentTypeFQCNs"`
+
+	// later populated by process()
+	Name                  string
+	JoinedParentTypeFQCNs string
 }
 
 type Enum struct {
@@ -33,15 +34,19 @@ type Enum struct {
 	Entries []string `json:"entries"`
 	Methods []Method `json:"methods"`
 	Desc    string   `json:"desc"`
-	Name    string
+
+	// later populated by process()
+	Name string
 }
 
 type Method struct {
-	Name         string  `json:"name"`
-	Params       []Param `json:"params"`
-	Desc         string  `json:"desc"`
-	RetDesc      string  `json:"retDesc"`
-	RetTypeFQCN  string  `json:"retTypeFQCN"`
+	Name        string  `json:"name"`
+	Params      []Param `json:"params"`
+	Desc        string  `json:"desc"`
+	RetDesc     string  `json:"retDesc"`
+	RetTypeFQCN string  `json:"retTypeFQCN"`
+
+	// later populated by process()
 	JoinedParams string
 }
 
@@ -94,8 +99,8 @@ func gen(baseDir string, dumps []Dump) error {
 		if err != nil {
 			return fmt.Errorf("create class file: %w", err)
 		}
-		if err := genClassMeta(tpl.ClassMetaTpl, f, c); err != nil {
-			return fmt.Errorf("gen class %s.java: %w", c.FQCN, err)
+		if err := tpl.ClassMetaTpl.Execute(f, c); err != nil {
+			return fmt.Errorf("exec template: %w", err)
 		}
 	}
 
@@ -104,8 +109,8 @@ func gen(baseDir string, dumps []Dump) error {
 		if err != nil {
 			return fmt.Errorf("create enum file: %w", err)
 		}
-		if err := genEnumMeta(tpl.EnumMetaTpl, f, e); err != nil {
-			return fmt.Errorf("gen enum %s.java: %w", e.FQCN, err)
+		if err := tpl.EnumMetaTpl.Execute(f, e); err != nil {
+			return fmt.Errorf("exec template: %w", err)
 		}
 	}
 	return nil
@@ -115,9 +120,7 @@ func merge(list []templateData) templateData {
 	if len(list) == 0 {
 		return templateData{}
 	}
-
 	copy := list[0]
-
 	for _, data := range list[1:] {
 		copy.Classes = append(copy.Classes, data.Classes...)
 		copy.Enums = append(copy.Enums, data.Enums...)
@@ -136,21 +139,24 @@ func processDump(dump Dump) templateData {
 	)
 	for i := range dump.Classes {
 		var (
-			c     = dump.Classes[i]
+			c     = dump.Classes[i] // easier access only
 			parts = strings.Split(c.FQCN, ".")
 		)
-		c.Name = parts[len(parts)-1]
+		dump.Classes[i].Name = parts[len(parts)-1]
+		dump.Classes[i].JoinedParentTypeFQCNs = strings.Join(c.ParentTypeFQCNs, ",")
 		for i, m := range c.Methods {
 			c.Methods[i].JoinedParams = concatParams(m.Params)
 		}
 	}
 
 	for i := range dump.Enums {
-		e := dump.Enums[i]
-		parts := strings.Split(e.FQCN, ".")
-		e.Name = parts[len(parts)-1]
-		for i, m := range e.Methods {
-			e.Methods[i].JoinedParams = concatParams(m.Params)
+		var (
+			e     = dump.Enums[i] // easier access only
+			parts = strings.Split(e.FQCN, ".")
+		)
+		dump.Enums[i].Name = parts[len(parts)-1]
+		for j, m := range e.Methods {
+			dump.Enums[i].Methods[j].JoinedParams = concatParams(m.Params)
 		}
 	}
 
@@ -177,34 +183,6 @@ func processDump(dump Dump) templateData {
 		EventClasses: events,
 		Materials:    materials,
 	}
-}
-
-func genClassMeta(tpl *template.Template, w io.Writer, class Class) error {
-	parts := strings.Split(class.FQCN, ".")
-	class.Name = parts[len(parts)-1]
-
-	for i, m := range class.Methods {
-		class.Methods[i].JoinedParams = concatParams(m.Params)
-	}
-
-	if err := tpl.Execute(w, class); err != nil {
-		return fmt.Errorf("exec template: %w", err)
-	}
-	return nil
-}
-
-func genEnumMeta(tpl *template.Template, w io.Writer, enum Enum) error {
-	parts := strings.Split(enum.FQCN, ".")
-	enum.Name = parts[len(parts)-1]
-
-	for i, m := range enum.Methods {
-		enum.Methods[i].JoinedParams = concatParams(m.Params)
-	}
-
-	if err := tpl.Execute(w, enum); err != nil {
-		return fmt.Errorf("exec template: %w", err)
-	}
-	return nil
 }
 
 func createFileOrDie(path string) (*os.File, error) {

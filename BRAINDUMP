@@ -13,23 +13,8 @@
     * proper minimessage support
 
 ## NEXT STEPS
-* add list of all events to `event` param in listen() call
-  like this:
-  ```
-  ---@param event string
-  ---|"'org.bukkit.event.player.PlayerInteractEvent'"  # comment 1
-  ---|"'org.bukkit.event.player.PlayerMoveEvent'" # comment 2
-  function listen(event, callback) end
-  ```
+
 * add parent interfaces to dumps
     * we need them, because luals only displays functions of
       directly parent we have configured currently. so also add
       all interfaces the class implements
-
-* restructure addon folder:
-  library/
-    builtin.lua
-    import.lua
-    javadump/
-      org.bukkit.Location.lua
-      ....

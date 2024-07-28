@@ -1,7 +1,7 @@
 ---@meta
 {{- $className := .Name }}
 
----@class {{ .FQCN }} {{- if ne .ParentTypeFQCN "" }}: {{ .ParentTypeFQCN }} {{ end }}
+---@class {{ .FQCN }}: {{ .JoinedParentTypeFQCNs }}
 local {{ $className }} = {}
 
 {{- range .Methods }}
