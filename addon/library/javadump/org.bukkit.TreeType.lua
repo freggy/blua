@@ -1,0 +1,28 @@
+---@meta
+
+---@class org.bukkit.TreeType
+---@field TREE org.bukkit.TreeType
+---@field BIG_TREE org.bukkit.TreeType
+---@field REDWOOD org.bukkit.TreeType
+---@field TALL_REDWOOD org.bukkit.TreeType
+---@field BIRCH org.bukkit.TreeType
+---@field JUNGLE org.bukkit.TreeType
+---@field SMALL_JUNGLE org.bukkit.TreeType
+---@field COCOA_TREE org.bukkit.TreeType
+---@field JUNGLE_BUSH org.bukkit.TreeType
+---@field RED_MUSHROOM org.bukkit.TreeType
+---@field BROWN_MUSHROOM org.bukkit.TreeType
+---@field SWAMP org.bukkit.TreeType
+---@field ACACIA org.bukkit.TreeType
+---@field DARK_OAK org.bukkit.TreeType
+---@field MEGA_REDWOOD org.bukkit.TreeType
+---@field MEGA_PINE org.bukkit.TreeType
+---@field TALL_BIRCH org.bukkit.TreeType
+---@field CHORUS_PLANT org.bukkit.TreeType
+---@field CRIMSON_FUNGUS org.bukkit.TreeType
+---@field WARPED_FUNGUS org.bukkit.TreeType
+---@field AZALEA org.bukkit.TreeType
+---@field MANGROVE org.bukkit.TreeType
+---@field TALL_MANGROVE org.bukkit.TreeType
+---@field CHERRY org.bukkit.TreeType
+local TreeType = {}
