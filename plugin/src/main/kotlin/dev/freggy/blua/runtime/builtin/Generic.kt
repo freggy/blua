@@ -10,7 +10,6 @@ import org.bukkit.entity.Entity
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.Plugin
 import org.bukkit.potion.PotionEffectType
-import org.bukkit.util.Consumer
 import party.iroiro.luajava.JFunction
 import party.iroiro.luajava.Lua
 import party.iroiro.luajava.value.LuaFunction

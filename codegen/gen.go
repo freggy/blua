@@ -144,8 +144,8 @@ func processDump(dump Dump) templateData {
 		)
 		dump.Classes[i].Name = parts[len(parts)-1]
 		dump.Classes[i].JoinedParentTypeFQCNs = strings.Join(c.ParentTypeFQCNs, ",")
-		for i, m := range c.Methods {
-			c.Methods[i].JoinedParams = concatParams(m.Params)
+		for j, m := range c.Methods {
+			dump.Classes[i].Methods[j].JoinedParams = concatParams(m.Params)
 		}
 	}
 
