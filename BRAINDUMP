@@ -12,9 +12,5 @@
     * command support
     * proper minimessage support
 
-## NEXT STEPS
-
-* add parent interfaces to dumps
-    * we need them, because luals only displays functions of
-      directly parent we have configured currently. so also add
-      all interfaces the class implements
+* release mechanism for luals addon
+  * part of this could be creating a pipeline which automatically generates the addon
