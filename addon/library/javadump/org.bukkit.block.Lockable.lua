@@ -12,3 +12,7 @@ function Lockable.getLock(self, ) end
 ---@return void # 
 function Lockable.setLock(self, key) end
 
+---@param key org.bukkit.inventory.ItemStack the key required to access the container.
+---@return void # 
+function Lockable.setLockItem(self, key) end
+

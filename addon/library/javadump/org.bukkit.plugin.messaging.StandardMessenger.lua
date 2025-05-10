@@ -127,6 +127,10 @@ function StandardMessenger.validateChannel(self, channel) end
 ---@return java.lang.String # corrected channel name
 function StandardMessenger.validateAndCorrectChannel(self, channel) end
 
+---@param channel java.lang.String 
+---@return java.lang.String # 
+function StandardMessenger.shortened(self, channel) end
+
 ---@param messenger org.bukkit.plugin.messaging.Messenger Messenger to use for validation.
 ---@param source org.bukkit.plugin.Plugin Source plugin of the Message.
 ---@param channel java.lang.String Plugin Channel to send the message by.

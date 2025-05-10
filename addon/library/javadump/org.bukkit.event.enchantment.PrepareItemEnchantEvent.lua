@@ -2,6 +2,9 @@
 
 ---@class org.bukkit.event.enchantment.PrepareItemEnchantEvent: org.bukkit.event.inventory.InventoryEvent
 local PrepareItemEnchantEvent = {}
+---@return org.bukkit.inventory.view.EnchantmentView # 
+function PrepareItemEnchantEvent.getView(self, ) end
+
 ---@return org.bukkit.entity.Player # enchanting player
 function PrepareItemEnchantEvent.getEnchanter(self, ) end
 

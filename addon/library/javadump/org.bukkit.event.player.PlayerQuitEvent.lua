@@ -16,12 +16,12 @@ function PlayerQuitEvent.getQuitMessage(self, ) end
 ---@return void # 
 function PlayerQuitEvent.setQuitMessage(self, quitMessage) end
 
+---@return org.bukkit.event.player.PlayerQuitEvent.QuitReason # 
+function PlayerQuitEvent.getReason(self, ) end
+
 ---@return org.bukkit.event.HandlerList # 
 function PlayerQuitEvent.getHandlers(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function PlayerQuitEvent.getHandlerList(self, ) end
-
----@return org.bukkit.event.player.PlayerQuitEvent.QuitReason # 
-function PlayerQuitEvent.getReason(self, ) end
 

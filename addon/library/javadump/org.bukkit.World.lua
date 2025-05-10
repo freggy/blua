@@ -2,19 +2,40 @@
 
 ---@class org.bukkit.World: org.bukkit.RegionAccessor,org.bukkit.generator.WorldInfo,org.bukkit.plugin.messaging.PluginMessageRecipient,org.bukkit.metadata.Metadatable,org.bukkit.persistence.PersistentDataHolder,org.bukkit.Keyed,net.kyori.adventure.audience.ForwardingAudience
 local World = {}
----@return int # The amount of Entities in this world
+---@return boolean # true if enabled
+function World.isVoidDamageEnabled(self, ) end
+
+---@param enabled boolean true to enable void damage
+---@return void # 
+function World.setVoidDamageEnabled(self, enabled) end
+
+---@return float # amount of damage to apply
+function World.getVoidDamageAmount(self, ) end
+
+---@param voidDamageAmount float amount of damage to apply
+---@return void # 
+function World.setVoidDamageAmount(self, voidDamageAmount) end
+
+---@return double # offset from min build height
+function World.getVoidDamageMinBuildHeightOffset(self, ) end
+
+---@param minBuildHeightOffset double offset from min build height
+---@return void # 
+function World.setVoidDamageMinBuildHeightOffset(self, minBuildHeightOffset) end
+
+---@return int # The amount of entities in this world
 function World.getEntityCount(self, ) end
 
----@return int # The amount of Tile Entities in this world
+---@return int # The amount of block entities in this world
 function World.getTileEntityCount(self, ) end
 
----@return int # The amount of Tickable Tile Entities in this world
+---@return int # The amount of tickable block entities in this world
 function World.getTickableTileEntityCount(self, ) end
 
----@return int # The amount of Chunks in this world
+---@return int # The amount of chunks in this world
 function World.getChunkCount(self, ) end
 
----@return int # The amount of Players in this world
+---@return int # The amount of players in this world
 function World.getPlayerCount(self, ) end
 
 ---@param position io.papermc.paper.math.Position the position to check at
@@ -158,9 +179,9 @@ function World.unloadChunkRequest(self, x,z) end
 ---@return boolean # Whether the chunk was actually regenerated
 function World.regenerateChunk(self, x,z) end
 
----@param x int 
----@param z int 
----@return boolean # 
+---@param x int X-coordinate of the chunk
+---@param z int Z-coordinate of the chunk
+---@return boolean # Whether the chunk was actually refreshed
 function World.refreshChunk(self, x,z) end
 
 ---@param chunk org.bukkit.Chunk the chunk to check
@@ -419,8 +440,8 @@ function World.getNearbyEntitiesByType(self, clazz,loc,xzRadius,yRadius,predicat
 ---@return java.util.Collection # the collection of entities near location. This will always be a non-null collection.
 function World.getNearbyEntitiesByType(self, clazz,loc,xRadius,yRadius,zRadius,predicate) end
 
----@param x int Chunk X-coordinate of the chunk - floor(world coordinate / 16)
----@param z int Chunk Z-coordinate of the chunk - floor(world coordinate / 16)
+---@param x int Chunk x-coordinate
+---@param z int Chunk z-coordinate
 ---@param cb org.bukkit.World.ChunkLoadCallback Callback to receive the chunk when it is loaded.           will be executed synchronously
 ---@return void # 
 function World.getChunkAtAsync(self, x,z,cb) end
@@ -435,18 +456,35 @@ function World.getChunkAtAsync(self, loc,cb) end
 ---@return void # 
 function World.getChunkAtAsync(self, block,cb) end
 
----@param x int Chunk X-coordinate of the chunk - floor(world coordinate / 16)
----@param z int Chunk Z-coordinate of the chunk - floor(world coordinate / 16)
+---@param x int Chunk x-coordinate
+---@param z int Chunk z-coordinate
 ---@param cb java.util.function.Consumer Callback to receive the chunk when it is loaded.           will be executed synchronously
 ---@return void # 
 function World.getChunkAtAsync(self, x,z,cb) end
 
----@param x int Chunk X-coordinate of the chunk - floor(world coordinate / 16)
----@param z int Chunk Z-coordinate of the chunk - floor(world coordinate / 16)
+---@param x int Chunk x-coordinate
+---@param z int Chunk z-coordinate
 ---@param gen boolean Should we generate a chunk if it doesn't exist or not
 ---@param cb java.util.function.Consumer Callback to receive the chunk when it is loaded.           will be executed synchronously
 ---@return void # 
 function World.getChunkAtAsync(self, x,z,gen,cb) end
+
+---@param x int Chunk x-coordinate
+---@param z int Chunk z-coordinate
+---@param gen boolean Should we generate a chunk if it doesn't exist or not
+---@param urgent boolean If true, the chunk may be prioritised to be loaded above other chunks in queue
+---@param cb java.util.function.Consumer Callback to receive the chunk when it is loaded.           will be executed synchronously
+---@return void # 
+function World.getChunkAtAsync(self, x,z,gen,urgent,cb) end
+
+---@param minX int Minimum Chunk x-coordinate
+---@param minZ int Minimum Chunk z-coordinate
+---@param maxX int Maximum Chunk x-coordinate
+---@param maxZ int Maximum Chunk z-coordinate
+---@param urgent boolean If true, the chunks may be prioritised to be loaded above other chunks in queue
+---@param cb java.lang.Runnable Callback to invoke when all chunks are loaded.           Will be executed synchronously
+---@return void # 
+function World.getChunksAtAsync(self, minX,minZ,maxX,maxZ,urgent,cb) end
 
 ---@param loc org.bukkit.Location Location of the chunk
 ---@param cb java.util.function.Consumer Callback to receive the chunk when it is loaded.           will be executed synchronously
@@ -488,13 +526,13 @@ function World.getChunkAtAsync(self, block) end
 ---@return java.util.concurrent.CompletableFuture # Future that will resolve when the chunk is loaded
 function World.getChunkAtAsync(self, block,gen) end
 
----@param x int Chunk X-coordinate of the chunk - floor(world coordinate / 16)
----@param z int Chunk Z-coordinate of the chunk - floor(world coordinate / 16)
+---@param x int Chunk x-coordinate
+---@param z int Chunk z-coordinate
 ---@return java.util.concurrent.CompletableFuture # Future that will resolve when the chunk is loaded
 function World.getChunkAtAsync(self, x,z) end
 
----@param x int Chunk X-coordinate of the chunk - floor(world coordinate / 16)
----@param z int Chunk Z-coordinate of the chunk - floor(world coordinate / 16)
+---@param x int Chunk x-coordinate
+---@param z int Chunk z-coordinate
 ---@param gen boolean Should we generate a chunk if it doesn't exist or not
 ---@return java.util.concurrent.CompletableFuture # Future that will resolve when the chunk is loaded
 function World.getChunkAtAsync(self, x,z,gen) end
@@ -517,16 +555,16 @@ function World.getChunkAtAsyncUrgently(self, block) end
 ---@return java.util.concurrent.CompletableFuture # Future that will resolve when the chunk is loaded
 function World.getChunkAtAsyncUrgently(self, block,gen) end
 
----@param x int X Coord
----@param z int Z Coord
+---@param x int Chunk x-coordinate
+---@param z int Chunk z-coordinate
 ---@return java.util.concurrent.CompletableFuture # Future that will resolve when the chunk is loaded
 function World.getChunkAtAsyncUrgently(self, x,z) end
 
----@param x int 
----@param z int 
----@param gen boolean 
----@param urgent boolean 
----@return java.util.concurrent.CompletableFuture # 
+---@param x int Chunk x-coordinate
+---@param z int Chunk z-coordinate
+---@param gen boolean Should the chunk generate if it doesn't exist
+---@param urgent boolean If true, the chunk may be prioritised to be loaded above other chunks in queue
+---@return java.util.concurrent.CompletableFuture # Future that will resolve when the chunk is loaded
 function World.getChunkAtAsync(self, x,z,gen,urgent) end
 
 ---@return java.util.List # A list of all Players currently residing in this world
@@ -649,6 +687,10 @@ function World.rayTrace(self, start,direction,maxDistance,fluidCollisionMode,ign
 ---@param canCollide java.util.function.Predicate predicate for blocks the ray can potentially collide     with, or <code>null</code> to consider all blocks
 ---@return org.bukkit.util.RayTraceResult # the closest ray trace hit result with either a block or an     entity, or <code>null</code> if there is no hit
 function World.rayTrace(self, start,direction,maxDistance,fluidCollisionMode,ignorePassableBlocks,raySize,filter,canCollide) end
+
+---@param builderConsumer java.util.function.Consumer a consumer to configure the ray trace configuration.     The received builder is not valid for use outside the consumer
+---@return org.bukkit.util.RayTraceResult # the closest ray trace hit result with either a block or an     entity, or <code>null</code> if there is no hit
+function World.rayTrace(self, builderConsumer) end
 
 ---@return org.bukkit.Location # The spawn location of this world
 function World.getSpawnLocation(self, ) end
@@ -778,6 +820,15 @@ function World.createExplosion(self, loc,power,setFire) end
 ---@param power float The power of explosion, where 4F is TNT
 ---@param setFire boolean Whether or not to set blocks on fire
 ---@param breakBlocks boolean Whether or not to have blocks be destroyed
+---@param excludeSourceFromDamage boolean whether the explosion should exclude the passed source from taking damage like vanilla explosions do.
+---@return boolean # false if explosion was canceled, otherwise true
+function World.createExplosion(self, source,loc,power,setFire,breakBlocks,excludeSourceFromDamage) end
+
+---@param source org.bukkit.entity.Entity The source entity of the explosion
+---@param loc org.bukkit.Location Location to blow up
+---@param power float The power of explosion, where 4F is TNT
+---@param setFire boolean Whether or not to set blocks on fire
+---@param breakBlocks boolean Whether or not to have blocks be destroyed
 ---@return boolean # false if explosion was canceled, otherwise true
 function World.createExplosion(self, source,loc,power,setFire,breakBlocks) end
 
@@ -842,6 +893,10 @@ function World.getBiomeProvider(self, ) end
 
 ---@return void # 
 function World.save(self, ) end
+
+---@param flush boolean Whether to wait for the chunk writer to finish
+---@return void # 
+function World.save(self, flush) end
 
 ---@return java.util.List # List containing any or none BlockPopulators
 function World.getPopulators(self, ) end
@@ -1012,6 +1067,9 @@ function World.getWorldType(self, ) end
 
 ---@return boolean # True if structures are being generated.
 function World.canGenerateStructures(self, ) end
+
+---@return boolean # {@code true} if the bonus chest is enabled, {@code false} otherwise
+function World.hasBonusChest(self, ) end
 
 ---@return boolean # hardcore status
 function World.isHardcore(self, ) end

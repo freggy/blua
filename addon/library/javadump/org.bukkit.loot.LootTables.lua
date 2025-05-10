@@ -1,7 +1,6 @@
 ---@meta
 
 ---@class org.bukkit.loot.LootTables
----@field EMPTY org.bukkit.loot.LootTables
 ---@field ABANDONED_MINESHAFT org.bukkit.loot.LootTables
 ---@field BURIED_TREASURE org.bukkit.loot.LootTables
 ---@field DESERT_PYRAMID org.bukkit.loot.LootTables
@@ -157,8 +156,12 @@
 ---@field SHEPHERD_GIFT org.bukkit.loot.LootTables
 ---@field TOOLSMITH_GIFT org.bukkit.loot.LootTables
 ---@field WEAPONSMITH_GIFT org.bukkit.loot.LootTables
+---@field UNEMPLOYED_GIFT org.bukkit.loot.LootTables
+---@field BABY_VILLAGER_GIFT org.bukkit.loot.LootTables
 ---@field SNIFFER_DIGGING org.bukkit.loot.LootTables
 ---@field PANDA_SNEEZE org.bukkit.loot.LootTables
+---@field CHICKEN_LAY org.bukkit.loot.LootTables
+---@field ARMADILLO_SHED org.bukkit.loot.LootTables
 ---@field PIGLIN_BARTERING org.bukkit.loot.LootTables
 ---@field TRIAL_CHAMBER_KEY org.bukkit.loot.LootTables
 ---@field TRIAL_CHAMBER_CONSUMABLES org.bukkit.loot.LootTables
@@ -166,6 +169,27 @@
 ---@field OMINOUS_TRIAL_CHAMBER_CONSUMABLES org.bukkit.loot.LootTables
 ---@field TRIAL_CHAMBER_ITEMS_TO_DROP_WHEN_OMINOUS org.bukkit.loot.LootTables
 ---@field SHEARING_BOGGED org.bukkit.loot.LootTables
+---@field SHEARING_MOOSHROOM org.bukkit.loot.LootTables
+---@field SHEARING_MOOSHROOM_RED org.bukkit.loot.LootTables
+---@field SHEARING_MOOSHROOM_BROWN org.bukkit.loot.LootTables
+---@field SHEARING_SNOW_GOLEM org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_BLACK org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_BLUE org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_BROWN org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_CYAN org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_GRAY org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_GREEN org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_LIGHT_BLUE org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_LIGHT_GRAY org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_LIME org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_MAGENTA org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_ORANGE org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_PINK org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_PURPLE org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_RED org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_WHITE org.bukkit.loot.LootTables
+---@field SHEARING_SHEEP_YELLOW org.bukkit.loot.LootTables
 ---@field DESERT_WELL_ARCHAEOLOGY org.bukkit.loot.LootTables
 ---@field DESERT_PYRAMID_ARCHAEOLOGY org.bukkit.loot.LootTables
 ---@field TRAIL_RUINS_ARCHAEOLOGY_COMMON org.bukkit.loot.LootTables

@@ -52,12 +52,12 @@ function HumanEntity.openInventory(self, inventory) end
 
 ---@param trader org.bukkit.entity.Villager The merchant to trade with. Cannot be null.
 ---@param force boolean whether to force the trade even if another player is trading
----@return org.bukkit.inventory.InventoryView # The newly opened inventory view, or null if it could not be opened.
+---@return org.bukkit.inventory.InventoryView # The newly opened inventory view, or null if it could not be
 function HumanEntity.openMerchant(self, trader,force) end
 
 ---@param merchant org.bukkit.inventory.Merchant The merchant to trade with. Cannot be null.
 ---@param force boolean whether to force the trade even if another player is trading
----@return org.bukkit.inventory.InventoryView # The newly opened inventory view, or null if it could not be opened.
+---@return org.bukkit.inventory.InventoryView # The newly opened inventory view, or null if it could not be
 function HumanEntity.openMerchant(self, merchant,force) end
 
 ---@param location org.bukkit.Location The location to attach it to. If null, the player's     location is used.
@@ -131,11 +131,36 @@ function HumanEntity.setHurtDirection(self, hurtDirection) end
 ---@return boolean # true if the player has slept enough
 function HumanEntity.isDeeplySleeping(self, ) end
 
+---@param item org.bukkit.inventory.ItemStack the item to check
+---@return boolean # if a cooldown is active on the item
+function HumanEntity.hasCooldown(self, item) end
+
+---@param item org.bukkit.inventory.ItemStack the item to check
+---@return int # the remaining cooldown time in ticks
+function HumanEntity.getCooldown(self, item) end
+
+---@param item org.bukkit.inventory.ItemStack the item to set the cooldown for
+---@param ticks int the amount of ticks to set or 0 to remove
+---@return void # 
+function HumanEntity.setCooldown(self, item,ticks) end
+
+---@param key <unresolved> the cooldown group to check
+---@return int # the remaining cooldown time in ticks
+function HumanEntity.getCooldown(self, key) end
+
+---@param key <unresolved> cooldown group to set the cooldown for
+---@param ticks int the amount of ticks to set or 0 to remove
+---@return void # 
+function HumanEntity.setCooldown(self, key,ticks) end
+
 ---@return int # slumber ticks
 function HumanEntity.getSleepTicks(self, ) end
 
 ---@return org.bukkit.Location # Bed Location if has slept in one, otherwise null.
 function HumanEntity.getPotentialBedLocation(self, ) end
+
+---@return org.bukkit.Location # respawn location if exists, otherwise null.
+function HumanEntity.getPotentialRespawnLocation(self, ) end
 
 ---@return org.bukkit.entity.FishHook # the player's fishing hook if they are fishing
 function HumanEntity.getFishHook(self, ) end
@@ -148,6 +173,12 @@ function HumanEntity.sleep(self, location,force) end
 ---@param setSpawnLocation boolean whether to set their spawn location to the bed they are currently sleeping in
 ---@return void # 
 function HumanEntity.wakeup(self, setSpawnLocation) end
+
+---@param duration int spin attack duration in ticks.
+---@param attackStrength float damage value inflicted upon entities hit by spin attack.
+---@param attackItem org.bukkit.inventory.ItemStack item used to attack.
+---@return void # 
+function HumanEntity.startRiptideAttack(self, duration,attackStrength,attackItem) end
 
 ---@return org.bukkit.Location # location
 function HumanEntity.getBedLocation(self, ) end
@@ -226,6 +257,48 @@ function HumanEntity.openSign(self, sign,side) end
 ---@param dropAll boolean True to drop entire stack, false to drop 1 of the stack
 ---@return boolean # True if item was dropped successfully
 function HumanEntity.dropItem(self, dropAll) end
+
+---@param slot int the equipment slot to drop
+---@return org.bukkit.entity.Item # the dropped item entity, or null if the action was unsuccessful
+function HumanEntity.dropItem(self, slot) end
+
+---@param slot int the slot to drop
+---@param amount int the number of items to drop from this slot. Values below one always return null
+---@return org.bukkit.entity.Item # the dropped item entity, or null if the action was unsuccessful
+function HumanEntity.dropItem(self, slot,amount) end
+
+---@param slot int the slot to drop
+---@param amount int the number of items to drop from this slot. Values below one always return null
+---@param throwRandomly boolean controls the randomness of the dropped items velocity, where {@code true} mimics dropped                        items during a player's death, while {@code false} acts like a normal item drop.
+---@param entityOperation java.util.function.Consumer the function to be run before adding the entity into the world
+---@return org.bukkit.entity.Item # the dropped item entity, or null if the action was unsuccessful
+function HumanEntity.dropItem(self, slot,amount,throwRandomly,entityOperation) end
+
+---@param slot org.bukkit.inventory.EquipmentSlot the equipment slot to drop
+---@return org.bukkit.entity.Item # the dropped item entity, or null if the action was unsuccessful
+function HumanEntity.dropItem(self, slot) end
+
+---@param slot org.bukkit.inventory.EquipmentSlot the equipment slot to drop
+---@param amount int the amount of items to drop from this equipment slot. Values below one always return null
+---@return org.bukkit.entity.Item # the dropped item entity, or null if the action was unsuccessful
+function HumanEntity.dropItem(self, slot,amount) end
+
+---@param slot org.bukkit.inventory.EquipmentSlot the equipment slot to drop
+---@param amount int The amount of items to drop from this equipment slot. Values below one always return null
+---@param throwRandomly boolean controls the randomness of the dropped items velocity, where {@code true} mimics dropped                        items during a player's death, while {@code false} acts like a normal item drop.
+---@param entityOperation java.util.function.Consumer the function to be run before adding the entity into the world
+---@return org.bukkit.entity.Item # the dropped item entity, or null if the action was unsuccessful
+function HumanEntity.dropItem(self, slot,amount,throwRandomly,entityOperation) end
+
+---@param itemStack org.bukkit.inventory.ItemStack the itemstack to drop
+---@return org.bukkit.entity.Item # the dropped item entity, or null if the action was unsuccessful
+function HumanEntity.dropItem(self, itemStack) end
+
+---@param itemStack org.bukkit.inventory.ItemStack the itemstack to drop
+---@param throwRandomly boolean controls the randomness of the dropped items velocity, where {@code true} mimics dropped                        items during a player's death, while {@code false} acts like a normal item drop.
+---@param entityOperation java.util.function.Consumer the function to be run before adding the entity into the world
+---@return org.bukkit.entity.Item # the dropped item entity, or null if the action was unsuccessful
+function HumanEntity.dropItem(self, itemStack,throwRandomly,entityOperation) end
 
 ---@return float # Exhaustion level
 function HumanEntity.getExhaustion(self, ) end

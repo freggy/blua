@@ -8,12 +8,12 @@ function PlayerItemDamageEvent.getItem(self, ) end
 ---@return int # durability change
 function PlayerItemDamageEvent.getDamage(self, ) end
 
----@return int # pre-reduction damage amount
-function PlayerItemDamageEvent.getOriginalDamage(self, ) end
-
 ---@param damage int 
 ---@return void # 
 function PlayerItemDamageEvent.setDamage(self, damage) end
+
+---@return int # pre-reduction damage amount
+function PlayerItemDamageEvent.getOriginalDamage(self, ) end
 
 ---@return boolean # 
 function PlayerItemDamageEvent.isCancelled(self, ) end

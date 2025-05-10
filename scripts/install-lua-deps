@@ -1,10 +1,11 @@
 #!/bin/bash
-sudo luarocks install --force xml2lua
+luarocks install --local --force xml2lua
 # if macos
 # * brew install openssl@3 (or whatever openssl version)
 # * brew reinstall m4
-# sudo luarocks install http CRYPTO_DIR=/opt/homebrew/opt/openssl@3 OPENSSL_DIR=/opt/homebrew/opt/openssl@3
-sudo luarocks install --force http
+luarocks install --local http CRYPTO_DIR=$(brew --prefix openssl) OPENSSL_DIR=$(brew --prefix openssl)
 
-# http relies on require('lpeg') but luarocks installs it as lpeg_patters
-sudo ln -s /opt/local/share/luarocks/share/lua/5.3/lpeg_patterns/ /opt/local/share/luarocks/share/lua/5.3/lpeg/
+# http relies on require('lpeg') but luarocks installed it as lpeg_patters
+# at some point. so if running fetch-mvn-sources fails, try the below
+# sudo ln -s /opt/local/share/luarocks/share/lua/<lua-version>/lpeg_patterns/ /opt/local/share/luarocks/share/lua/<lua-version>/lpeg/
+

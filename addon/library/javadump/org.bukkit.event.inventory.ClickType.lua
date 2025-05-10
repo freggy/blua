@@ -16,20 +16,20 @@
 ---@field SWAP_OFFHAND org.bukkit.event.inventory.ClickType
 ---@field UNKNOWN org.bukkit.event.inventory.ClickType
 local ClickType = {}
----@return boolean # true if this ClickType represents the pressing of a key
+---@return boolean # {@code true} if this ClickType represents the pressing of a key
 function ClickType.isKeyboardClick() end
 
----@return boolean # true if this ClickType represents the pressing of a mouse button
+---@return boolean # {@code true} if this ClickType represents the pressing of a mouse button
 function ClickType.isMouseClick() end
 
----@return boolean # true if this action requires Creative mode
+---@return boolean # {@code true} if this action requires Creative mode
 function ClickType.isCreativeAction() end
 
----@return boolean # true if this ClickType represents a right click
+---@return boolean # {@code true} if this ClickType represents a right click
 function ClickType.isRightClick() end
 
----@return boolean # true if this ClickType represents a left click
+---@return boolean # {@code true} if this ClickType represents a left click
 function ClickType.isLeftClick() end
 
----@return boolean # true if the action uses Shift.
+---@return boolean # {@code true} if the action uses Shift.
 function ClickType.isShiftClick() end

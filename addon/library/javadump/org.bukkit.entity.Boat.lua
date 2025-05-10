@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.entity.Boat: org.bukkit.entity.Vehicle
+---@class org.bukkit.entity.Boat: org.bukkit.entity.Vehicle,io.papermc.paper.entity.Leashable
 local Boat = {}
 ---@return org.bukkit.TreeSpecies # the wood type
 function Boat.getWoodType(self, ) end

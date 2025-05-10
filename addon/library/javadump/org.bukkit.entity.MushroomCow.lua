@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.entity.MushroomCow: org.bukkit.entity.Cow,io.papermc.paper.entity.Shearable
+---@class org.bukkit.entity.MushroomCow: org.bukkit.entity.AbstractCow,io.papermc.paper.entity.Shearable
 local MushroomCow = {}
 ---@return boolean # true if custom potion effects are applied to the stew
 function MushroomCow.hasEffectsForNextStew(self, ) end

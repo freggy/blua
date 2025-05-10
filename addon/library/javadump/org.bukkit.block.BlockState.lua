@@ -95,3 +95,6 @@ function BlockState.getDrops(self, tool) end
 ---@return java.util.Collection # an immutable list of dropped items for the block state
 function BlockState.getDrops(self, tool,entity) end
 
+---@return boolean # {@code true} if the block state can suffocate
+function BlockState.isSuffocating(self, ) end
+

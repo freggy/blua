@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.OfflinePlayer: org.bukkit.permissions.ServerOperator,org.bukkit.entity.AnimalTamer,org.bukkit.configuration.serialization.ConfigurationSerializable
+---@class org.bukkit.OfflinePlayer: org.bukkit.permissions.ServerOperator,org.bukkit.entity.AnimalTamer,org.bukkit.configuration.serialization.ConfigurationSerializable,io.papermc.paper.persistence.PersistentDataViewHolder
 local OfflinePlayer = {}
 ---@return boolean # true if they are online
 function OfflinePlayer.isOnline(self, ) end
@@ -14,7 +14,7 @@ function OfflinePlayer.getName(self, ) end
 ---@return java.util.UUID # Player UUID
 function OfflinePlayer.getUniqueId(self, ) end
 
----@return com.destroystokyo.paper.profile.PlayerProfile # the player's profile
+---@return com.destroystokyo.paper.profile.PlayerProfile # 
 function OfflinePlayer.getPlayerProfile(self, ) end
 
 ---@return boolean # true if banned, otherwise false
@@ -93,8 +93,12 @@ function OfflinePlayer.getLastLogin(self, ) end
 ---@return long # last seen time
 function OfflinePlayer.getLastSeen(self, ) end
 
----@return org.bukkit.Location # respawn location if exists, otherwise null.
+---@return org.bukkit.Location # respawn location if exists, otherwise {@code null}.
 function OfflinePlayer.getRespawnLocation(self, ) end
+
+---@param loadLocationAndValidate boolean load the expected respawn location to retrieve the exact position of the spawn                                block and check if this position is still valid or not. Loading the location                                will induce a sync chunk load and must hence be used with caution.
+---@return org.bukkit.Location # respawn location if exists, otherwise {@code null}.
+function OfflinePlayer.getRespawnLocation(self, loadLocationAndValidate) end
 
 ---@param statistic org.bukkit.Statistic Statistic to increment
 ---@return void # 
@@ -194,4 +198,7 @@ function OfflinePlayer.getLastDeathLocation(self, ) end
 
 ---@return org.bukkit.Location # the player's location, {@code null} if player hasn't ever played before.
 function OfflinePlayer.getLocation(self, ) end
+
+---@return io.papermc.paper.persistence.PersistentDataContainerView # the persistent data container view
+function OfflinePlayer.getPersistentDataContainer(self, ) end
 

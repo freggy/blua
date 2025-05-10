@@ -22,7 +22,7 @@ function PaperServerListPingEvent.shouldHidePlayers(self, ) end
 ---@return void # 
 function PaperServerListPingEvent.setHidePlayers(self, hidePlayers) end
 
----@return com.destroystokyo.paper.event.server.PaperServerListPingEvent.ListedPlayerInfo # The mutable player sample list
+---@return java.util.List # The mutable player sample list
 function PaperServerListPingEvent.getListedPlayers(self, ) end
 
 ---@return java.util.List # The mutable player sample list

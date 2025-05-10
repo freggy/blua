@@ -2,16 +2,6 @@
 
 ---@class org.bukkit.event.entity.EntityShootBowEvent: org.bukkit.event.entity.EntityEvent
 local EntityShootBowEvent = {}
----@param consumeArrow boolean 
----@return void # 
-function EntityShootBowEvent.setConsumeArrow(self, consumeArrow) end
-
----@return boolean # 
-function EntityShootBowEvent.getConsumeArrow(self, ) end
-
----@return org.bukkit.inventory.ItemStack # 
-function EntityShootBowEvent.getArrowItem(self, ) end
-
 ---@return org.bukkit.entity.LivingEntity # 
 function EntityShootBowEvent.getEntity(self, ) end
 
@@ -34,12 +24,22 @@ function EntityShootBowEvent.getHand(self, ) end
 ---@return float # bow shooting force, up to 1.0
 function EntityShootBowEvent.getForce(self, ) end
 
----@param consumeItem boolean whether or not to consume the item
+---@param consumeItem boolean whether to consume the item
 ---@return void # 
 function EntityShootBowEvent.setConsumeItem(self, consumeItem) end
 
----@return boolean # true if consumed, false otherwise
+---@return boolean # {@code true} if consumed, {@code false} otherwise
 function EntityShootBowEvent.shouldConsumeItem(self, ) end
+
+---@return org.bukkit.inventory.ItemStack # 
+function EntityShootBowEvent.getArrowItem(self, ) end
+
+---@param consumeArrow boolean 
+---@return void # 
+function EntityShootBowEvent.setConsumeArrow(self, consumeArrow) end
+
+---@return boolean # 
+function EntityShootBowEvent.getConsumeArrow(self, ) end
 
 ---@return boolean # 
 function EntityShootBowEvent.isCancelled(self, ) end

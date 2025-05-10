@@ -1,17 +1,14 @@
 ---@meta
 
----@class io.papermc.paper.datapack.Datapack: 
+---@class io.papermc.paper.datapack.Datapack: io.papermc.paper.datapack.DiscoveredDatapack
 local Datapack = {}
----@return java.lang.String # the name of the pack
-function Datapack.getName(self, ) end
-
----@return io.papermc.paper.datapack.Datapack.Compatibility # the compatibility of the pack
-function Datapack.getCompatibility(self, ) end
-
----@return boolean # whether or not the pack is currently enabled
+---@return boolean # whether the pack is currently enabled
 function Datapack.isEnabled(self, ) end
 
----@param enabled boolean 
+---@param enabled boolean true to enable, false to disable
 ---@return void # 
 function Datapack.setEnabled(self, enabled) end
+
+---@return net.kyori.adventure.text.Component # a new component
+function Datapack.computeDisplayName(self, ) end
 

@@ -20,4 +20,10 @@
 ---@field CLONE_STACK org.bukkit.event.inventory.InventoryAction
 ---@field COLLECT_TO_CURSOR org.bukkit.event.inventory.InventoryAction
 ---@field UNKNOWN org.bukkit.event.inventory.InventoryAction
+---@field PICKUP_FROM_BUNDLE org.bukkit.event.inventory.InventoryAction
+---@field PICKUP_ALL_INTO_BUNDLE org.bukkit.event.inventory.InventoryAction
+---@field PICKUP_SOME_INTO_BUNDLE org.bukkit.event.inventory.InventoryAction
+---@field PLACE_FROM_BUNDLE org.bukkit.event.inventory.InventoryAction
+---@field PLACE_ALL_INTO_BUNDLE org.bukkit.event.inventory.InventoryAction
+---@field PLACE_SOME_INTO_BUNDLE org.bukkit.event.inventory.InventoryAction
 local InventoryAction = {}

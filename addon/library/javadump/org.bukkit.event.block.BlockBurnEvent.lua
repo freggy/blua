@@ -2,7 +2,7 @@
 
 ---@class org.bukkit.event.block.BlockBurnEvent: org.bukkit.event.block.BlockEvent
 local BlockBurnEvent = {}
----@return org.bukkit.block.Block # The Block that ignited and burned this block, or null if no source block exists
+---@return org.bukkit.block.Block # The Block that ignited and burned this block, or {@code null} if no source block exists
 function BlockBurnEvent.getIgnitingBlock(self, ) end
 
 ---@return boolean # 

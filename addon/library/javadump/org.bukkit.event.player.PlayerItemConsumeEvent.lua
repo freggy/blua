@@ -12,10 +12,10 @@ function PlayerItemConsumeEvent.setItem(self, item) end
 ---@return org.bukkit.inventory.EquipmentSlot # the hand
 function PlayerItemConsumeEvent.getHand(self, ) end
 
----@return org.bukkit.inventory.ItemStack # The custom item stack that will replace the consumed item or null
+---@return org.bukkit.inventory.ItemStack # The custom item stack that will replace the consumed item or {@code null}
 function PlayerItemConsumeEvent.getReplacement(self, ) end
 
----@param replacement org.bukkit.inventory.ItemStack Replacement item to set, null to clear any custom stack and use default
+---@param replacement org.bukkit.inventory.ItemStack Replacement item to set, {@code null} to clear any custom stack and use default
 ---@return void # 
 function PlayerItemConsumeEvent.setReplacement(self, replacement) end
 

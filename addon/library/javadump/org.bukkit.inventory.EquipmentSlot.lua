@@ -8,6 +8,7 @@
 ---@field CHEST org.bukkit.inventory.EquipmentSlot
 ---@field HEAD org.bukkit.inventory.EquipmentSlot
 ---@field BODY org.bukkit.inventory.EquipmentSlot
+---@field SADDLE org.bukkit.inventory.EquipmentSlot
 local EquipmentSlot = {}
 ---@return org.bukkit.inventory.EquipmentSlotGroup # corresponding {@link EquipmentSlotGroup}
 function EquipmentSlot.getGroup() end

@@ -11,7 +11,7 @@ function PlayerShearBlockEvent.getItem(self, ) end
 ---@return org.bukkit.inventory.EquipmentSlot # Either {@link EquipmentSlot#HAND} OR {@link EquipmentSlot#OFF_HAND}.
 function PlayerShearBlockEvent.getHand(self, ) end
 
----@return java.util.List # A {@link List list} of {@link ItemStack items} that will be dropped as result of this event.
+---@return java.util.List # A mutable {@link List list} of {@link ItemStack items} that will be dropped as result of this event.
 function PlayerShearBlockEvent.getDrops(self, ) end
 
 ---@return boolean # Whether the shearing of the block should be cancelled or not.

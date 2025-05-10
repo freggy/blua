@@ -14,6 +14,10 @@ function ItemStack.of(self, type,amount) end
 ---@return io.papermc.paper.persistence.PersistentDataContainerView # 
 function ItemStack.getPersistentDataContainer(self, ) end
 
+---@param consumer java.util.function.Consumer the persistent data container consumer
+---@return boolean # {@code true} if the edit was successful, {@code false} otherwise. Failure to edit the persistent data container may be caused by empty or invalid itemstacks.
+function ItemStack.editPersistentDataContainer(self, consumer) end
+
 ---@return org.bukkit.Material # Type of the items in this stack
 function ItemStack.getType(self, ) end
 
@@ -70,13 +74,13 @@ function ItemStack.clone(self, ) end
 ---@return int # 
 function ItemStack.hashCode(self, ) end
 
----@param ench org.bukkit.enchantments.Enchantment Enchantment to test
+---@param enchant org.bukkit.enchantments.Enchantment Enchantment to test
 ---@return boolean # True if this has the given enchantment
-function ItemStack.containsEnchantment(self, ench) end
+function ItemStack.containsEnchantment(self, enchant) end
 
----@param ench org.bukkit.enchantments.Enchantment Enchantment to check
+---@param enchant org.bukkit.enchantments.Enchantment Enchantment to check
 ---@return int # Level of the enchantment, or 0
-function ItemStack.getEnchantmentLevel(self, ench) end
+function ItemStack.getEnchantmentLevel(self, enchant) end
 
 ---@return java.util.Map # Map of enchantments.
 function ItemStack.getEnchantments(self, ) end
@@ -85,23 +89,23 @@ function ItemStack.getEnchantments(self, ) end
 ---@return void # 
 function ItemStack.addEnchantments(self, enchantments) end
 
----@param ench org.bukkit.enchantments.Enchantment Enchantment to add
+---@param enchant org.bukkit.enchantments.Enchantment Enchantment to add
 ---@param level int Level of the enchantment
 ---@return void # 
-function ItemStack.addEnchantment(self, ench,level) end
+function ItemStack.addEnchantment(self, enchant,level) end
 
 ---@param enchantments java.util.Map Enchantments to add
 ---@return void # 
 function ItemStack.addUnsafeEnchantments(self, enchantments) end
 
----@param ench org.bukkit.enchantments.Enchantment Enchantment to add
+---@param enchant org.bukkit.enchantments.Enchantment Enchantment to add
 ---@param level int Level of the enchantment
 ---@return void # 
-function ItemStack.addUnsafeEnchantment(self, ench,level) end
+function ItemStack.addUnsafeEnchantment(self, enchant,level) end
 
----@param ench org.bukkit.enchantments.Enchantment Enchantment to remove
+---@param enchant org.bukkit.enchantments.Enchantment Enchantment to remove
 ---@return int # Previous level, or 0
-function ItemStack.removeEnchantment(self, ench) end
+function ItemStack.removeEnchantment(self, enchant) end
 
 ---@return void # 
 function ItemStack.removeEnchantments(self, ) end
@@ -141,12 +145,21 @@ function ItemStack.getTranslationKey(self, ) end
 ---@return org.bukkit.inventory.ItemStack # enchanted copy of the provided ItemStack
 function ItemStack.enchantWithLevels(self, levels,allowTreasure,random) end
 
----@param op java.util.function.UnaryOperator 
----@return net.kyori.adventure.text.event.HoverEvent # 
+---@param levels int levels to use for enchanting
+---@param keySet io.papermc.paper.registry.set.RegistryKeySet registry key set defining the set of possible enchantments, e.g. {@link io.papermc.paper.registry.keys.tags.EnchantmentTagKeys#IN_ENCHANTING_TABLE}.
+---@param random java.util.Random {@link java.util.Random} instance to use for enchanting
+---@return org.bukkit.inventory.ItemStack # enchanted copy of the provided ItemStack
+function ItemStack.enchantWithLevels(self, levels,keySet,random) end
+
+---@param op java.util.function.UnaryOperator transformation on value
+---@return net.kyori.adventure.text.event.HoverEvent # a hover event
 function ItemStack.asHoverEvent(self, op) end
 
 ---@return net.kyori.adventure.text.Component # display name of the {@link ItemStack}
 function ItemStack.displayName(self, ) end
+
+---@return net.kyori.adventure.text.Component # the effective name of this item stack
+function ItemStack.effectiveName(self, ) end
 
 ---@return org.bukkit.inventory.ItemStack # A potentially Data Converted ItemStack
 function ItemStack.ensureServerConversions(self, ) end
@@ -157,6 +170,18 @@ function ItemStack.deserializeBytes(self, bytes) end
 
 ---@return byte[] # bytes representing this item in NBT.
 function ItemStack.serializeAsBytes(self, ) end
+
+---@param items java.util.Collection items to serialize
+---@return byte[] # bytes representing the items in NBT
+function ItemStack.serializeItemsAsBytes(self, items) end
+
+---@param items ItemStack[] items to serialize
+---@return byte[] # bytes representing the items in NBT
+function ItemStack.serializeItemsAsBytes(self, items) end
+
+---@param bytes byte[] bytes representing an item in NBT
+---@return ItemStack[] # ItemStack array migrated to this version of Minecraft if needed
+function ItemStack.deserializeItemsFromBytes(self, bytes) end
 
 ---@return java.lang.String # Display name of Item
 function ItemStack.getI18NDisplayName(self, ) end
@@ -247,4 +272,62 @@ function ItemStack.isEmpty(self, ) end
 ---@param player org.bukkit.entity.Player a player for player-specific tooltip lines
 ---@return java.util.List # an immutable list of components (can be empty)
 function ItemStack.computeTooltipLines(self, tooltipContext,player) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType.Valued the data component type
+---@return T # the value for the data component type, or {@code null} if not set or marked as removed
+function ItemStack.getData(self, type) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType.Valued the data component type
+---@param fallback T the fallback value if the value isn't present
+---@return T # the value for the data component type or the fallback value
+function ItemStack.getDataOrDefault(self, type,fallback) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType the data component type
+---@return boolean # {@code true} if set, {@code false} otherwise
+function ItemStack.hasData(self, type) end
+
+---@return java.util.Set # an immutable set of data component types
+function ItemStack.getDataTypes(self, ) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType.Valued the data component type
+---@param valueBuilder io.papermc.paper.datacomponent.DataComponentBuilder value builder
+---@return void # 
+function ItemStack.setData(self, type,valueBuilder) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType.Valued the data component type
+---@param value T value to set
+---@return void # 
+function ItemStack.setData(self, type,value) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType.NonValued the data component type
+---@return void # 
+function ItemStack.setData(self, type) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType the data component type
+---@return void # 
+function ItemStack.unsetData(self, type) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType the data component type
+---@return void # 
+function ItemStack.resetData(self, type) end
+
+---@param source org.bukkit.inventory.ItemStack the item stack to copy from
+---@param filter java.util.function.Predicate predicate for which components to copy
+---@return void # 
+function ItemStack.copyDataFrom(self, source,filter) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType the data component type
+---@return boolean # {@code true} if the data type is overridden
+function ItemStack.isDataOverridden(self, type) end
+
+---@param item org.bukkit.inventory.ItemStack the item to compare
+---@param excludeTypes java.util.Set the data component types to ignore
+---@return boolean # {@code true} if the provided item is equal, ignoring the provided components
+function ItemStack.matchesWithoutData(self, item,excludeTypes) end
+
+---@param item org.bukkit.inventory.ItemStack the item to compare
+---@param excludeTypes java.util.Set the data component types to ignore
+---@param ignoreCount boolean ignore the count of the item
+---@return boolean # {@code true} if the provided item is equal, ignoring the provided components
+function ItemStack.matchesWithoutData(self, item,excludeTypes,ignoreCount) end
 

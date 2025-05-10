@@ -11,7 +11,7 @@ local function do_req(url, code, timeout)
     local headers, stream = request.new_from_uri(url):go(timeout)
     local status = headers:get(":status")
     if status ~= code then
-        return {}, string.format("expected status %s got %s", code, status)
+        return {}, string.format("expected status %s got %s (%s)", code, status, url)
     end
     return stream, nil
 end
@@ -39,9 +39,9 @@ local HTTP_OK = "200"
 
 -- script configuration
 -- TODO: pass version and ci_stuff as script args
-local version = "1.21-R0.1"
-local ci_stuff = "20240712.185542-65"
-local paper = "https://repo.papermc.io/repository/maven-releases/%s/%s/%s/%s-%s-sources.jar"
+local version = "1.21.5-R0.1"
+local ci_stuff = "20250509.154041-78"
+local paper = "https://repo.papermc.io/repository/maven-public/%s/%s/%s/%s-%s-sources.jar"
 local central = "https://repo1.maven.org/maven2/%s/%s/%s/%s-%s-sources.jar"
 -- what groups where sources should be downloaded
 local download = {
@@ -94,10 +94,11 @@ for _, dep in pairs(paperapi_pom.root.project.dependencies.dependency) do
         die("fetch sources: %s", err)
     end
     local name = string.format("%s-%s", dep.groupId, dep.artifactId)
-    local cmd = string.format("tar -xzvf %s.jar -C %s-src", name, name)
-    local f = io.open(string.format("%s.jar", name), "w")
+    local path = string.format("wrk/%s", name)
+    local cmd = string.format("tar -xzvf %s.jar -C %s-src", path, path)
+    local f = io.open(string.format("%s.jar", path), "w")
     stream:save_body_to_file(f, TIMEOUT)
-    os.execute(string.format("mkdir %s-src", name))
+    os.execute(string.format("mkdir %s-src", path))
     os.execute(cmd)
     ::continue::
 end

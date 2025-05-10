@@ -14,11 +14,21 @@ function ArgumentTypes.player(self, ) end
 ---@return <unresolved> # argument that takes multiple players
 function ArgumentTypes.players(self, ) end
 
----@return <unresolved> # player profile arguments
+---@return <unresolved> # player profile argument
 function ArgumentTypes.playerProfiles(self, ) end
 
----@return <unresolved> # argument
+---@return <unresolved> # block position argument
 function ArgumentTypes.blockPosition(self, ) end
+
+---@return <unresolved> # fine position argument
+function ArgumentTypes.finePosition(self, ) end
+
+---@param centerIntegers boolean if whole numbers should be centered (+0.5)
+---@return <unresolved> # fine position argument
+function ArgumentTypes.finePosition(self, centerIntegers) end
+
+---@return <unresolved> # rotation argument
+function ArgumentTypes.rotation(self, ) end
 
 ---@return <unresolved> # argument
 function ArgumentTypes.blockState(self, ) end

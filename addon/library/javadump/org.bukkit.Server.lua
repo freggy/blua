@@ -116,6 +116,19 @@ function Server.broadcast(self, component) end
 ---@return void # 
 function Server.broadcast(self, components) end
 
+---@param message java.lang.String MiniMessage content
+---@return void # 
+function Server.sendRichMessage(self, message) end
+
+---@param message java.lang.String MiniMessage content
+---@param resolvers net.kyori.adventure.text.minimessage.tag.resolver.TagResolver resolvers to use
+---@return void # 
+function Server.sendRichMessage(self, message,resolvers) end
+
+---@param message java.lang.String plain message
+---@return void # 
+function Server.sendPlainMessage(self, message) end
+
 ---@return java.lang.String # the name of the update folder
 function Server.getUpdateFolder(self, ) end
 
@@ -208,11 +221,15 @@ function Server.getWorld(self, uid) end
 ---@return org.bukkit.World # a world with the given NamespacedKey, or null if none exists
 function Server.getWorld(self, worldKey) end
 
+---@param worldKey <unresolved> the Key of the world to retrieve
+---@return org.bukkit.World # a world with the given Key, or null if none exists
+function Server.getWorld(self, worldKey) end
+
 ---@return org.bukkit.WorldBorder # the created world border instance
 function Server.createWorldBorder(self, ) end
 
----@param id int 
----@return org.bukkit.map.MapView # 
+---@param id int the id of the map to get
+---@return org.bukkit.map.MapView # a map view if it exists, or null otherwise
 function Server.getMap(self, id) end
 
 ---@param world org.bukkit.World the world the map will belong to
@@ -277,7 +294,7 @@ function Server.savePlayers(self, ) end
 function Server.dispatchCommand(self, sender,commandLine) end
 
 ---@param recipe org.bukkit.inventory.Recipe the recipe to add
----@return boolean # true if the recipe was added, false if it wasn't for some     reason
+---@return boolean # true if the recipe was added, false if it wasn't for some reason
 function Server.addRecipe(self, recipe) end
 
 ---@param recipe org.bukkit.inventory.Recipe the recipe to add
@@ -362,6 +379,9 @@ function Server.getHideOnlinePlayers(self, ) end
 
 ---@return boolean # true if the server authenticates clients, false otherwise
 function Server.getOnlineMode(self, ) end
+
+---@return io.papermc.paper.configuration.ServerConfiguration # the instance of ServerConfiguration containing the server's configuration details
+function Server.getServerConfig(self, ) end
 
 ---@return boolean # true if the server allows flight, false otherwise
 function Server.getAllowFlight(self, ) end
@@ -515,6 +535,9 @@ function Server.createMerchant(self, title) end
 ---@return int # the amount of consecutive neighbor updates, if the value is negative then the limit it's not used
 function Server.getMaxChainedNeighborUpdates(self, ) end
 
+---@return org.bukkit.inventory.Merchant # a new merchant
+function Server.createMerchant(self, ) end
+
 ---@return int # the monster spawn limit
 function Server.getMonsterSpawnLimit(self, ) end
 
@@ -596,6 +619,13 @@ function Server.setIdleTimeout(self, threshold) end
 
 ---@return int # the idle timeout in minutes
 function Server.getIdleTimeout(self, ) end
+
+---@return int # the pause threshold in seconds
+function Server.getPauseWhenEmptyTime(self, ) end
+
+---@param seconds int the pause threshold in seconds
+---@return void # 
+function Server.setPauseWhenEmptyTime(self, seconds) end
 
 ---@param world org.bukkit.World the world to create the ChunkData for
 ---@return org.bukkit.generator.ChunkGenerator.ChunkData # a new ChunkData for the world
@@ -702,6 +732,9 @@ function Server.getUnsafe(self, ) end
 function Server.spigot(self, ) end
 
 ---@return void # 
+function Server.restart(self, ) end
+
+---@return void # 
 function Server.reloadPermissions(self, ) end
 
 ---@return boolean # 
@@ -795,7 +828,26 @@ function Server.isOwnedByCurrentRegion(self, world,chunkX,chunkZ) end
 ---@return boolean # 
 function Server.isOwnedByCurrentRegion(self, world,chunkX,chunkZ,squareRadiusChunks) end
 
+---@param world org.bukkit.World Specified world.
+---@param minChunkX int Specified x-coordinate of the minimum chunk position.
+---@param minChunkZ int Specified z-coordinate of the minimum chunk position.
+---@param maxChunkX int Specified x-coordinate of the maximum chunk position.
+---@param maxChunkZ int Specified z-coordinate of the maximum chunk position.
+---@return boolean # 
+function Server.isOwnedByCurrentRegion(self, world,minChunkX,minChunkZ,maxChunkX,maxChunkZ) end
+
 ---@param entity org.bukkit.entity.Entity Specified entity.
 ---@return boolean # 
 function Server.isOwnedByCurrentRegion(self, entity) end
+
+---@return boolean # 
+function Server.isGlobalTickThread(self, ) end
+
+---@return boolean # 
+function Server.isPaused(self, ) end
+
+---@param plugin org.bukkit.plugin.Plugin The {@link org.bukkit.plugin.Plugin} that's allowing or disallowing pausing.
+---@param value boolean Whether to allow sleeping of the server (defaults to true).
+---@return void # 
+function Server.allowPausing(self, plugin,value) end
 

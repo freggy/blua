@@ -42,11 +42,11 @@ function PlayerPreLoginEvent.getName(self, ) end
 ---@return java.net.InetAddress # The IP address
 function PlayerPreLoginEvent.getAddress(self, ) end
 
----@return org.bukkit.event.HandlerList # 
-function PlayerPreLoginEvent.getHandlers(self, ) end
-
 ---@return java.util.UUID # The unique ID
 function PlayerPreLoginEvent.getUniqueId(self, ) end
+
+---@return org.bukkit.event.HandlerList # 
+function PlayerPreLoginEvent.getHandlers(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function PlayerPreLoginEvent.getHandlerList(self, ) end

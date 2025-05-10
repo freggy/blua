@@ -2,13 +2,6 @@
 
 ---@class com.destroystokyo.paper.event.player.PlayerHandshakeEvent: org.bukkit.event.Event
 local PlayerHandshakeEvent = {}
----@return boolean # {@code true} if this event is cancelled, {@code false} otherwise
-function PlayerHandshakeEvent.isCancelled(self, ) end
-
----@param cancel boolean {@code true} if this event is cancelled, {@code false} otherwise
----@return void # 
-function PlayerHandshakeEvent.setCancelled(self, cancel) end
-
 ---@return java.lang.String # the original handshake string
 function PlayerHandshakeEvent.getOriginalHandshake(self, ) end
 
@@ -63,6 +56,13 @@ function PlayerHandshakeEvent.getFailMessage(self, ) end
 ---@param failMessage java.lang.String the message to display to the client
 ---@return void # 
 function PlayerHandshakeEvent.setFailMessage(self, failMessage) end
+
+---@return boolean # {@code true} if this event is cancelled, {@code false} otherwise
+function PlayerHandshakeEvent.isCancelled(self, ) end
+
+---@param cancel boolean {@code true} if this event is cancelled, {@code false} otherwise
+---@return void # 
+function PlayerHandshakeEvent.setCancelled(self, cancel) end
 
 ---@return org.bukkit.event.HandlerList # 
 function PlayerHandshakeEvent.getHandlers(self, ) end

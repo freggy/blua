@@ -2,6 +2,9 @@
 
 ---@class org.bukkit.event.player.PlayerBedEnterEvent: org.bukkit.event.player.PlayerEvent
 local PlayerBedEnterEvent = {}
+---@return org.bukkit.block.Block # the bed block involved in this event
+function PlayerBedEnterEvent.getBed(self, ) end
+
 ---@return org.bukkit.event.player.PlayerBedEnterEvent.BedEnterResult # the bed enter result representing the default outcome of this event
 function PlayerBedEnterEvent.getBedEnterResult(self, ) end
 
@@ -15,12 +18,9 @@ function PlayerBedEnterEvent.setUseBed(self, useBed) end
 ---@return boolean # boolean cancellation state
 function PlayerBedEnterEvent.isCancelled(self, ) end
 
----@param cancel boolean true if you wish to cancel this event
+---@param cancel boolean 
 ---@return void # 
 function PlayerBedEnterEvent.setCancelled(self, cancel) end
-
----@return org.bukkit.block.Block # the bed block involved in this event
-function PlayerBedEnterEvent.getBed(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function PlayerBedEnterEvent.getHandlers(self, ) end

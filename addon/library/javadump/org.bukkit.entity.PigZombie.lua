@@ -9,14 +9,14 @@ function PigZombie.getAnger(self, ) end
 ---@return void # 
 function PigZombie.setAnger(self, level) end
 
----@param angry boolean Whether the zombie should be angry.
+---@param angry boolean Whether the piglin should be angry.
 ---@return void # 
 function PigZombie.setAngry(self, angry) end
 
----@return boolean # True if the zombie is angry, otherwise false.
+---@return boolean # True if the piglin is angry, otherwise false.
 function PigZombie.isAngry(self, ) end
 
----@return boolean # false
+---@return boolean # {@code false}
 function PigZombie.isConverting(self, ) end
 
 ---@return int # 

@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.entity.Dolphin: org.bukkit.entity.WaterMob
+---@class org.bukkit.entity.Dolphin: org.bukkit.entity.Ageable,org.bukkit.entity.WaterMob
 local Dolphin = {}
 ---@return int # 
 function Dolphin.getMoistness(self, ) end

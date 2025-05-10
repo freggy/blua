@@ -16,10 +16,10 @@ function Crafter.isTriggered(self, ) end
 ---@return void # 
 function Crafter.setTriggered(self, triggered) end
 
----@return org.bukkit.block.data.type.Crafter.Orientation # the 'orientation' value
+---@return org.bukkit.block.Orientation # the 'orientation' value
 function Crafter.getOrientation(self, ) end
 
----@param orientation org.bukkit.block.data.type.Crafter.Orientation the new 'orientation' value
+---@param orientation org.bukkit.block.Orientation the new 'orientation' value
 ---@return void # 
 function Crafter.setOrientation(self, orientation) end
 

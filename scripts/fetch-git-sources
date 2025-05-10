@@ -1,7 +1,7 @@
 #!/usr/bin/env lua
 local repos = {
-    ["git@github.com:openjdk/jdk21.git"] = "jdk21",
-    ["git@github.com:PaperMC/Paper.git"] = "paper"
+    ["git@github.com:openjdk/jdk21.git"] = "wrk/jdk21-src",
+    ["git@github.com:PaperMC/Paper.git"] = "wrk/paper-src"
 }
 for k, v in pairs(repos) do
     os.execute(string.format("git clone %s %s", k, v))

@@ -6,6 +6,11 @@ local CustomArgumentType = {}
 ---@return T # parsed value
 function CustomArgumentType.parse(self, reader) end
 
+---@param reader <unresolved> string reader input
+---@param source S source of the command
+---@return T # parsed value
+function CustomArgumentType.parse(self, reader,source) end
+
 ---@return <unresolved> # native argument type
 function CustomArgumentType.getNativeType(self, ) end
 

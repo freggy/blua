@@ -6,7 +6,7 @@ local MavenLibraryResolver = {}
 ---@return void # 
 function MavenLibraryResolver.addDependency(self, dependency) end
 
----@param remoteRepository <unresolved> the configuration that defines the maven repository this library resolver should fetch                         dependencies from
+---@param remoteRepository <unresolved> the configuration that defines the maven repository this library resolver should fetch dependencies from
 ---@return void # 
 function MavenLibraryResolver.addRepository(self, remoteRepository) end
 

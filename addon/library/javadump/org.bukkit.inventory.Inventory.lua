@@ -119,7 +119,7 @@ function Inventory.getType(self, ) end
 ---@return org.bukkit.inventory.InventoryHolder # The holder of the inventory; null if it has no holder.
 function Inventory.getHolder(self, ) end
 
----@param useSnapshot boolean Create a snapshot if the holder is a tile entity
+---@param useSnapshot boolean Create a snapshot if the holder is a block entity
 ---@return org.bukkit.inventory.InventoryHolder # The holder of the inventory; null if it has no holder.
 function Inventory.getHolder(self, useSnapshot) end
 

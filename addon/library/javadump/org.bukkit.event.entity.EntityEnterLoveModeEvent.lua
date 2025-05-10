@@ -5,7 +5,7 @@ local EntityEnterLoveModeEvent = {}
 ---@return org.bukkit.entity.Animals # The animal that is entering love mode
 function EntityEnterLoveModeEvent.getEntity(self, ) end
 
----@return org.bukkit.entity.HumanEntity # The Human entity that caused the animal to enter love mode, or null if there wasn't one.
+---@return org.bukkit.entity.HumanEntity # The Human entity that caused the animal to enter love mode, or {@code null} if there wasn't one.
 function EntityEnterLoveModeEvent.getHumanEntity(self, ) end
 
 ---@return int # The amount of ticks that the animal will fall in love for

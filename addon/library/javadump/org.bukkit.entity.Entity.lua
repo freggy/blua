@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.entity.Entity: org.bukkit.metadata.Metadatable,org.bukkit.command.CommandSender,org.bukkit.Nameable,org.bukkit.persistence.PersistentDataHolder,net.kyori.adventure.text.event.HoverEventSource,net.kyori.adventure.sound.Sound.Emitter
+---@class org.bukkit.entity.Entity: org.bukkit.metadata.Metadatable,org.bukkit.command.CommandSender,org.bukkit.Nameable,org.bukkit.persistence.PersistentDataHolder,net.kyori.adventure.text.event.HoverEventSource,net.kyori.adventure.sound.Sound.Emitter,io.papermc.paper.datacomponent.DataComponentView
 local Entity = {}
 ---@return org.bukkit.Location # a new copy of Location containing the position of this entity
 function Entity.getLocation(self, ) end
@@ -49,6 +49,18 @@ function Entity.teleport(self, location,teleportFlags) end
 ---@param teleportFlags io.papermc.paper.entity.TeleportFlag Flags to be used in this teleportation
 ---@return boolean # <code>true</code> if the teleport was successful
 function Entity.teleport(self, location,cause,teleportFlags) end
+
+---@param x double x coordinate
+---@param y double y coordinate
+---@param z double z coordinate
+---@param entityAnchor io.papermc.paper.entity.LookAnchor What part of the entity should face the given position
+---@return void # 
+function Entity.lookAt(self, x,y,z,entityAnchor) end
+
+---@param position io.papermc.paper.math.Position Position to look at in the player's current world
+---@param entityAnchor io.papermc.paper.entity.LookAnchor What part of the entity should face the given position
+---@return void # 
+function Entity.lookAt(self, position,entityAnchor) end
 
 ---@param location org.bukkit.Location New location to teleport this entity to
 ---@return boolean # <code>true</code> if the teleport was successful
@@ -106,8 +118,15 @@ function Entity.setFireTicks(self, ticks) end
 ---@return void # 
 function Entity.setVisualFire(self, fire) end
 
+---@param fire net.kyori.adventure.util.TriState a TriState value representing the state of the visual fire.
+---@return void # 
+function Entity.setVisualFire(self, fire) end
+
 ---@return boolean # whether visual fire is enabled
 function Entity.isVisualFire(self, ) end
+
+---@return net.kyori.adventure.util.TriState # A TriState indicating the current visual fire state.
+function Entity.getVisualFire(self, ) end
 
 ---@return int # int freeze ticks
 function Entity.getFreezeTicks(self, ) end
@@ -122,11 +141,11 @@ function Entity.setFreezeTicks(self, ticks) end
 ---@return boolean # freeze status
 function Entity.isFrozen(self, ) end
 
----@param invisible boolean 
+---@param invisible boolean If the entity is invisible
 ---@return void # 
 function Entity.setInvisible(self, invisible) end
 
----@return boolean # 
+---@return boolean # Whether the entity is invisible
 function Entity.isInvisible(self, ) end
 
 ---@param noPhysics boolean boolean indicating if the entity should not have physics.
@@ -210,9 +229,9 @@ function Entity.getTicksLived(self, ) end
 ---@return void # 
 function Entity.setTicksLived(self, value) end
 
----@param type org.bukkit.EntityEffect Effect to play.
+---@param effect org.bukkit.EntityEffect Effect to play.
 ---@return void # 
-function Entity.playEffect(self, type) end
+function Entity.playEffect(self, effect) end
 
 ---@return org.bukkit.entity.EntityType # The entity type.
 function Entity.getType(self, ) end
@@ -251,6 +270,10 @@ function Entity.isVisibleByDefault(self, ) end
 
 ---@return java.util.Set # the players tracking this entity, or an empty set if none
 function Entity.getTrackedBy(self, ) end
+
+---@param player org.bukkit.entity.Player the player to check
+---@return boolean # if the player is currently tracking this entity
+function Entity.isTrackedBy(self, player) end
 
 ---@param flag boolean if the entity is glowing
 ---@return void # 
@@ -394,13 +417,13 @@ function Entity.isTicking(self, ) end
 ---@return java.util.Set # players in tracking range
 function Entity.getTrackedPlayers(self, ) end
 
----@param location org.bukkit.Location The location to spawn the entity at.
----@return boolean # Whether the entity was successfully spawned.
+---@param location org.bukkit.Location the location to spawn the entity at
+---@return boolean # whether the entity was successfully spawned
 function Entity.spawnAt(self, location) end
 
----@param location org.bukkit.Location The location to spawn the entity at.
----@param reason org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason The reason for the entity being spawned.
----@return boolean # Whether the entity was successfully spawned.
+---@param location org.bukkit.Location the location to spawn the entity at
+---@param reason org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason the reason for the entity being spawned
+---@return boolean # whether the entity was successfully spawned
 function Entity.spawnAt(self, location,reason) end
 
 ---@return boolean # true if in powdered snow.
@@ -434,4 +457,8 @@ function Entity.getScheduler(self, ) end
 
 ---@return java.lang.String # the scoreboard entry name
 function Entity.getScoreboardEntryName(self, ) end
+
+---@param players java.util.Collection the players to broadcast to (cannot include {@code this}
+---@return void # 
+function Entity.broadcastHurtAnimation(self, players) end
 

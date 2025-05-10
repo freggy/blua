@@ -5,10 +5,10 @@ local PlayerBedLeaveEvent = {}
 ---@return org.bukkit.block.Block # the bed block involved in this event
 function PlayerBedLeaveEvent.getBed(self, ) end
 
----@return boolean # true if the spawn location will be changed
+---@return boolean # {@code true} if the spawn location will be changed
 function PlayerBedLeaveEvent.shouldSetSpawnLocation(self, ) end
 
----@param setBedSpawn boolean true to change the new spawn location
+---@param setBedSpawn boolean {@code true} to change the new spawn location
 ---@return void # 
 function PlayerBedLeaveEvent.setSpawnLocation(self, setBedSpawn) end
 

@@ -5,10 +5,10 @@ local ExpBottleEvent = {}
 ---@return org.bukkit.entity.ThrownExpBottle # 
 function ExpBottleEvent.getEntity(self, ) end
 
----@return boolean # true if the effect will be shown, false otherwise
+---@return boolean # {@code true} if the effect will be shown, {@code false} otherwise
 function ExpBottleEvent.getShowEffect(self, ) end
 
----@param showEffect boolean true indicates the effect will be shown, false     indicates no effect will be shown
+---@param showEffect boolean {@code true} indicates the effect will be shown, false     indicates no effect will be shown
 ---@return void # 
 function ExpBottleEvent.setShowEffect(self, showEffect) end
 

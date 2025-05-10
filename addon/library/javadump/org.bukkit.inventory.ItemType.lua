@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.inventory.ItemType: org.bukkit.Keyed,org.bukkit.Translatable,net.kyori.adventure.translation.Translatable
+---@class org.bukkit.inventory.ItemType: org.bukkit.Keyed,org.bukkit.Translatable,net.kyori.adventure.translation.Translatable,io.papermc.paper.world.flag.FeatureDependant
 local ItemType = {}
 ---@param key java.lang.String 
 ---@return M # 
@@ -60,7 +60,7 @@ function ItemType.getDefaultAttributeModifiers(self, ) end
 ---@return com.google.common.collect.Multimap # the immutable {@link Multimap} with the respective default Attributes and modifiers, or an empty map if no attributes are set.
 function ItemType.getDefaultAttributeModifiers(self, slot) end
 
----@return org.bukkit.inventory.CreativeCategory # the creative category. null if does not belong to a category
+---@return org.bukkit.inventory.CreativeCategory # the creative category. null if does not belong to a category      <!-- * @deprecated use #getCreativeCategories() -->
 function ItemType.getCreativeCategory(self, ) end
 
 ---@param world org.bukkit.World the world to check
@@ -72,4 +72,18 @@ function ItemType.asMaterial(self, ) end
 
 ---@return java.lang.String # 
 function ItemType.getTranslationKey(self, ) end
+
+---@return org.bukkit.inventory.ItemRarity # the item rarity (or null if none is set)
+function ItemType.getItemRarity(self, ) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType.Valued the data component type
+---@return T # the default value or {@code null} if there is none
+function ItemType.getDefaultData(self, type) end
+
+---@param type io.papermc.paper.datacomponent.DataComponentType the data component type
+---@return boolean # {@code true} if there is a default value
+function ItemType.hasDefaultData(self, type) end
+
+---@return java.util.Set # an immutable set of data component types
+function ItemType.getDefaultDataTypes(self, ) end
 

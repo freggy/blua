@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.block.BlockType: org.bukkit.Keyed,org.bukkit.Translatable,net.kyori.adventure.translation.Translatable
+---@class org.bukkit.block.BlockType: org.bukkit.Keyed,org.bukkit.Translatable,net.kyori.adventure.translation.Translatable,io.papermc.paper.world.flag.FeatureDependant
 local BlockType = {}
 ---@param key java.lang.String 
 ---@return B # 
@@ -24,6 +24,9 @@ function BlockType.getBlockDataClass(self, ) end
 
 ---@return org.bukkit.block.data.BlockData # new data instance
 function BlockType.createBlockData(self, ) end
+
+---@return java.util.Collection # new block data collection
+function BlockType.createBlockDataStates(self, ) end
 
 ---@param data java.lang.String data string
 ---@return org.bukkit.block.data.BlockData # new data instance

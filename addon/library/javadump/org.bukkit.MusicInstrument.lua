@@ -16,6 +16,9 @@ function MusicInstrument.getInstrument(self, key) end
 ---@return org.bukkit.NamespacedKey # 
 function MusicInstrument.getKey(self, ) end
 
+---@return <unresolved> # 
+function MusicInstrument.key(self, ) end
+
 ---@return java.lang.String # 
 function MusicInstrument.translationKey(self, ) end
 

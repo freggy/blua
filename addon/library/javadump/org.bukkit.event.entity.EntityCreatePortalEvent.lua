@@ -8,15 +8,15 @@ function EntityCreatePortalEvent.getEntity(self, ) end
 ---@return java.util.List # List of blocks that will be changed.
 function EntityCreatePortalEvent.getBlocks(self, ) end
 
+---@return org.bukkit.PortalType # Type of portal.
+function EntityCreatePortalEvent.getPortalType(self, ) end
+
 ---@return boolean # 
 function EntityCreatePortalEvent.isCancelled(self, ) end
 
 ---@param cancel boolean 
 ---@return void # 
 function EntityCreatePortalEvent.setCancelled(self, cancel) end
-
----@return org.bukkit.PortalType # Type of portal.
-function EntityCreatePortalEvent.getPortalType(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function EntityCreatePortalEvent.getHandlers(self, ) end

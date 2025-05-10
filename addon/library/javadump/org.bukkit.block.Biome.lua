@@ -1,74 +1,18 @@
 ---@meta
 
----@class org.bukkit.block.Biome
----@field OCEAN org.bukkit.block.Biome
----@field PLAINS org.bukkit.block.Biome
----@field DESERT org.bukkit.block.Biome
----@field WINDSWEPT_HILLS org.bukkit.block.Biome
----@field FOREST org.bukkit.block.Biome
----@field TAIGA org.bukkit.block.Biome
----@field SWAMP org.bukkit.block.Biome
----@field MANGROVE_SWAMP org.bukkit.block.Biome
----@field RIVER org.bukkit.block.Biome
----@field NETHER_WASTES org.bukkit.block.Biome
----@field THE_END org.bukkit.block.Biome
----@field FROZEN_OCEAN org.bukkit.block.Biome
----@field FROZEN_RIVER org.bukkit.block.Biome
----@field SNOWY_PLAINS org.bukkit.block.Biome
----@field MUSHROOM_FIELDS org.bukkit.block.Biome
----@field BEACH org.bukkit.block.Biome
----@field JUNGLE org.bukkit.block.Biome
----@field SPARSE_JUNGLE org.bukkit.block.Biome
----@field DEEP_OCEAN org.bukkit.block.Biome
----@field STONY_SHORE org.bukkit.block.Biome
----@field SNOWY_BEACH org.bukkit.block.Biome
----@field BIRCH_FOREST org.bukkit.block.Biome
----@field DARK_FOREST org.bukkit.block.Biome
----@field SNOWY_TAIGA org.bukkit.block.Biome
----@field OLD_GROWTH_PINE_TAIGA org.bukkit.block.Biome
----@field WINDSWEPT_FOREST org.bukkit.block.Biome
----@field SAVANNA org.bukkit.block.Biome
----@field SAVANNA_PLATEAU org.bukkit.block.Biome
----@field BADLANDS org.bukkit.block.Biome
----@field WOODED_BADLANDS org.bukkit.block.Biome
----@field SMALL_END_ISLANDS org.bukkit.block.Biome
----@field END_MIDLANDS org.bukkit.block.Biome
----@field END_HIGHLANDS org.bukkit.block.Biome
----@field END_BARRENS org.bukkit.block.Biome
----@field WARM_OCEAN org.bukkit.block.Biome
----@field LUKEWARM_OCEAN org.bukkit.block.Biome
----@field COLD_OCEAN org.bukkit.block.Biome
----@field DEEP_LUKEWARM_OCEAN org.bukkit.block.Biome
----@field DEEP_COLD_OCEAN org.bukkit.block.Biome
----@field DEEP_FROZEN_OCEAN org.bukkit.block.Biome
----@field THE_VOID org.bukkit.block.Biome
----@field SUNFLOWER_PLAINS org.bukkit.block.Biome
----@field WINDSWEPT_GRAVELLY_HILLS org.bukkit.block.Biome
----@field FLOWER_FOREST org.bukkit.block.Biome
----@field ICE_SPIKES org.bukkit.block.Biome
----@field OLD_GROWTH_BIRCH_FOREST org.bukkit.block.Biome
----@field OLD_GROWTH_SPRUCE_TAIGA org.bukkit.block.Biome
----@field WINDSWEPT_SAVANNA org.bukkit.block.Biome
----@field ERODED_BADLANDS org.bukkit.block.Biome
----@field BAMBOO_JUNGLE org.bukkit.block.Biome
----@field SOUL_SAND_VALLEY org.bukkit.block.Biome
----@field CRIMSON_FOREST org.bukkit.block.Biome
----@field WARPED_FOREST org.bukkit.block.Biome
----@field BASALT_DELTAS org.bukkit.block.Biome
----@field DRIPSTONE_CAVES org.bukkit.block.Biome
----@field LUSH_CAVES org.bukkit.block.Biome
----@field DEEP_DARK org.bukkit.block.Biome
----@field MEADOW org.bukkit.block.Biome
----@field GROVE org.bukkit.block.Biome
----@field SNOWY_SLOPES org.bukkit.block.Biome
----@field FROZEN_PEAKS org.bukkit.block.Biome
----@field JAGGED_PEAKS org.bukkit.block.Biome
----@field STONY_PEAKS org.bukkit.block.Biome
----@field CHERRY_GROVE org.bukkit.block.Biome
----@field CUSTOM org.bukkit.block.Biome
+---@class org.bukkit.block.Biome: org.bukkit.util.OldEnum,org.bukkit.Keyed,net.kyori.adventure.translation.Translatable
 local Biome = {}
----@return org.bukkit.NamespacedKey # 
-function Biome.getKey() end
+---@param key java.lang.String 
+---@return org.bukkit.block.Biome # 
+function Biome.getBiome(self, key) end
+
+---@param name java.lang.String of the biome.
+---@return org.bukkit.block.Biome # the biome with the given name.
+function Biome.valueOf(self, name) end
+
+---@return Biome[] # an array of all known biomes.
+function Biome.values(self, ) end
 
 ---@return java.lang.String # 
-function Biome.translationKey() end
+function Biome.translationKey(self, ) end
+

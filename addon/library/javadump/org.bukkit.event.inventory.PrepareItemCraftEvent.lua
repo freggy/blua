@@ -8,7 +8,7 @@ function PrepareItemCraftEvent.getRecipe(self, ) end
 ---@return org.bukkit.inventory.CraftingInventory # The crafting inventory on which the recipe was formed.
 function PrepareItemCraftEvent.getInventory(self, ) end
 
----@return boolean # True if this is a repair.
+---@return boolean # {@code true} if this is a repair.
 function PrepareItemCraftEvent.isRepair(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 

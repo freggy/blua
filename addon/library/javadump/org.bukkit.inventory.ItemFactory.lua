@@ -109,3 +109,10 @@ function ItemFactory.hoverContentOf(self, entity,customName) end
 ---@return org.bukkit.inventory.ItemStack # enchanted copy of the provided ItemStack
 function ItemFactory.enchantWithLevels(self, itemStack,levels,allowTreasure,random) end
 
+---@param itemStack org.bukkit.inventory.ItemStack ItemStack to enchant
+---@param levels int levels to use for enchanting
+---@param keySet io.papermc.paper.registry.set.RegistryKeySet registry key set defining the set of possible enchantments, e.g. {@link io.papermc.paper.registry.keys.tags.EnchantmentTagKeys#IN_ENCHANTING_TABLE}.
+---@param random java.util.Random {@link java.util.Random} instance to use for enchanting
+---@return org.bukkit.inventory.ItemStack # enchanted copy of the provided ItemStack
+function ItemFactory.enchantWithLevels(self, itemStack,levels,keySet,random) end
+

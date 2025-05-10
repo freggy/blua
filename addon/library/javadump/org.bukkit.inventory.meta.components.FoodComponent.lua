@@ -23,29 +23,3 @@ function FoodComponent.canAlwaysEat(self, ) end
 ---@return void # 
 function FoodComponent.setCanAlwaysEat(self, canAlwaysEat) end
 
----@return float # eat time
-function FoodComponent.getEatSeconds(self, ) end
-
----@param eatSeconds float new eat time
----@return void # 
-function FoodComponent.setEatSeconds(self, eatSeconds) end
-
----@return org.bukkit.inventory.ItemStack # converted item
-function FoodComponent.getUsingConvertsTo(self, ) end
-
----@param item org.bukkit.inventory.ItemStack converted item
----@return void # 
-function FoodComponent.setUsingConvertsTo(self, item) end
-
----@return java.util.List # food effects
-function FoodComponent.getEffects(self, ) end
-
----@param effects java.util.List new effects
----@return void # 
-function FoodComponent.setEffects(self, effects) end
-
----@param effect org.bukkit.potion.PotionEffect the effect
----@param probability float the probability of the effect being applied
----@return org.bukkit.inventory.meta.components.FoodComponent.FoodEffect # the added effect
-function FoodComponent.addEffect(self, effect,probability) end
-

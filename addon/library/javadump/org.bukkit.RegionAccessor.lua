@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.RegionAccessor: org.bukkit.Keyed
+---@class org.bukkit.RegionAccessor: org.bukkit.Keyed,io.papermc.paper.world.flag.FeatureFlagSetHolder
 local RegionAccessor = {}
 ---@param location org.bukkit.Location the location of the biome
 ---@return org.bukkit.block.Biome # Biome at the given location

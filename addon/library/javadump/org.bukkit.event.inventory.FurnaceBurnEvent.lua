@@ -15,14 +15,14 @@ function FurnaceBurnEvent.setBurnTime(self, burnTime) end
 ---@return boolean # whether the furnace's fuel is burning or not.
 function FurnaceBurnEvent.isBurning(self, ) end
 
----@param burning boolean true if the furnace's fuel is burning
+---@param burning boolean {@code true} if the furnace's fuel is burning
 ---@return void # 
 function FurnaceBurnEvent.setBurning(self, burning) end
 
 ---@return boolean # whether the furnace's fuel will be consumed
 function FurnaceBurnEvent.willConsumeFuel(self, ) end
 
----@param consumeFuel boolean true to consume the fuel
+---@param consumeFuel boolean {@code true} to consume the fuel
 ---@return void # 
 function FurnaceBurnEvent.setConsumeFuel(self, consumeFuel) end
 

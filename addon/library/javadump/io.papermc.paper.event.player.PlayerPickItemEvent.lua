@@ -2,6 +2,9 @@
 
 ---@class io.papermc.paper.event.player.PlayerPickItemEvent: org.bukkit.event.player.PlayerEvent
 local PlayerPickItemEvent = {}
+---@return boolean # {@code true} if data is included, otherwise {@code false}.
+function PlayerPickItemEvent.isIncludeData(self, ) end
+
 ---@return int # hotbar slot (0-8 inclusive)
 function PlayerPickItemEvent.getTargetSlot(self, ) end
 
@@ -9,10 +12,10 @@ function PlayerPickItemEvent.getTargetSlot(self, ) end
 ---@return void # 
 function PlayerPickItemEvent.setTargetSlot(self, targetSlot) end
 
----@return int # player inventory slot (0-35 inclusive)
+---@return int # player inventory slot (0-35 inclusive, or {@code -1} if not in the player inventory)
 function PlayerPickItemEvent.getSourceSlot(self, ) end
 
----@param sourceSlot int player inventory slot (0-35 inclusive)
+---@param sourceSlot int player inventory slot (0-35 inclusive, or {@code -1} if not in the player inventory)
 ---@return void # 
 function PlayerPickItemEvent.setSourceSlot(self, sourceSlot) end
 

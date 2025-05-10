@@ -2,7 +2,7 @@
 
 ---@class org.bukkit.event.block.BlockFadeEvent: org.bukkit.event.block.BlockEvent
 local BlockFadeEvent = {}
----@return org.bukkit.block.BlockState # The block state of the block that will be fading, melting or     disappearing
+---@return org.bukkit.block.BlockState # The block state of the new block that replaces the block     fading, melting or disappearing
 function BlockFadeEvent.getNewState(self, ) end
 
 ---@return boolean # 

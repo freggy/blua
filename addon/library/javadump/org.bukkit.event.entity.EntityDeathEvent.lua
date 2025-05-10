@@ -18,19 +18,6 @@ function EntityDeathEvent.setDroppedExp(self, exp) end
 ---@return java.util.List # Items to drop when the entity dies
 function EntityDeathEvent.getDrops(self, ) end
 
----@return org.bukkit.event.HandlerList # 
-function EntityDeathEvent.getHandlers(self, ) end
-
----@return org.bukkit.event.HandlerList # 
-function EntityDeathEvent.getHandlerList(self, ) end
-
----@return boolean # 
-function EntityDeathEvent.isCancelled(self, ) end
-
----@param cancel boolean 
----@return void # 
-function EntityDeathEvent.setCancelled(self, cancel) end
-
 ---@return double # The amount of health
 function EntityDeathEvent.getReviveHealth(self, ) end
 
@@ -38,7 +25,7 @@ function EntityDeathEvent.getReviveHealth(self, ) end
 ---@return void # 
 function EntityDeathEvent.setReviveHealth(self, reviveHealth) end
 
----@return boolean # Whether or not the death sound should play. Event is called with this set to false if the entity is silent.
+---@return boolean # Whether the death sound should play. Event is called with this set to {@code false} if the entity is silent.
 function EntityDeathEvent.shouldPlayDeathSound(self, ) end
 
 ---@param playDeathSound boolean Enable or disable the death sound
@@ -72,4 +59,17 @@ function EntityDeathEvent.getDeathSoundPitch(self, ) end
 ---@param pitch float The pitch the death sound should play with
 ---@return void # 
 function EntityDeathEvent.setDeathSoundPitch(self, pitch) end
+
+---@return boolean # 
+function EntityDeathEvent.isCancelled(self, ) end
+
+---@param cancel boolean 
+---@return void # 
+function EntityDeathEvent.setCancelled(self, cancel) end
+
+---@return org.bukkit.event.HandlerList # 
+function EntityDeathEvent.getHandlers(self, ) end
+
+---@return org.bukkit.event.HandlerList # 
+function EntityDeathEvent.getHandlerList(self, ) end
 

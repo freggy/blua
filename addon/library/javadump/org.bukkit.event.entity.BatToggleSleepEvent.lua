@@ -2,7 +2,7 @@
 
 ---@class org.bukkit.event.entity.BatToggleSleepEvent: org.bukkit.event.entity.EntityEvent
 local BatToggleSleepEvent = {}
----@return boolean # true if trying to awaken, false otherwise
+---@return boolean # {@code true} if trying to awaken, {@code false} otherwise
 function BatToggleSleepEvent.isAwake(self, ) end
 
 ---@param cancel boolean 

@@ -5,6 +5,9 @@ local PlayerArmorChangeEvent = {}
 ---@return com.destroystokyo.paper.event.player.PlayerArmorChangeEvent.SlotType # type of slot being altered
 function PlayerArmorChangeEvent.getSlotType(self, ) end
 
+---@return org.bukkit.inventory.EquipmentSlot # slot being altered
+function PlayerArmorChangeEvent.getSlot(self, ) end
+
 ---@return org.bukkit.inventory.ItemStack # old item
 function PlayerArmorChangeEvent.getOldItem(self, ) end
 

@@ -2,19 +2,6 @@
 
 ---@class org.bukkit.map.MapPalette: 
 local MapPalette = {}
----@param r int 
----@param g int 
----@param b int 
----@return java.awt.Color # 
-function MapPalette.c(self, r,g,b) end
-
----@param r int 
----@param g int 
----@param b int 
----@param a int 
----@return java.awt.Color # 
-function MapPalette.c(self, r,g,b,a) end
-
 ---@param c1 java.awt.Color 
 ---@param c2 java.awt.Color 
 ---@return double # 

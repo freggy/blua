@@ -103,6 +103,13 @@ function WorldCreator.hardcore(self, hardcore) end
 ---@return boolean # hardcore status
 function WorldCreator.hardcore(self, ) end
 
+---@param bonusChest boolean indicating whether the bonus chest should be generated
+---@return org.bukkit.WorldCreator # This object, for chaining
+function WorldCreator.bonusChest(self, bonusChest) end
+
+---@return boolean # true if the bonus chest is enabled, false otherwise.
+function WorldCreator.bonusChest(self, ) end
+
 ---@param keepSpawnInMemory boolean Whether the spawn chunks will be kept loaded
 ---@return org.bukkit.WorldCreator # This object, for chaining
 function WorldCreator.keepSpawnInMemory(self, keepSpawnInMemory) end

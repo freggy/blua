@@ -293,6 +293,10 @@ function LivingEntity.setSwimming(self, swimming) end
 ---@return boolean # True if this entity is currently riptiding.
 function LivingEntity.isRiptiding(self, ) end
 
+---@param riptiding boolean whether the entity should start riptiding.
+---@return void # 
+function LivingEntity.setRiptiding(self, riptiding) end
+
 ---@return boolean # slumber state
 function LivingEntity.isSleeping(self, ) end
 
@@ -368,13 +372,6 @@ function LivingEntity.canBreatheUnderwater(self, ) end
 
 ---@return org.bukkit.entity.EntityCategory # the entity category
 function LivingEntity.getCategory(self, ) end
-
----@param invisible boolean If the entity is invisible
----@return void # 
-function LivingEntity.setInvisible(self, invisible) end
-
----@return boolean # Whether the entity is invisible
-function LivingEntity.isInvisible(self, ) end
 
 ---@return int # Number of arrows stuck
 function LivingEntity.getArrowsStuck(self, ) end
@@ -502,4 +499,7 @@ function LivingEntity.setBodyYaw(self, bodyYaw) end
 ---@param slot org.bukkit.inventory.EquipmentSlot equipment slot
 ---@return boolean # whether this entity can use the equipment slot
 function LivingEntity.canUseEquipmentSlot(self, slot) end
+
+---@return io.papermc.paper.world.damagesource.CombatTracker # the entity's combat tracker
+function LivingEntity.getCombatTracker(self, ) end
 

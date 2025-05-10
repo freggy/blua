@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.block.ChiseledBookshelf: org.bukkit.block.TileState,org.bukkit.inventory.BlockInventoryHolder
+---@class org.bukkit.block.ChiseledBookshelf: io.papermc.paper.block.TileStateInventoryHolder
 local ChiseledBookshelf = {}
 ---@return int # the last interacted slot
 function ChiseledBookshelf.getLastInteractedSlot(self, ) end
@@ -9,10 +9,10 @@ function ChiseledBookshelf.getLastInteractedSlot(self, ) end
 ---@return void # 
 function ChiseledBookshelf.setLastInteractedSlot(self, lastInteractedSlot) end
 
----@return org.bukkit.inventory.ChiseledBookshelfInventory # inventory
+---@return org.bukkit.inventory.ChiseledBookshelfInventory # 
 function ChiseledBookshelf.getInventory(self, ) end
 
----@return org.bukkit.inventory.ChiseledBookshelfInventory # snapshot inventory
+---@return org.bukkit.inventory.ChiseledBookshelfInventory # 
 function ChiseledBookshelf.getSnapshotInventory(self, ) end
 
 ---@param position org.bukkit.util.Vector a vector relative to this block

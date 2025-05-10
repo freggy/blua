@@ -19,7 +19,7 @@ function ProfileWhitelistVerifyEvent.kickMessage(self, kickMessage) end
 ---@return com.destroystokyo.paper.profile.PlayerProfile # The profile of the player trying to connect
 function ProfileWhitelistVerifyEvent.getPlayerProfile(self, ) end
 
----@return boolean # Whether the player is whitelisted to play on this server (whitelist may be off is why its true)
+---@return boolean # Whether the player is whitelisted to play on this server (whitelist may be off is why it's true)
 function ProfileWhitelistVerifyEvent.isWhitelisted(self, ) end
 
 ---@param whitelisted boolean The new whitelisted state

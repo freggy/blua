@@ -5,11 +5,11 @@ local BrewEvent = {}
 ---@return org.bukkit.inventory.BrewerInventory # the contents
 function BrewEvent.getContents(self, ) end
 
----@return int # the remaining fuel
-function BrewEvent.getFuelLevel(self, ) end
-
 ---@return java.util.List # List of {@link ItemStack} resulting for this operation
 function BrewEvent.getResults(self, ) end
+
+---@return int # the remaining fuel
+function BrewEvent.getFuelLevel(self, ) end
 
 ---@return boolean # 
 function BrewEvent.isCancelled(self, ) end

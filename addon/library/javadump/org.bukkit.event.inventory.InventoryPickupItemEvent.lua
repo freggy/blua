@@ -2,10 +2,10 @@
 
 ---@class org.bukkit.event.inventory.InventoryPickupItemEvent: org.bukkit.event.Event
 local InventoryPickupItemEvent = {}
----@return org.bukkit.inventory.Inventory # Inventory
+---@return org.bukkit.inventory.Inventory # 
 function InventoryPickupItemEvent.getInventory(self, ) end
 
----@return org.bukkit.entity.Item # Item
+---@return org.bukkit.entity.Item # 
 function InventoryPickupItemEvent.getItem(self, ) end
 
 ---@return boolean # 

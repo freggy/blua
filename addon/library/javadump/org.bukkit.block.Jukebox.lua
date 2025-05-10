@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.block.Jukebox: org.bukkit.block.TileState,org.bukkit.inventory.BlockInventoryHolder
+---@class org.bukkit.block.Jukebox: io.papermc.paper.block.TileStateInventoryHolder
 local Jukebox = {}
 ---@return org.bukkit.Material # The record Material, or AIR if none is inserted
 function Jukebox.getPlaying(self, ) end
@@ -31,9 +31,9 @@ function Jukebox.stopPlaying(self, ) end
 ---@return boolean # True if a record was ejected; false if there was none playing
 function Jukebox.eject(self, ) end
 
----@return org.bukkit.inventory.JukeboxInventory # inventory
+---@return org.bukkit.inventory.JukeboxInventory # 
 function Jukebox.getInventory(self, ) end
 
----@return org.bukkit.inventory.JukeboxInventory # snapshot inventory
+---@return org.bukkit.inventory.JukeboxInventory # 
 function Jukebox.getSnapshotInventory(self, ) end
 

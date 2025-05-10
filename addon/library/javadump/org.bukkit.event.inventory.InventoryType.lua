@@ -42,5 +42,8 @@ function InventoryType.getDefaultSize() end
 ---@return java.lang.String # 
 function InventoryType.getDefaultTitle() end
 
+---@return org.bukkit.inventory.MenuType # the corresponding {@link MenuType}
+function InventoryType.getMenuType() end
+
 ---@return boolean # if this InventoryType can be created and shown to a player
 function InventoryType.isCreatable() end

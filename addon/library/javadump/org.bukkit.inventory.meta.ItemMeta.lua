@@ -2,6 +2,16 @@
 
 ---@class org.bukkit.inventory.meta.ItemMeta: java.lang.Cloneable,org.bukkit.configuration.serialization.ConfigurationSerializable,org.bukkit.persistence.PersistentDataHolder
 local ItemMeta = {}
+---@return boolean # true if this has a custom name
+function ItemMeta.hasCustomName(self, ) end
+
+---@return net.kyori.adventure.text.Component # the custom name
+function ItemMeta.customName(self, ) end
+
+---@param customName net.kyori.adventure.text.Component the custom name to set
+---@return void # 
+function ItemMeta.customName(self, customName) end
+
 ---@return boolean # true if this has a display name
 function ItemMeta.hasDisplayName(self, ) end
 
@@ -83,40 +93,60 @@ function ItemMeta.hasCustomModelData(self, ) end
 ---@return int # the custom model data that is set
 function ItemMeta.getCustomModelData(self, ) end
 
+---@return org.bukkit.inventory.meta.components.CustomModelDataComponent # component
+function ItemMeta.getCustomModelDataComponent(self, ) end
+
 ---@param data java.lang.Integer the data to set, or null to clear
 ---@return void # 
 function ItemMeta.setCustomModelData(self, data) end
 
+---@return boolean # if a custom model data component is set
+function ItemMeta.hasCustomModelDataComponent(self, ) end
+
+---@param customModelData org.bukkit.inventory.meta.components.CustomModelDataComponent new component
+---@return void # 
+function ItemMeta.setCustomModelDataComponent(self, customModelData) end
+
+---@return boolean # if an enchantable is set.
+function ItemMeta.hasEnchantable(self, ) end
+
+---@return int # the enchantable value
+function ItemMeta.getEnchantable(self, ) end
+
+---@param enchantable java.lang.Integer enchantable value, must be positive
+---@return void # 
+function ItemMeta.setEnchantable(self, enchantable) end
+
 ---@return boolean # true if an enchantment exists on this meta
 function ItemMeta.hasEnchants(self, ) end
 
----@param ench org.bukkit.enchantments.Enchantment enchantment to check
+---@param enchant org.bukkit.enchantments.Enchantment enchantment to check
 ---@return boolean # true if this enchantment exists for this meta
-function ItemMeta.hasEnchant(self, ench) end
+function ItemMeta.hasEnchant(self, enchant) end
 
----@param ench org.bukkit.enchantments.Enchantment enchantment to check
+---@param enchant org.bukkit.enchantments.Enchantment enchantment to check
 ---@return int # The level that the specified enchantment has, or 0 if none
-function ItemMeta.getEnchantLevel(self, ench) end
+function ItemMeta.getEnchantLevel(self, enchant) end
 
 ---@return java.util.Map # An immutable copy of the enchantments
 function ItemMeta.getEnchants(self, ) end
 
----@param ench org.bukkit.enchantments.Enchantment Enchantment to add
+---@param enchant org.bukkit.enchantments.Enchantment Enchantment to add
 ---@param level int Level for the enchantment
 ---@param ignoreLevelRestriction boolean this indicates the enchantment should be     applied, ignoring the level limit
 ---@return boolean # true if the item meta changed as a result of this call, false     otherwise
-function ItemMeta.addEnchant(self, ench,level,ignoreLevelRestriction) end
+function ItemMeta.addEnchant(self, enchant,level,ignoreLevelRestriction) end
 
----@param ench org.bukkit.enchantments.Enchantment Enchantment to remove
+---@param enchant org.bukkit.enchantments.Enchantment Enchantment to remove
 ---@return boolean # true if the item meta changed as a result of this call, false     otherwise
-function ItemMeta.removeEnchant(self, ench) end
+function ItemMeta.removeEnchant(self, enchant) end
 
 ---@return void # 
 function ItemMeta.removeEnchantments(self, ) end
 
----@param ench org.bukkit.enchantments.Enchantment enchantment to test
+---@param enchant org.bukkit.enchantments.Enchantment enchantment to test
 ---@return boolean # true if the enchantment conflicts, false otherwise
-function ItemMeta.hasConflictingEnchant(self, ench) end
+function ItemMeta.hasConflictingEnchant(self, enchant) end
 
 ---@param itemFlags org.bukkit.inventory.ItemFlag The hideflags which shouldn't be rendered
 ---@return void # 
@@ -140,6 +170,26 @@ function ItemMeta.isHideTooltip(self, ) end
 ---@return void # 
 function ItemMeta.setHideTooltip(self, hideTooltip) end
 
+---@return boolean # if a tooltip_style is set
+function ItemMeta.hasTooltipStyle(self, ) end
+
+---@return org.bukkit.NamespacedKey # the tooltip style
+function ItemMeta.getTooltipStyle(self, ) end
+
+---@param tooltipStyle org.bukkit.NamespacedKey the new style
+---@return void # 
+function ItemMeta.setTooltipStyle(self, tooltipStyle) end
+
+---@return boolean # if a item_model is set
+function ItemMeta.hasItemModel(self, ) end
+
+---@return org.bukkit.NamespacedKey # the item model
+function ItemMeta.getItemModel(self, ) end
+
+---@param itemModel org.bukkit.NamespacedKey the new model
+---@return void # 
+function ItemMeta.setItemModel(self, itemModel) end
+
 ---@return boolean # true if the unbreakable tag is true
 function ItemMeta.isUnbreakable(self, ) end
 
@@ -157,12 +207,29 @@ function ItemMeta.getEnchantmentGlintOverride(self, ) end
 ---@return void # 
 function ItemMeta.setEnchantmentGlintOverride(self, override) end
 
+---@return boolean # glider
+function ItemMeta.isGlider(self, ) end
+
+---@param glider boolean glider
+---@return void # 
+function ItemMeta.setGlider(self, glider) end
+
 ---@return boolean # fire_resistant
 function ItemMeta.isFireResistant(self, ) end
 
 ---@param fireResistant boolean fire_resistant
 ---@return void # 
 function ItemMeta.setFireResistant(self, fireResistant) end
+
+---@return boolean # true if a resistance is set
+function ItemMeta.hasDamageResistant(self, ) end
+
+---@return org.bukkit.Tag # damage type
+function ItemMeta.getDamageResistant(self, ) end
+
+---@param tag org.bukkit.Tag the tag, or null to clear
+---@return void # 
+function ItemMeta.setDamageResistant(self, tag) end
 
 ---@return boolean # if a max_stack_size is set.
 function ItemMeta.hasMaxStackSize(self, ) end
@@ -184,6 +251,26 @@ function ItemMeta.getRarity(self, ) end
 ---@return void # 
 function ItemMeta.setRarity(self, rarity) end
 
+---@return boolean # if a use remainder item is set
+function ItemMeta.hasUseRemainder(self, ) end
+
+---@return org.bukkit.inventory.ItemStack # remainder
+function ItemMeta.getUseRemainder(self, ) end
+
+---@param remainder org.bukkit.inventory.ItemStack new item
+---@return void # 
+function ItemMeta.setUseRemainder(self, remainder) end
+
+---@return boolean # if a use cooldown is set
+function ItemMeta.hasUseCooldown(self, ) end
+
+---@return org.bukkit.inventory.meta.components.UseCooldownComponent # cooldown
+function ItemMeta.getUseCooldown(self, ) end
+
+---@param cooldown org.bukkit.inventory.meta.components.UseCooldownComponent new cooldown
+---@return void # 
+function ItemMeta.setUseCooldown(self, cooldown) end
+
 ---@return boolean # if a food is set
 function ItemMeta.hasFood(self, ) end
 
@@ -203,6 +290,16 @@ function ItemMeta.getTool(self, ) end
 ---@param tool org.bukkit.inventory.meta.components.ToolComponent new tool
 ---@return void # 
 function ItemMeta.setTool(self, tool) end
+
+---@return boolean # if a equippable is set
+function ItemMeta.hasEquippable(self, ) end
+
+---@return org.bukkit.inventory.meta.components.EquippableComponent # equippable
+function ItemMeta.getEquippable(self, ) end
+
+---@param equippable org.bukkit.inventory.meta.components.EquippableComponent new equippable
+---@return void # 
+function ItemMeta.setEquippable(self, equippable) end
 
 ---@return boolean # if a jukebox playable is set
 function ItemMeta.hasJukeboxPlayable(self, ) end
@@ -265,4 +362,38 @@ function ItemMeta.setVersion(self, version) end
 
 ---@return org.bukkit.inventory.meta.ItemMeta # 
 function ItemMeta.clone(self, ) end
+
+---@return java.util.Set # Set of materials
+function ItemMeta.getCanDestroy(self, ) end
+
+---@param canDestroy java.util.Set Set of materials
+---@return void # 
+function ItemMeta.setCanDestroy(self, canDestroy) end
+
+---@return java.util.Set # Set of materials
+function ItemMeta.getCanPlaceOn(self, ) end
+
+---@param canPlaceOn java.util.Set Set of materials
+---@return void # 
+function ItemMeta.setCanPlaceOn(self, canPlaceOn) end
+
+---@return java.util.Set # Set of {@link com.destroystokyo.paper.Namespaced}
+function ItemMeta.getDestroyableKeys(self, ) end
+
+---@param canDestroy java.util.Collection Collection of {@link com.destroystokyo.paper.Namespaced}
+---@return void # 
+function ItemMeta.setDestroyableKeys(self, canDestroy) end
+
+---@return java.util.Set # Set of {@link com.destroystokyo.paper.Namespaced}
+function ItemMeta.getPlaceableKeys(self, ) end
+
+---@param canPlaceOn java.util.Collection Collection of {@link com.destroystokyo.paper.Namespaced}
+---@return void # 
+function ItemMeta.setPlaceableKeys(self, canPlaceOn) end
+
+---@return boolean # true if this item has placeable keys
+function ItemMeta.hasPlaceableKeys(self, ) end
+
+---@return boolean # true if this item has destroyable keys
+function ItemMeta.hasDestroyableKeys(self, ) end
 

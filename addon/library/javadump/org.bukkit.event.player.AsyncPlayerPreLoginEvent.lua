@@ -75,7 +75,7 @@ function AsyncPlayerPreLoginEvent.getRawAddress(self, ) end
 ---@return java.lang.String # The hostname
 function AsyncPlayerPreLoginEvent.getHostname(self, ) end
 
----@return boolean # true if the connection has been transferred
+---@return boolean # {@code true} if the connection has been transferred
 function AsyncPlayerPreLoginEvent.isTransferred(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 

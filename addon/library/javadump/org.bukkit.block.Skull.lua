@@ -54,3 +54,10 @@ function Skull.getSkullType(self, ) end
 ---@return void # 
 function Skull.setSkullType(self, skullType) end
 
+---@return net.kyori.adventure.text.Component # Custom name of skull
+function Skull.customName(self, ) end
+
+---@param customName net.kyori.adventure.text.Component Custom name of skull
+---@return void # 
+function Skull.customName(self, customName) end
+

@@ -5,3 +5,7 @@ local Lectern = {}
 ---@return boolean # the 'has_book' value
 function Lectern.hasBook(self, ) end
 
+---@param hasBook boolean the new 'has_book' value
+---@return void # 
+function Lectern.setHasBook(self, hasBook) end
+

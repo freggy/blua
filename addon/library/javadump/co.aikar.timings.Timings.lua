@@ -31,9 +31,6 @@ function Timings.isTimingsEnabled(self, ) end
 ---@return void # 
 function Timings.setTimingsEnabled(self, enabled) end
 
----@return void # 
-function Timings.warnAboutDeprecationOnEnable(self, ) end
-
 ---@return net.kyori.adventure.text.Component # 
 function Timings.deprecationMessage(self, ) end
 

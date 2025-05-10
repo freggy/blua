@@ -1,9 +1,9 @@
 ---@meta
 
 ---@class org.bukkit.scoreboard.DisplaySlot
----@field BELOW_NAME org.bukkit.scoreboard.DisplaySlot
 ---@field PLAYER_LIST org.bukkit.scoreboard.DisplaySlot
 ---@field SIDEBAR org.bukkit.scoreboard.DisplaySlot
+---@field BELOW_NAME org.bukkit.scoreboard.DisplaySlot
 ---@field SIDEBAR_TEAM_BLACK org.bukkit.scoreboard.DisplaySlot
 ---@field SIDEBAR_TEAM_DARK_BLUE org.bukkit.scoreboard.DisplaySlot
 ---@field SIDEBAR_TEAM_DARK_GREEN org.bukkit.scoreboard.DisplaySlot

@@ -36,3 +36,10 @@ function Wolf.getVariant(self, ) end
 ---@return void # 
 function Wolf.setVariant(self, variant) end
 
+---@return org.bukkit.entity.Wolf.SoundVariant # wolf sound variant
+function Wolf.getSoundVariant(self, ) end
+
+---@param soundVariant org.bukkit.entity.Wolf.SoundVariant wolf sound variant
+---@return void # 
+function Wolf.setSoundVariant(self, soundVariant) end
+

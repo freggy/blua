@@ -2,16 +2,6 @@
 
 ---@class org.bukkit.event.player.PlayerItemMendEvent: org.bukkit.event.player.PlayerEvent
 local PlayerItemMendEvent = {}
----@return java.util.function.IntUnaryOperator # the durability-to-xp operation
-function PlayerItemMendEvent.getDurabilityToXpOperation(self, ) end
-
----@param durabilityToXpOp java.util.function.IntUnaryOperator the durability-to-xp operation
----@return void # 
-function PlayerItemMendEvent.setDurabilityToXpOperation(self, durabilityToXpOp) end
-
----@return int # the amount of xp that will be consumed
-function PlayerItemMendEvent.getConsumedExperience(self, ) end
-
 ---@return org.bukkit.inventory.ItemStack # the item to be repaired
 function PlayerItemMendEvent.getItem(self, ) end
 
@@ -27,6 +17,16 @@ function PlayerItemMendEvent.getRepairAmount(self, ) end
 ---@param amount int how much damage will be repaired on the item
 ---@return void # 
 function PlayerItemMendEvent.setRepairAmount(self, amount) end
+
+---@return int # the amount of xp that will be consumed
+function PlayerItemMendEvent.getConsumedExperience(self, ) end
+
+---@return java.util.function.IntUnaryOperator # the durability-to-xp operation
+function PlayerItemMendEvent.getDurabilityToXpOperation(self, ) end
+
+---@param durabilityToXpOp java.util.function.IntUnaryOperator the durability-to-xp operation
+---@return void # 
+function PlayerItemMendEvent.setDurabilityToXpOperation(self, durabilityToXpOp) end
 
 ---@return boolean # 
 function PlayerItemMendEvent.isCancelled(self, ) end

@@ -5,7 +5,7 @@ local EntityResurrectEvent = {}
 ---@return org.bukkit.entity.LivingEntity # 
 function EntityResurrectEvent.getEntity(self, ) end
 
----@return org.bukkit.inventory.EquipmentSlot # the hand, or null
+---@return org.bukkit.inventory.EquipmentSlot # the hand, or {@code null}
 function EntityResurrectEvent.getHand(self, ) end
 
 ---@return boolean # 

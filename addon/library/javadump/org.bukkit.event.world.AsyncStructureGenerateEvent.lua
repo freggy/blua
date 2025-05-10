@@ -5,8 +5,20 @@ local AsyncStructureGenerateEvent = {}
 ---@return org.bukkit.event.world.AsyncStructureGenerateEvent.Cause # the event cause
 function AsyncStructureGenerateEvent.getCause(self, ) end
 
+---@return org.bukkit.generator.structure.Structure # the structure
+function AsyncStructureGenerateEvent.getStructure(self, ) end
+
+---@return org.bukkit.util.BoundingBox # the bounding box
+function AsyncStructureGenerateEvent.getBoundingBox(self, ) end
+
+---@return int # the chunk x coordinate
+function AsyncStructureGenerateEvent.getChunkX(self, ) end
+
+---@return int # the chunk z coordinate
+function AsyncStructureGenerateEvent.getChunkZ(self, ) end
+
 ---@param key org.bukkit.NamespacedKey the key of the block transformer
----@return org.bukkit.util.BlockTransformer # the block transformer or null
+---@return org.bukkit.util.BlockTransformer # the block transformer or {@code null}
 function AsyncStructureGenerateEvent.getBlockTransformer(self, key) end
 
 ---@param key org.bukkit.NamespacedKey the key
@@ -25,7 +37,7 @@ function AsyncStructureGenerateEvent.clearBlockTransformers(self, ) end
 function AsyncStructureGenerateEvent.getBlockTransformers(self, ) end
 
 ---@param key org.bukkit.NamespacedKey the key of the entity transformer
----@return org.bukkit.util.EntityTransformer # the entity transformer or null
+---@return org.bukkit.util.EntityTransformer # the entity transformer or {@code null}
 function AsyncStructureGenerateEvent.getEntityTransformer(self, key) end
 
 ---@param key org.bukkit.NamespacedKey the key
@@ -42,18 +54,6 @@ function AsyncStructureGenerateEvent.clearEntityTransformers(self, ) end
 
 ---@return java.util.Map # the entity transformers in a map
 function AsyncStructureGenerateEvent.getEntityTransformers(self, ) end
-
----@return org.bukkit.generator.structure.Structure # the structure
-function AsyncStructureGenerateEvent.getStructure(self, ) end
-
----@return org.bukkit.util.BoundingBox # the bounding box
-function AsyncStructureGenerateEvent.getBoundingBox(self, ) end
-
----@return int # the chunk x coordinate
-function AsyncStructureGenerateEvent.getChunkX(self, ) end
-
----@return int # the chunk z coordinate
-function AsyncStructureGenerateEvent.getChunkZ(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function AsyncStructureGenerateEvent.getHandlers(self, ) end
