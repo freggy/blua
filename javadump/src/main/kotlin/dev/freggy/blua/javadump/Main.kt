@@ -138,7 +138,7 @@ fun fqcn(
     t: Type,
     cu: CompilationUnit,
 ): String {
-    println(String.format("cu: %s type %s", cu.primaryTypeName, t.asString()))
+    println(String.format("%s type %s", cu.primaryTypeName, t.asString()))
     try {
         val rt = solver.convertToUsage(t)
         if (rt.isReferenceType) {
@@ -150,48 +150,12 @@ fun fqcn(
         return t.asString()
     } catch (e: Exception) {
         when(e) {
-            // those indicate that we have record that cannot be parsed.
-            // currently, it is enough to only search in the current
-            // compilation unit for record declarations. in the future
-            // it might be necessary to expand the search.
-            is UnsupportedOperationException, is IllegalArgumentException -> {
-                val topLevelRecords = cu.types
-                    .filter { it.isRecordDeclaration }
-                    .filter { it.isPublic }
-                    .map { it.asRecordDeclaration() }
-                    .toList()
-
-                // we are only interested in one layer deep records.
-                // everything else should be pretty rare, so we can
-                // ignore it for now.
-                val nestedRecords = cu.types
-                    .asSequence()
-                    .filter { !it.isRecordDeclaration }
-                    .map { it.members }
-                    .toList()
-                    .flatten() // merge all members of all types together to avoid List<List<Member>>
-                    .filter { it.isRecordDeclaration }
-                    .map { it.asRecordDeclaration() }
-                    .filter { it.isPublic }
-                    .toList()
-
-                val merged = listOf(topLevelRecords, nestedRecords).flatten()
-
-                // HANDLE EDGE CASE:
-                // cu -> ThreadFlock, t -> ScopedValueContainer.BindingsSnapshot
-                // somehow leads to this list being empty, but we can simpy return
-                // the type name
-                if (merged.isEmpty()) {
-                    return t.asString()
-                }
-
-                val record = merged.first {
-                    // HANDLE EDGE CASE:
-                    // * match when t is = List<Record>
-                    t.asString().contains(it.nameAsString)
-                }
-                return record.fullyQualifiedName.orElse("<rec-not-found>")
-            }
+            // for very few (unimportant) types it throws this exception,
+            // just log it and just return the name.
+            is UnsupportedOperationException -> {
+                println(String.format("UNSUPPORTED exception for %s type %s", cu.primaryTypeName, t.asString()))
+                return t.asString()
+           }
             is UnsolvedSymbolException -> {
                 return "<unresolved>"
             }
