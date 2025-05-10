@@ -2,6 +2,9 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,gradle
 
 .DS_Store
+.envrc
+
+luagen
 
 # fetch-sources work dir
 wrk/
