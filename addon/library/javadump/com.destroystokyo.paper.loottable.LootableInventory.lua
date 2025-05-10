@@ -9,7 +9,7 @@ function LootableInventory.isRefillEnabled(self, ) end
 function LootableInventory.hasBeenFilled(self, ) end
 
 ---@param player org.bukkit.entity.Player The player to check
----@return boolean # Whether or not this player has looted this block
+---@return boolean # Whether this player has looted this block
 function LootableInventory.hasPlayerLooted(self, player) end
 
 ---@param player java.util.UUID the player to check
@@ -17,7 +17,7 @@ function LootableInventory.hasPlayerLooted(self, player) end
 function LootableInventory.canPlayerLoot(self, player) end
 
 ---@param player java.util.UUID The player to check
----@return boolean # Whether or not this player has looted this block
+---@return boolean # Whether this player has looted this block
 function LootableInventory.hasPlayerLooted(self, player) end
 
 ---@param player org.bukkit.entity.Player The player to check

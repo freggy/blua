@@ -2,17 +2,17 @@
 
 ---@class org.bukkit.event.player.PlayerJoinEvent: org.bukkit.event.player.PlayerEvent
 local PlayerJoinEvent = {}
----@return net.kyori.adventure.text.Component # string join message. Can be null
+---@return net.kyori.adventure.text.Component # string join message. Can be {@code null}
 function PlayerJoinEvent.joinMessage(self, ) end
 
----@param joinMessage net.kyori.adventure.text.Component join message. If null, no message will be sent
+---@param joinMessage net.kyori.adventure.text.Component join message. If {@code null}, no message will be sent
 ---@return void # 
 function PlayerJoinEvent.joinMessage(self, joinMessage) end
 
----@return java.lang.String # string join message. Can be null
+---@return java.lang.String # string join message. Can be {@code null}
 function PlayerJoinEvent.getJoinMessage(self, ) end
 
----@param joinMessage java.lang.String join message. If null, no message will be sent
+---@param joinMessage java.lang.String join message. If {@code null}, no message will be sent
 ---@return void # 
 function PlayerJoinEvent.setJoinMessage(self, joinMessage) end
 

@@ -25,4 +25,6 @@
 ---@field MANGROVE org.bukkit.TreeType
 ---@field TALL_MANGROVE org.bukkit.TreeType
 ---@field CHERRY org.bukkit.TreeType
+---@field PALE_OAK org.bukkit.TreeType
+---@field PALE_OAK_CREAKING org.bukkit.TreeType
 local TreeType = {}

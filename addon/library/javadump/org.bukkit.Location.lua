@@ -83,6 +83,15 @@ function Location.add(self, vec) end
 ---@return org.bukkit.Location # the same location
 function Location.add(self, x,y,z) end
 
+---@param yaw float yaw, measured in degrees.
+---@param pitch float pitch, measured in degrees.
+---@return org.bukkit.Location # the same location
+function Location.addRotation(self, yaw,pitch) end
+
+---@param rotation io.papermc.paper.math.Rotation the rotation to add.
+---@return org.bukkit.Location # the same location
+function Location.addRotation(self, rotation) end
+
 ---@param vec org.bukkit.Location The other location
 ---@return org.bukkit.Location # the same location
 function Location.subtract(self, vec) end
@@ -96,6 +105,15 @@ function Location.subtract(self, vec) end
 ---@param z double Z coordinate
 ---@return org.bukkit.Location # the same location
 function Location.subtract(self, x,y,z) end
+
+---@param yaw float yaw, measured in degrees.
+---@param pitch float pitch, measured in degrees.
+---@return org.bukkit.Location # the same location
+function Location.subtractRotation(self, yaw,pitch) end
+
+---@param rotation io.papermc.paper.math.Rotation the rotation to subtract.
+---@return org.bukkit.Location # the same location
+function Location.subtractRotation(self, rotation) end
 
 ---@return double # the magnitude
 function Location.length(self, ) end
@@ -129,6 +147,15 @@ function Location.isGenerated(self, ) end
 ---@param z double Z coordinate
 ---@return org.bukkit.Location # self (not cloned)
 function Location.set(self, x,y,z) end
+
+---@param yaw float yaw, measured in degrees.
+---@param pitch float pitch, measured in degrees.
+---@return org.bukkit.Location # self (not cloned)
+function Location.setRotation(self, yaw,pitch) end
+
+---@param rotation io.papermc.paper.math.Rotation the new rotation.
+---@return org.bukkit.Location # self (not cloned)
+function Location.setRotation(self, rotation) end
 
 ---@param base org.bukkit.Location The base coordinate to modify
 ---@param x double X coordinate to add to base

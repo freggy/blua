@@ -2,10 +2,10 @@
 
 ---@class org.bukkit.inventory.meta.MapMeta: org.bukkit.inventory.meta.ItemMeta
 local MapMeta = {}
----@return boolean # 
+---@return boolean # true if this has a map ID number.
 function MapMeta.hasMapId(self, ) end
 
----@return int # 
+---@return int # the map ID that is set
 function MapMeta.getMapId(self, ) end
 
 ---@param id int the map id to set

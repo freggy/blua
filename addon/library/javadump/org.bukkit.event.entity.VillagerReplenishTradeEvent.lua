@@ -2,6 +2,9 @@
 
 ---@class org.bukkit.event.entity.VillagerReplenishTradeEvent: org.bukkit.event.entity.EntityEvent
 local VillagerReplenishTradeEvent = {}
+---@return org.bukkit.entity.AbstractVillager # 
+function VillagerReplenishTradeEvent.getEntity(self, ) end
+
 ---@return org.bukkit.inventory.MerchantRecipe # the replenished recipe
 function VillagerReplenishTradeEvent.getRecipe(self, ) end
 
@@ -22,9 +25,6 @@ function VillagerReplenishTradeEvent.isCancelled(self, ) end
 ---@param cancel boolean 
 ---@return void # 
 function VillagerReplenishTradeEvent.setCancelled(self, cancel) end
-
----@return org.bukkit.entity.AbstractVillager # 
-function VillagerReplenishTradeEvent.getEntity(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function VillagerReplenishTradeEvent.getHandlers(self, ) end

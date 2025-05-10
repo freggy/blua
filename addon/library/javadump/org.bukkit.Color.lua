@@ -18,7 +18,7 @@ function Color.fromRGB(self, red,green,blue) end
 ---@param blue int integer from 0-255
 ---@param green int integer from 0-255
 ---@param red int integer from 0-255
----@return org.bukkit.Color # a new Color object for the red, green, blue
+---@return org.bukkit.Color # a new Color object for the blue, green, red
 function Color.fromBGR(self, blue,green,red) end
 
 ---@param rgb int the integer storing the red, green, and blue values
@@ -37,7 +37,7 @@ function Color.fromBGR(self, bgr) end
 function Color.getAlpha(self, ) end
 
 ---@param alpha int the alpha component, from 0 to 255
----@return org.bukkit.Color # a new color object with the red component
+---@return org.bukkit.Color # a new color object with the alpha component
 function Color.setAlpha(self, alpha) end
 
 ---@return int # red component, from 0 to 255
@@ -50,15 +50,15 @@ function Color.setRed(self, red) end
 ---@return int # green component, from 0 to 255
 function Color.getGreen(self, ) end
 
----@param green int the red component, from 0 to 255
----@return org.bukkit.Color # a new color object with the red component
+---@param green int the green component, from 0 to 255
+---@return org.bukkit.Color # a new color object with the green component
 function Color.setGreen(self, green) end
 
 ---@return int # blue component, from 0 to 255
 function Color.getBlue(self, ) end
 
----@param blue int the red component, from 0 to 255
----@return org.bukkit.Color # a new color object with the red component
+---@param blue int the blue component, from 0 to 255
+---@return org.bukkit.Color # a new color object with the blue component
 function Color.setBlue(self, blue) end
 
 ---@return int # An integer representation of this color, as 0xRRGGBB

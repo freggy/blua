@@ -45,6 +45,13 @@ function Player.getPlayerListName(self, ) end
 ---@return void # 
 function Player.setPlayerListName(self, name) end
 
+---@return int # the player list order
+function Player.getPlayerListOrder(self, ) end
+
+---@param order int new player list order, must be positive
+---@return void # 
+function Player.setPlayerListOrder(self, order) end
+
 ---@return java.lang.String # player list header or null
 function Player.getPlayerListHeader(self, ) end
 
@@ -194,10 +201,7 @@ function Player.setSleepingIgnored(self, isSleeping) end
 ---@return boolean # Whether player is ignoring sleep.
 function Player.isSleepingIgnored(self, ) end
 
----@return org.bukkit.Location # Bed Spawn Location if bed exists, otherwise null.
-function Player.getBedSpawnLocation(self, ) end
-
----@return org.bukkit.Location # respawn location if exists, otherwise null.
+---@return org.bukkit.Location # respawn location if exists, otherwise {@code null}.
 function Player.getRespawnLocation(self, ) end
 
 ---@param location org.bukkit.Location where to set the respawn location
@@ -217,6 +221,12 @@ function Player.setBedSpawnLocation(self, location,force) end
 ---@param force boolean whether to forcefully set the respawn location even if a     valid respawn point is not present
 ---@return void # 
 function Player.setRespawnLocation(self, location,force) end
+
+---@return java.util.Collection # collection of entities corresponding to current pearls.
+function Player.getEnderPearls(self, ) end
+
+---@return org.bukkit.Input # current input
+function Player.getCurrentInput(self, ) end
 
 ---@param loc org.bukkit.Location The location to play the note
 ---@param instrument byte The instrument ID.
@@ -420,7 +430,7 @@ function Player.sendBlockDamage(self, loc,progress,sourceId) end
 function Player.sendEquipmentChange(self, entity,slot,item) end
 
 ---@param entity org.bukkit.entity.LivingEntity the entity whose equipment to change
----@param items java.util.Map the slots to change, where the values are the items to which the slot should be changed. null values will set the slot to air
+---@param items java.util.Map the slots to change, where the values are the items to which the slot should be changed. null values will set the slot to air, empty map is not allowed
 ---@return void # 
 function Player.sendEquipmentChange(self, entity,items) end
 
@@ -1281,18 +1291,6 @@ function Player.getClientBrandName(self, ) end
 ---@return void # 
 function Player.setRotation(self, yaw,pitch) end
 
----@param x double x coordinate
----@param y double y coordinate
----@param z double z coordinate
----@param playerAnchor io.papermc.paper.entity.LookAnchor What part of the player should face the given position
----@return void # 
-function Player.lookAt(self, x,y,z,playerAnchor) end
-
----@param position io.papermc.paper.math.Position Position to look at in the player's current world
----@param playerAnchor io.papermc.paper.entity.LookAnchor What part of the player should face the given position
----@return void # 
-function Player.lookAt(self, position,playerAnchor) end
-
 ---@param entity org.bukkit.entity.Entity Entity to look at
 ---@param playerAnchor io.papermc.paper.entity.LookAnchor What part of the player should face the entity
 ---@param entityAnchor io.papermc.paper.entity.LookAnchor What part of the entity the player should face
@@ -1352,4 +1350,29 @@ function Player.isChunkSent(self, chunkKey) end
 
 ---@return org.bukkit.entity.Player.Spigot # 
 function Player.spigot(self, ) end
+
+---@param effect org.bukkit.EntityEffect the entity effect
+---@param target org.bukkit.entity.Entity the target entity
+---@return void # 
+function Player.sendEntityEffect(self, effect,target) end
+
+---@param items org.bukkit.inventory.ItemStack the items to give.
+---@return io.papermc.paper.entity.PlayerGiveResult # the result of this method, holding leftovers and spawned items.
+function Player.give(self, items) end
+
+---@param items java.util.Collection the items to give
+---@return io.papermc.paper.entity.PlayerGiveResult # the result of this method, holding leftovers and spawned items.
+function Player.give(self, items) end
+
+---@param items java.util.Collection the items to give
+---@param dropIfFull boolean whether the player should drop items that                   did not fit the inventory
+---@return io.papermc.paper.entity.PlayerGiveResult # the result of this method, holding leftovers and spawned items.
+function Player.give(self, items,dropIfFull) end
+
+---@return int # Death screen score of player
+function Player.getDeathScreenScore(self, ) end
+
+---@param score int New death screen score of player
+---@return void # 
+function Player.setDeathScreenScore(self, score) end
 

@@ -8,7 +8,7 @@ function ThrownEggHatchEvent.getEgg(self, ) end
 ---@return boolean # boolean Whether the egg is going to hatch or not
 function ThrownEggHatchEvent.isHatching(self, ) end
 
----@param hatching boolean {@code true} if you want the egg to hatch, {@code false} if you want it     not to
+---@param hatching boolean {@code true} if you want the egg to hatch, {@code false} if you want it                 not to
 ---@return void # 
 function ThrownEggHatchEvent.setHatching(self, hatching) end
 

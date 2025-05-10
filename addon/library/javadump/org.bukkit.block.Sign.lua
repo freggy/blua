@@ -65,6 +65,13 @@ function Sign.getTargetSide(self, player) end
 ---@return org.bukkit.entity.Player # the player allowed to edit this sign, or null
 function Sign.getAllowedEditor(self, ) end
 
+---@return java.util.UUID # the allowed editor's UUID, or null
+function Sign.getAllowedEditorUniqueId(self, ) end
+
+---@param uuid java.util.UUID the allowed editor's UUID
+---@return void # 
+function Sign.setAllowedEditorUniqueId(self, uuid) end
+
 ---@param entity org.bukkit.entity.Entity the entity
 ---@return org.bukkit.block.sign.Side # the side it is facing
 function Sign.getInteractableSideFor(self, entity) end

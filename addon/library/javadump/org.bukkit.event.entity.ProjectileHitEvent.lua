@@ -5,19 +5,19 @@ local ProjectileHitEvent = {}
 ---@return org.bukkit.entity.Projectile # 
 function ProjectileHitEvent.getEntity(self, ) end
 
----@return org.bukkit.block.Block # hit block or else null
+---@return org.bukkit.entity.Entity # hit entity or else {@code null}
+function ProjectileHitEvent.getHitEntity(self, ) end
+
+---@return org.bukkit.block.Block # hit block or else {@code null}
 function ProjectileHitEvent.getHitBlock(self, ) end
 
----@return org.bukkit.block.BlockFace # hit face or else null
+---@return org.bukkit.block.BlockFace # hit face or else {@code null}
 function ProjectileHitEvent.getHitBlockFace(self, ) end
-
----@return org.bukkit.entity.Entity # hit entity or else null
-function ProjectileHitEvent.getHitEntity(self, ) end
 
 ---@return boolean # 
 function ProjectileHitEvent.isCancelled(self, ) end
 
----@param cancel boolean true if you wish to cancel this event
+---@param cancel boolean 
 ---@return void # 
 function ProjectileHitEvent.setCancelled(self, cancel) end
 

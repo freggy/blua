@@ -2,7 +2,7 @@
 
 ---@class org.bukkit.event.entity.PigZombieAngerEvent: org.bukkit.event.entity.EntityEvent
 local PigZombieAngerEvent = {}
----@return org.bukkit.entity.Entity # triggering entity, or null
+---@return org.bukkit.entity.Entity # triggering entity, or {@code null}
 function PigZombieAngerEvent.getTarget(self, ) end
 
 ---@return int # new anger

@@ -5,6 +5,9 @@ local Advancement = {}
 ---@return java.util.Collection # a unmodifiable copy of all criteria
 function Advancement.getCriteria(self, ) end
 
+---@return org.bukkit.advancement.AdvancementRequirements # an AdvancementRequirements object.
+function Advancement.getRequirements(self, ) end
+
 ---@return io.papermc.paper.advancement.AdvancementDisplay # the display info
 function Advancement.getDisplay(self, ) end
 

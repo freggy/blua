@@ -5,7 +5,7 @@ local PlayerAdvancementDoneEvent = {}
 ---@return org.bukkit.advancement.Advancement # completed advancement
 function PlayerAdvancementDoneEvent.getAdvancement(self, ) end
 
----@return net.kyori.adventure.text.Component # The announcement message, or null
+---@return net.kyori.adventure.text.Component # The announcement message, or {@code null}
 function PlayerAdvancementDoneEvent.message(self, ) end
 
 ---@param message net.kyori.adventure.text.Component The new message

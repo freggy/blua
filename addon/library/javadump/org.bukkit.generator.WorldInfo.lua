@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.generator.WorldInfo: 
+---@class org.bukkit.generator.WorldInfo: io.papermc.paper.world.flag.FeatureFlagSetHolder
 local WorldInfo = {}
 ---@return java.lang.String # Name of this world
 function WorldInfo.getName(self, ) end

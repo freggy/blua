@@ -45,6 +45,6 @@ func main() {
 }
 
 func die(format string, args ...any) {
-	fmt.Printf(format+"\n", args)
+	fmt.Printf(format+"\n", args...)
 	os.Exit(1)
 }

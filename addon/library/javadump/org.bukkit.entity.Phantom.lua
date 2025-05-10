@@ -5,9 +5,9 @@ local Phantom = {}
 ---@return int # The size of the phantom
 function Phantom.getSize(self, ) end
 
----@param sz int The new size of the phantom.
+---@param size int The new size of the phantom.
 ---@return void # 
-function Phantom.setSize(self, sz) end
+function Phantom.setSize(self, size) end
 
 ---@return java.util.UUID # UUID
 function Phantom.getSpawningEntity(self, ) end

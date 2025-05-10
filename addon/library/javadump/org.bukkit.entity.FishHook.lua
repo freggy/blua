@@ -120,3 +120,7 @@ function FishHook.setTimeUntilBite(self, ticks) end
 ---@return void # 
 function FishHook.resetFishingState(self, ) end
 
+---@param slot org.bukkit.inventory.EquipmentSlot Slot holding the fishing rod (must be HAND/OFF_HAND)
+---@return int # The amount of damage which would be applied to the itemstack
+function FishHook.retrieve(self, slot) end
+

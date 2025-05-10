@@ -8,10 +8,10 @@ function StructureGrowEvent.getLocation(self, ) end
 ---@return org.bukkit.TreeType # Structure species
 function StructureGrowEvent.getSpecies(self, ) end
 
----@return boolean # True if the structure was grown using bonemeal.
+---@return boolean # {@code true} if the structure was grown using bonemeal.
 function StructureGrowEvent.isFromBonemeal(self, ) end
 
----@return org.bukkit.entity.Player # Player that created the structure, null if was not created     manually
+---@return org.bukkit.entity.Player # Player that created the structure, {@code null} if was not created     manually
 function StructureGrowEvent.getPlayer(self, ) end
 
 ---@return java.util.List # list of all blocks associated with the structure.

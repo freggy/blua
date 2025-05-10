@@ -8,6 +8,7 @@
 ---@field DEATH org.bukkit.EntityEffect
 ---@field EGG_BREAK org.bukkit.EntityEffect
 ---@field SNOWBALL_BREAK org.bukkit.EntityEffect
+---@field PROJECTILE_CRACK org.bukkit.EntityEffect
 ---@field ENTITY_DEATH org.bukkit.EntityEffect
 ---@field FANG_ATTACK org.bukkit.EntityEffect
 ---@field HOGLIN_ATTACK org.bukkit.EntityEffect
@@ -15,8 +16,11 @@
 ---@field RAVAGER_ATTACK org.bukkit.EntityEffect
 ---@field WARDEN_ATTACK org.bukkit.EntityEffect
 ---@field ZOGLIN_ATTACK org.bukkit.EntityEffect
+---@field ENTITY_ATTACK org.bukkit.EntityEffect
 ---@field WOLF_SMOKE org.bukkit.EntityEffect
 ---@field WOLF_HEARTS org.bukkit.EntityEffect
+---@field TAMING_FAILED org.bukkit.EntityEffect
+---@field TAMING_SUCCEEDED org.bukkit.EntityEffect
 ---@field WOLF_SHAKE org.bukkit.EntityEffect
 ---@field SHEEP_EAT org.bukkit.EntityEffect
 ---@field SHEEP_EAT_GRASS org.bukkit.EntityEffect
@@ -38,12 +42,15 @@
 ---@field THORNS_HURT org.bukkit.EntityEffect
 ---@field IRON_GOLEM_SHEATH org.bukkit.EntityEffect
 ---@field TOTEM_RESURRECT org.bukkit.EntityEffect
+---@field PROTECTED_FROM_DEATH org.bukkit.EntityEffect
 ---@field HURT_DROWN org.bukkit.EntityEffect
 ---@field HURT_EXPLOSION org.bukkit.EntityEffect
 ---@field DOLPHIN_FED org.bukkit.EntityEffect
 ---@field RAVAGER_STUNNED org.bukkit.EntityEffect
 ---@field CAT_TAME_FAIL org.bukkit.EntityEffect
 ---@field CAT_TAME_SUCCESS org.bukkit.EntityEffect
+---@field TRUSTING_FAILED org.bukkit.EntityEffect
+---@field TRUSTING_SUCCEEDED org.bukkit.EntityEffect
 ---@field VILLAGER_SPLASH org.bukkit.EntityEffect
 ---@field PLAYER_BAD_OMEN_RAID org.bukkit.EntityEffect
 ---@field HURT_BERRY_BUSH org.bukkit.EntityEffect
@@ -65,17 +72,26 @@
 ---@field WARDEN_TENDRIL_SHAKE org.bukkit.EntityEffect
 ---@field WARDEN_SONIC_ATTACK org.bukkit.EntityEffect
 ---@field SNIFFER_DIG org.bukkit.EntityEffect
+---@field ARMADILLO_PEEK org.bukkit.EntityEffect
+---@field BODY_BREAK org.bukkit.EntityEffect
+---@field BREAK_EQUIPMENT_BODY org.bukkit.EntityEffect
+---@field SHAKE org.bukkit.EntityEffect
+---@field DROWN_PARTICLES org.bukkit.EntityEffect
+---@field BREAK_EQUIPMENT_SADDLE org.bukkit.EntityEffect
 local EntityEffect = {}
----@return byte # The data value
+---@return byte # the data value
 function EntityEffect.getData() end
 
 ---@return java.lang.Class # applicable class
 function EntityEffect.getApplicable() end
 
+---@return java.util.Set # the applicable classes
+function EntityEffect.getApplicableClasses() end
+
 ---@param entity org.bukkit.entity.Entity the entity to check
----@return boolean # true if applicable
+---@return boolean # {@code true} if applicable
 function EntityEffect.isApplicableTo(entity) end
 
 ---@param clazz java.lang.Class the entity class to check
----@return boolean # true if applicable
+---@return boolean # {@code true} if applicable
 function EntityEffect.isApplicableTo(clazz) end

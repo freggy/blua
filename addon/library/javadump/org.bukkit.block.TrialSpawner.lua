@@ -2,6 +2,20 @@
 
 ---@class org.bukkit.block.TrialSpawner: org.bukkit.block.TileState
 local TrialSpawner = {}
+---@return long # the game time in ticks
+function TrialSpawner.getCooldownEnd(self, ) end
+
+---@param ticks long the game time in ticks for the new cooldown
+---@return void # 
+function TrialSpawner.setCooldownEnd(self, ticks) end
+
+---@return long # the game time in ticks
+function TrialSpawner.getNextSpawnAttempt(self, ) end
+
+---@param ticks long the game time in ticks for the next mob spawn
+---@return void # 
+function TrialSpawner.setNextSpawnAttempt(self, ticks) end
+
 ---@return int # the number of ticks
 function TrialSpawner.getCooldownLength(self, ) end
 

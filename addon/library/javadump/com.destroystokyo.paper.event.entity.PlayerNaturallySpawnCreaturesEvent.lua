@@ -9,10 +9,10 @@ function PlayerNaturallySpawnCreaturesEvent.getSpawnRadius(self, ) end
 ---@return void # 
 function PlayerNaturallySpawnCreaturesEvent.setSpawnRadius(self, radius) end
 
----@return boolean # If this players chunks will be excluded from natural spawns
+---@return boolean # If this player's chunks will be excluded from natural spawns
 function PlayerNaturallySpawnCreaturesEvent.isCancelled(self, ) end
 
----@param cancel boolean {@code true} if you wish to cancel this event, and not include this players chunks for natural spawning
+---@param cancel boolean {@code true} if you wish to cancel this event, and not include this player's chunks for natural spawning
 ---@return void # 
 function PlayerNaturallySpawnCreaturesEvent.setCancelled(self, cancel) end
 

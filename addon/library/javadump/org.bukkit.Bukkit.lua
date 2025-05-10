@@ -218,11 +218,15 @@ function Bukkit.getWorld(self, uid) end
 ---@return org.bukkit.World # a world with the given NamespacedKey, or null if none exists
 function Bukkit.getWorld(self, worldKey) end
 
+---@param worldKey <unresolved> the Key of the world to retrieve
+---@return org.bukkit.World # a world with the given Key, or null if none exists
+function Bukkit.getWorld(self, worldKey) end
+
 ---@return org.bukkit.WorldBorder # the created world border instance
 function Bukkit.createWorldBorder(self, ) end
 
----@param id int 
----@return org.bukkit.map.MapView # 
+---@param id int the id of the map to get
+---@return org.bukkit.map.MapView # a map view if it exists, or null otherwise
 function Bukkit.getMap(self, id) end
 
 ---@param world org.bukkit.World the world the map will belong to
@@ -287,7 +291,7 @@ function Bukkit.savePlayers(self, ) end
 function Bukkit.dispatchCommand(self, sender,commandLine) end
 
 ---@param recipe org.bukkit.inventory.Recipe the recipe to add
----@return boolean # true if the recipe was added, false if it wasn't for some     reason
+---@return boolean # true if the recipe was added, false if it wasn't for some reason
 function Bukkit.addRecipe(self, recipe) end
 
 ---@param recipe org.bukkit.inventory.Recipe the recipe to add
@@ -373,6 +377,9 @@ function Bukkit.getHideOnlinePlayers(self, ) end
 ---@return boolean # true if the server authenticates clients, false otherwise
 function Bukkit.getOnlineMode(self, ) end
 
+---@return io.papermc.paper.configuration.ServerConfiguration # the instance of ServerConfiguration containing the server's configuration details
+function Bukkit.getServerConfig(self, ) end
+
 ---@return boolean # true if the server allows flight, false otherwise
 function Bukkit.getAllowFlight(self, ) end
 
@@ -396,8 +403,8 @@ function Bukkit.broadcast(self, message,permission) end
 ---@return int # number of message recipients
 function Bukkit.broadcast(self, message,permission) end
 
----@param name java.lang.String 
----@return org.bukkit.OfflinePlayer # 
+---@param name java.lang.String the name the player to retrieve
+---@return org.bukkit.OfflinePlayer # an offline player
 function Bukkit.getOfflinePlayer(self, name) end
 
 ---@param name java.lang.String the name of the player to retrieve
@@ -522,6 +529,9 @@ function Bukkit.createMerchant(self, title) end
 ---@return org.bukkit.inventory.Merchant # a new merchant
 function Bukkit.createMerchant(self, title) end
 
+---@return org.bukkit.inventory.Merchant # a new merchant
+function Bukkit.createMerchant(self, ) end
+
 ---@return int # the amount of consecutive neighbor updates, if the value is negative then the limit it's not used
 function Bukkit.getMaxChainedNeighborUpdates(self, ) end
 
@@ -606,6 +616,13 @@ function Bukkit.setIdleTimeout(self, threshold) end
 
 ---@return int # the idle timeout in minutes
 function Bukkit.getIdleTimeout(self, ) end
+
+---@return int # the pause threshold in seconds
+function Bukkit.getPauseWhenEmptyTime(self, ) end
+
+---@param seconds int the pause threshold in seconds
+---@return void # 
+function Bukkit.setPauseWhenEmptyTime(self, seconds) end
 
 ---@param world org.bukkit.World the world to create the ChunkData for
 ---@return org.bukkit.generator.ChunkGenerator.ChunkData # a new ChunkData for the world
@@ -802,10 +819,24 @@ function Bukkit.isOwnedByCurrentRegion(self, world,chunkX,chunkZ) end
 ---@return boolean # 
 function Bukkit.isOwnedByCurrentRegion(self, world,chunkX,chunkZ,squareRadiusChunks) end
 
+---@param world org.bukkit.World Specified world.
+---@param minChunkX int Specified x-coordinate of the minimum chunk position.
+---@param minChunkZ int Specified z-coordinate of the minimum chunk position.
+---@param maxChunkX int Specified x-coordinate of the maximum chunk position.
+---@param maxChunkZ int Specified z-coordinate of the maximum chunk position.
+---@return boolean # 
+function Bukkit.isOwnedByCurrentRegion(self, world,minChunkX,minChunkZ,maxChunkX,maxChunkZ) end
+
 ---@param entity org.bukkit.entity.Entity Specified entity.
 ---@return boolean # 
 function Bukkit.isOwnedByCurrentRegion(self, entity) end
 
+---@return boolean # 
+function Bukkit.isGlobalTickThread(self, ) end
+
 ---@return org.bukkit.Server.Spigot # 
 function Bukkit.spigot(self, ) end
+
+---@return void # 
+function Bukkit.restart(self, ) end
 

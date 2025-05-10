@@ -15,18 +15,12 @@ function PlayerEditBookEvent.getSlot(self, ) end
 ---@return void # 
 function PlayerEditBookEvent.setNewBookMeta(self, newBookMeta) end
 
----@return boolean # true if the book is being signed
+---@return boolean # {@code true} if the book is being signed
 function PlayerEditBookEvent.isSigning(self, ) end
 
----@param signing boolean whether or not the book is being signed.
+---@param signing boolean whether the book is being signed.
 ---@return void # 
 function PlayerEditBookEvent.setSigning(self, signing) end
-
----@return org.bukkit.event.HandlerList # 
-function PlayerEditBookEvent.getHandlers(self, ) end
-
----@return org.bukkit.event.HandlerList # 
-function PlayerEditBookEvent.getHandlerList(self, ) end
 
 ---@return boolean # 
 function PlayerEditBookEvent.isCancelled(self, ) end
@@ -34,4 +28,10 @@ function PlayerEditBookEvent.isCancelled(self, ) end
 ---@param cancel boolean 
 ---@return void # 
 function PlayerEditBookEvent.setCancelled(self, cancel) end
+
+---@return org.bukkit.event.HandlerList # 
+function PlayerEditBookEvent.getHandlers(self, ) end
+
+---@return org.bukkit.event.HandlerList # 
+function PlayerEditBookEvent.getHandlerList(self, ) end
 

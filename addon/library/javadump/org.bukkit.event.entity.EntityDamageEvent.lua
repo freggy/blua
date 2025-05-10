@@ -2,13 +2,6 @@
 
 ---@class org.bukkit.event.entity.EntityDamageEvent: org.bukkit.event.entity.EntityEvent
 local EntityDamageEvent = {}
----@return boolean # 
-function EntityDamageEvent.isCancelled(self, ) end
-
----@param cancel boolean 
----@return void # 
-function EntityDamageEvent.setCancelled(self, cancel) end
-
 ---@param type org.bukkit.event.entity.EntityDamageEvent.DamageModifier the modifier
 ---@return double # the original damage
 function EntityDamageEvent.getOriginalDamage(self, type) end
@@ -23,7 +16,7 @@ function EntityDamageEvent.setDamage(self, type,damage) end
 function EntityDamageEvent.getDamage(self, type) end
 
 ---@param type org.bukkit.event.entity.EntityDamageEvent.DamageModifier the modifier
----@return boolean # true if the modifier is supported by the caller, false otherwise
+---@return boolean # {@code true} if the modifier is supported by the caller, {@code false} otherwise
 function EntityDamageEvent.isApplicable(self, type) end
 
 ---@return double # The raw amount of damage caused by the event
@@ -41,6 +34,13 @@ function EntityDamageEvent.getCause(self, ) end
 
 ---@return org.bukkit.damage.DamageSource # a DamageSource detailing the source of the damage.
 function EntityDamageEvent.getDamageSource(self, ) end
+
+---@return boolean # 
+function EntityDamageEvent.isCancelled(self, ) end
+
+---@param cancel boolean 
+---@return void # 
+function EntityDamageEvent.setCancelled(self, cancel) end
 
 ---@return org.bukkit.event.HandlerList # 
 function EntityDamageEvent.getHandlers(self, ) end

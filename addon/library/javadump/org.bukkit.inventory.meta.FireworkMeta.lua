@@ -30,6 +30,9 @@ function FireworkMeta.clearEffects(self, ) end
 ---@return boolean # true if it has effects, false if there are no effects
 function FireworkMeta.hasEffects(self, ) end
 
+---@return boolean # true if it has power set, false if there are no power set
+function FireworkMeta.hasPower(self, ) end
+
 ---@return int # approximate flight height of the firework.
 function FireworkMeta.getPower(self, ) end
 

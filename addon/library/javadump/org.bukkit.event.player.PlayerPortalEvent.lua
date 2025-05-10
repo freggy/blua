@@ -9,12 +9,6 @@ function PlayerPortalEvent.getTo(self, ) end
 ---@return void # 
 function PlayerPortalEvent.setTo(self, to) end
 
----@return boolean # no effect
-function PlayerPortalEvent.willDismountPlayer(self, ) end
-
----@return java.util.Set # no effect
-function PlayerPortalEvent.getRelativeTeleportationFlags(self, ) end
-
 ---@param searchRadius int the radius in which to search for a portal from the location
 ---@return void # 
 function PlayerPortalEvent.setSearchRadius(self, searchRadius) end
@@ -35,6 +29,12 @@ function PlayerPortalEvent.setCreationRadius(self, creationRadius) end
 
 ---@return int # the currently set creation radius
 function PlayerPortalEvent.getCreationRadius(self, ) end
+
+---@return boolean # no effect
+function PlayerPortalEvent.willDismountPlayer(self, ) end
+
+---@return java.util.Set # no effect
+function PlayerPortalEvent.getRelativeTeleportationFlags(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function PlayerPortalEvent.getHandlers(self, ) end

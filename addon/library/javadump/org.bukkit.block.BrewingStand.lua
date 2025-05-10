@@ -9,6 +9,13 @@ function BrewingStand.getBrewingTime(self, ) end
 ---@return void # 
 function BrewingStand.setBrewingTime(self, brewTime) end
 
+---@param recipeBrewTime int recipe brew time (in ticks)
+---@return void # 
+function BrewingStand.setRecipeBrewTime(self, recipeBrewTime) end
+
+---@return int # recipe brew time (in ticks)
+function BrewingStand.getRecipeBrewTime(self, ) end
+
 ---@return int # The fuel level
 function BrewingStand.getFuelLevel(self, ) end
 

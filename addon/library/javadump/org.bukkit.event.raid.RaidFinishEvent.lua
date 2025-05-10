@@ -2,7 +2,7 @@
 
 ---@class org.bukkit.event.raid.RaidFinishEvent: org.bukkit.event.raid.RaidEvent
 local RaidFinishEvent = {}
----@return java.util.List # winners
+---@return java.util.List # the winners
 function RaidFinishEvent.getWinners(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 

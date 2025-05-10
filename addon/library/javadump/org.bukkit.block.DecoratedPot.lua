@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.block.DecoratedPot: org.bukkit.block.TileState,org.bukkit.inventory.BlockInventoryHolder,org.bukkit.loot.Lootable
+---@class org.bukkit.block.DecoratedPot: io.papermc.paper.block.TileStateInventoryHolder,org.bukkit.loot.Lootable
 local DecoratedPot = {}
 ---@param side org.bukkit.block.DecoratedPot.Side the side to set
 ---@param sherd org.bukkit.Material the sherd, or null to set a blank side.
@@ -17,9 +17,9 @@ function DecoratedPot.getSherds(self, ) end
 ---@return java.util.List # the sherds
 function DecoratedPot.getShards(self, ) end
 
----@return org.bukkit.inventory.DecoratedPotInventory # inventory
+---@return org.bukkit.inventory.DecoratedPotInventory # 
 function DecoratedPot.getInventory(self, ) end
 
----@return org.bukkit.inventory.DecoratedPotInventory # snapshot inventory
+---@return org.bukkit.inventory.DecoratedPotInventory # 
 function DecoratedPot.getSnapshotInventory(self, ) end
 

@@ -107,7 +107,7 @@ function Block.getFace(self, block) end
 ---@return org.bukkit.block.BlockState # BlockState with the current state of this block.
 function Block.getState(self, ) end
 
----@param useSnapshot boolean if this block is a TE, should we create a fully copy of the TileEntity
+---@param useSnapshot boolean if this block is a block entity, should we create a full copy of the BlockEntity
 ---@return org.bukkit.block.BlockState # BlockState with the current state of this block
 function Block.getState(self, useSnapshot) end
 
@@ -269,4 +269,7 @@ function Block.getDestroySpeed(self, itemStack) end
 ---@param considerEnchants boolean true to look at enchants on the itemstack
 ---@return float # the speed that this Block will be mined by the given {@link ItemStack}
 function Block.getDestroySpeed(self, itemStack,considerEnchants) end
+
+---@return boolean # {@code true} if the block can suffocate
+function Block.isSuffocating(self, ) end
 

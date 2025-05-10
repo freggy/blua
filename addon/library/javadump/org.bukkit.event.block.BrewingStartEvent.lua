@@ -9,3 +9,17 @@ function BrewingStartEvent.getTotalBrewTime(self, ) end
 ---@return void # 
 function BrewingStartEvent.setTotalBrewTime(self, brewTime) end
 
+---@return int # recipe brew time (in ticks)
+function BrewingStartEvent.getRecipeBrewTime(self, ) end
+
+---@param recipeBrewTime int recipe brew time (in ticks)
+---@return void # 
+function BrewingStartEvent.setRecipeBrewTime(self, recipeBrewTime) end
+
+---@return int # The amount of ticks left for the brewing task
+function BrewingStartEvent.getBrewingTime(self, ) end
+
+---@param brewTime int the ticks left, which is no less than 0
+---@return void # 
+function BrewingStartEvent.setBrewingTime(self, brewTime) end
+

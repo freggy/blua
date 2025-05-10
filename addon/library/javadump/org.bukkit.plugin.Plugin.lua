@@ -5,7 +5,10 @@ local Plugin = {}
 ---@return java.io.File # The folder
 function Plugin.getDataFolder(self, ) end
 
----@return org.bukkit.plugin.PluginDescriptionFile # Contents of the plugin.yaml file
+---@return java.nio.file.Path # The folder
+function Plugin.getDataPath(self, ) end
+
+---@return org.bukkit.plugin.PluginDescriptionFile # Contents of the plugin.yml file
 function Plugin.getDescription(self, ) end
 
 ---@return io.papermc.paper.plugin.configuration.PluginMeta # configuration

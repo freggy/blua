@@ -12,9 +12,9 @@ function BlockDispenseEvent.setItem(self, item) end
 ---@return org.bukkit.util.Vector # A Vector for the dispensed item's velocity
 function BlockDispenseEvent.getVelocity(self, ) end
 
----@param vel org.bukkit.util.Vector the velocity of the item being dispensed
+---@param velocity org.bukkit.util.Vector the velocity of the item being dispensed
 ---@return void # 
-function BlockDispenseEvent.setVelocity(self, vel) end
+function BlockDispenseEvent.setVelocity(self, velocity) end
 
 ---@return boolean # 
 function BlockDispenseEvent.isCancelled(self, ) end

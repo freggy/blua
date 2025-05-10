@@ -22,3 +22,7 @@ function CraftingRecipe.getCategory(self, ) end
 ---@return void # 
 function CraftingRecipe.setCategory(self, category) end
 
+---@param result org.bukkit.inventory.ItemStack an ItemStack
+---@return org.bukkit.inventory.ItemStack # the same result ItemStack
+function CraftingRecipe.checkResult(self, result) end
+

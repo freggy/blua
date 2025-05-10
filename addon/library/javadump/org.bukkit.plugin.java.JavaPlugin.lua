@@ -17,7 +17,7 @@ function JavaPlugin.isEnabled(self, ) end
 ---@return java.io.File # File containing this plugin
 function JavaPlugin.getFile(self, ) end
 
----@return org.bukkit.plugin.PluginDescriptionFile # Contents of the plugin.yaml file
+---@return org.bukkit.plugin.PluginDescriptionFile # Contents of the plugin.yml file
 function JavaPlugin.getDescription(self, ) end
 
 ---@return io.papermc.paper.plugin.configuration.PluginMeta # 
@@ -91,6 +91,30 @@ function JavaPlugin.onTabComplete(self, sender,command,alias,args) end
 ---@param name java.lang.String name or alias of the command
 ---@return org.bukkit.command.PluginCommand # the plugin command if found, otherwise null
 function JavaPlugin.getCommand(self, name) end
+
+---@param label java.lang.String the label of the to-be-registered command
+---@param basicCommand io.papermc.paper.command.brigadier.BasicCommand the basic command instance to register
+---@return void # 
+function JavaPlugin.registerCommand(self, label,basicCommand) end
+
+---@param label java.lang.String the label of the to-be-registered command
+---@param description java.lang.String the help description for the root literal node
+---@param basicCommand io.papermc.paper.command.brigadier.BasicCommand the basic command instance to register
+---@return void # 
+function JavaPlugin.registerCommand(self, label,description,basicCommand) end
+
+---@param label java.lang.String the label of the to-be-registered command
+---@param aliases java.util.Collection a collection of aliases to register the basic command under.
+---@param basicCommand io.papermc.paper.command.brigadier.BasicCommand the basic command instance to register
+---@return void # 
+function JavaPlugin.registerCommand(self, label,aliases,basicCommand) end
+
+---@param label java.lang.String the label of the to-be-registered command
+---@param description java.lang.String the help description for the root literal node
+---@param aliases java.util.Collection a collection of aliases to register the basic command under.
+---@param basicCommand io.papermc.paper.command.brigadier.BasicCommand the basic command instance to register
+---@return void # 
+function JavaPlugin.registerCommand(self, label,description,aliases,basicCommand) end
 
 ---@return void # 
 function JavaPlugin.onLoad(self, ) end

@@ -8,7 +8,7 @@ function CompassMeta.hasLodestone(self, ) end
 ---@return org.bukkit.Location # lodestone location
 function CompassMeta.getLodestone(self, ) end
 
----@param lodestone org.bukkit.Location new location or null to clear
+---@param lodestone org.bukkit.Location new location or null to clear the targeted location
 ---@return void # 
 function CompassMeta.setLodestone(self, lodestone) end
 
@@ -18,6 +18,12 @@ function CompassMeta.isLodestoneTracked(self, ) end
 ---@param tracked boolean new tracked status
 ---@return void # 
 function CompassMeta.setLodestoneTracked(self, tracked) end
+
+---@return boolean # 
+function CompassMeta.isLodestoneCompass(self, ) end
+
+---@return void # 
+function CompassMeta.clearLodestone(self, ) end
 
 ---@return org.bukkit.inventory.meta.CompassMeta # 
 function CompassMeta.clone(self, ) end

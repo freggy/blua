@@ -9,10 +9,10 @@ function PlayerSwapHandItemsEvent.getMainHandItem(self, ) end
 ---@return void # 
 function PlayerSwapHandItemsEvent.setMainHandItem(self, mainHandItem) end
 
----@return org.bukkit.inventory.ItemStack # item in the off hand
+---@return org.bukkit.inventory.ItemStack # item in the off-hand
 function PlayerSwapHandItemsEvent.getOffHandItem(self, ) end
 
----@param offHandItem org.bukkit.inventory.ItemStack new item in the off hand
+---@param offHandItem org.bukkit.inventory.ItemStack new item in the off-hand
 ---@return void # 
 function PlayerSwapHandItemsEvent.setOffHandItem(self, offHandItem) end
 

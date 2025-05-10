@@ -36,6 +36,9 @@ function AbstractArrow.isInBlock(self, ) end
 ---@return org.bukkit.block.Block # the attached block or null if not attached
 function AbstractArrow.getAttachedBlock(self, ) end
 
+---@return java.util.List # the attached block(s) or an empty list if not attached
+function AbstractArrow.getAttachedBlocks(self, ) end
+
 ---@return org.bukkit.entity.AbstractArrow.PickupStatus # the pickup status of this arrow.
 function AbstractArrow.getPickupStatus(self, ) end
 
@@ -91,4 +94,9 @@ function AbstractArrow.getHitSound(self, ) end
 ---@param sound org.bukkit.Sound sound that is played
 ---@return void # 
 function AbstractArrow.setHitSound(self, sound) end
+
+---@param source org.bukkit.projectiles.ProjectileSource the {@link org.bukkit.projectiles.ProjectileSource} that shot this projectile
+---@param resetPickupStatus boolean whether the {@link org.bukkit.entity.AbstractArrow.PickupStatus} should be reset
+---@return void # 
+function AbstractArrow.setShooter(self, source,resetPickupStatus) end
 

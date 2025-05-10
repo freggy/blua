@@ -9,3 +9,10 @@ function SculkSensor.getPhase(self, ) end
 ---@return void # 
 function SculkSensor.setPhase(self, phase) end
 
+---@return org.bukkit.block.data.type.SculkSensor.Phase # the 'sculk_sensor_phase' value
+function SculkSensor.getSculkSensorPhase(self, ) end
+
+---@param phase org.bukkit.block.data.type.SculkSensor.Phase the new 'sculk_sensor_phase' value
+---@return void # 
+function SculkSensor.setSculkSensorPhase(self, phase) end
+

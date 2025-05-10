@@ -14,14 +14,14 @@ function LootGenerateEvent.getLootTable(self, ) end
 ---@return org.bukkit.loot.LootContext # the loot context
 function LootGenerateEvent.getLootContext(self, ) end
 
----@param loot java.util.Collection the loot to generate, null to clear all loot
+---@param loot java.util.Collection the loot to generate, {@code null} to clear all loot
 ---@return void # 
 function LootGenerateEvent.setLoot(self, loot) end
 
 ---@return java.util.List # the loot to generate
 function LootGenerateEvent.getLoot(self, ) end
 
----@return boolean # true if plugin caused, false otherwise
+---@return boolean # {@code true} if plugin caused, {@code false} otherwise
 function LootGenerateEvent.isPlugin(self, ) end
 
 ---@param cancel boolean 

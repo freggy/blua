@@ -23,6 +23,13 @@ function VanillaArgumentProvider.playerProfiles(self, ) end
 ---@return <unresolved> # 
 function VanillaArgumentProvider.blockPosition(self, ) end
 
+---@param centerIntegers boolean 
+---@return <unresolved> # 
+function VanillaArgumentProvider.finePosition(self, centerIntegers) end
+
+---@return <unresolved> # 
+function VanillaArgumentProvider.rotation(self, ) end
+
 ---@return <unresolved> # 
 function VanillaArgumentProvider.blockState(self, ) end
 

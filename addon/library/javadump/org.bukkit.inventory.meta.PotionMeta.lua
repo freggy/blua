@@ -25,6 +25,9 @@ function PotionMeta.hasCustomEffects(self, ) end
 ---@return java.util.List # the immutable list of custom potion effects
 function PotionMeta.getCustomEffects(self, ) end
 
+---@return java.util.List # an unmodifiable list of all effects.
+function PotionMeta.getAllEffects(self, ) end
+
 ---@param effect org.bukkit.potion.PotionEffect the potion effect to add
 ---@param overwrite boolean true if any existing effect of the same type should be overwritten
 ---@return boolean # true if the potion meta changed as a result of this call
@@ -54,6 +57,29 @@ function PotionMeta.getColor(self, ) end
 ---@param color org.bukkit.Color the color to set
 ---@return void # 
 function PotionMeta.setColor(self, color) end
+
+---@return org.bukkit.Color # the effective potion color
+function PotionMeta.computeEffectiveColor(self, ) end
+
+---@return boolean # true if this has a custom potion name
+function PotionMeta.hasCustomName(self, ) end
+
+---@return java.lang.String # the potion name that is set
+function PotionMeta.getCustomName(self, ) end
+
+---@param name java.lang.String the name to set
+---@return void # 
+function PotionMeta.setCustomName(self, name) end
+
+---@return boolean # true if this has a custom potion name
+function PotionMeta.hasCustomPotionName(self, ) end
+
+---@return java.lang.String # the potion name that is set
+function PotionMeta.getCustomPotionName(self, ) end
+
+---@param name java.lang.String the name to set
+---@return void # 
+function PotionMeta.setCustomPotionName(self, name) end
 
 ---@return org.bukkit.inventory.meta.PotionMeta # 
 function PotionMeta.clone(self, ) end

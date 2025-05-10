@@ -15,7 +15,7 @@ function InventoryInteractEvent.getResult(self, ) end
 ---@return boolean # whether the event is cancelled
 function InventoryInteractEvent.isCancelled(self, ) end
 
----@param toCancel boolean result becomes DENY if true, ALLOW if false
+---@param cancel boolean result becomes {@link Result#DENY} if {@code true}, {@link Result#ALLOW} if {@code false}
 ---@return void # 
-function InventoryInteractEvent.setCancelled(self, toCancel) end
+function InventoryInteractEvent.setCancelled(self, cancel) end
 

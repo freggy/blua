@@ -5,3 +5,7 @@ local Jukebox = {}
 ---@return boolean # the 'has_record' value
 function Jukebox.hasRecord(self, ) end
 
+---@param hasRecord boolean the new 'has_record' value
+---@return void # 
+function Jukebox.setHasRecord(self, hasRecord) end
+

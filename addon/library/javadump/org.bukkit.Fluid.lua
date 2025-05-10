@@ -1,11 +1,15 @@
 ---@meta
 
----@class org.bukkit.Fluid
----@field EMPTY org.bukkit.Fluid
----@field WATER org.bukkit.Fluid
----@field FLOWING_WATER org.bukkit.Fluid
----@field LAVA org.bukkit.Fluid
----@field FLOWING_LAVA org.bukkit.Fluid
+---@class org.bukkit.Fluid: org.bukkit.util.OldEnum,org.bukkit.Keyed
 local Fluid = {}
----@return org.bukkit.NamespacedKey # 
-function Fluid.getKey() end
+---@param key java.lang.String 
+---@return org.bukkit.Fluid # 
+function Fluid.getFluid(self, key) end
+
+---@param name java.lang.String of the fluid.
+---@return org.bukkit.Fluid # the fluid with the given name.
+function Fluid.valueOf(self, name) end
+
+---@return Fluid[] # an array of all known fluids.
+function Fluid.values(self, ) end
+

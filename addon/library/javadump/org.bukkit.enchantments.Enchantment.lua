@@ -72,6 +72,21 @@ function Enchantment.getActiveSlots(self, ) end
 ---@return java.util.Set # the equipment slots
 function Enchantment.getActiveSlotGroups(self, ) end
 
+---@return net.kyori.adventure.text.Component # the description component.
+function Enchantment.description(self, ) end
+
+---@return io.papermc.paper.registry.set.RegistryKeySet # the registry key set.
+function Enchantment.getSupportedItems(self, ) end
+
+---@return io.papermc.paper.registry.set.RegistryKeySet # the registry key set.
+function Enchantment.getPrimaryItems(self, ) end
+
+---@return int # the weight value.
+function Enchantment.getWeight(self, ) end
+
+---@return io.papermc.paper.registry.set.RegistryKeySet # a registry set of enchantments exclusive to this one.
+function Enchantment.getExclusiveWith(self, ) end
+
 ---@return java.lang.String # 
 function Enchantment.translationKey(self, ) end
 

@@ -7,3 +7,8 @@ local WritableRegistry = {}
 ---@return void # 
 function WritableRegistry.register(self, key,value) end
 
+---@param key io.papermc.paper.registry.TypedKey the entry's key (must be unique from others)
+---@param value java.util.function.Consumer a consumer of a builder factory
+---@return void # 
+function WritableRegistry.registerWith(self, key,value) end
+

@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.entity.Mob: org.bukkit.entity.LivingEntity,org.bukkit.loot.Lootable
+---@class org.bukkit.entity.Mob: org.bukkit.entity.LivingEntity,org.bukkit.loot.Lootable,io.papermc.paper.entity.Leashable
 local Mob = {}
 ---@return org.bukkit.inventory.EntityEquipment # 
 function Mob.getEquipment(self, ) end
@@ -73,10 +73,10 @@ function Mob.getAmbientSound(self, ) end
 ---@return void # 
 function Mob.setLootTable(self, table,seed) end
 
----@return boolean # wether the mob is aggressive or not
+---@return boolean # whether the mob is aggressive or not
 function Mob.isAggressive(self, ) end
 
----@param aggressive boolean wether the mob should be aggressive or not
+---@param aggressive boolean whether the mob should be aggressive or not
 ---@return void # 
 function Mob.setAggressive(self, aggressive) end
 

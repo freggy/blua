@@ -12,3 +12,6 @@ function Structure.getStructureType(self, ) end
 ---@return org.bukkit.NamespacedKey # 
 function Structure.getKey(self, ) end
 
+---@return <unresolved> # 
+function Structure.key(self, ) end
+

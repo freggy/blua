@@ -11,14 +11,14 @@ function EnchantItemEvent.getEnchantBlock(self, ) end
 ---@return org.bukkit.inventory.ItemStack # ItemStack of item
 function EnchantItemEvent.getItem(self, ) end
 
----@param item org.bukkit.inventory.ItemStack item
+---@param item org.bukkit.inventory.ItemStack 
 ---@return void # 
 function EnchantItemEvent.setItem(self, item) end
 
 ---@return int # experience level cost
 function EnchantItemEvent.getExpLevelCost(self, ) end
 
----@param level int - cost in levels
+---@param level int cost in levels
 ---@return void # 
 function EnchantItemEvent.setExpLevelCost(self, level) end
 

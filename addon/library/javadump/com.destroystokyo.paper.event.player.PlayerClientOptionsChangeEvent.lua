@@ -39,16 +39,22 @@ function PlayerClientOptionsChangeEvent.getMainHand(self, ) end
 function PlayerClientOptionsChangeEvent.hasMainHandChanged(self, ) end
 
 ---@return boolean # 
+function PlayerClientOptionsChangeEvent.hasTextFilteringEnabled(self, ) end
+
+---@return boolean # 
+function PlayerClientOptionsChangeEvent.hasTextFilteringChanged(self, ) end
+
+---@return boolean # 
 function PlayerClientOptionsChangeEvent.allowsServerListings(self, ) end
 
 ---@return boolean # 
 function PlayerClientOptionsChangeEvent.hasAllowServerListingsChanged(self, ) end
 
----@return boolean # 
-function PlayerClientOptionsChangeEvent.hasTextFilteringEnabled(self, ) end
+---@return com.destroystokyo.paper.ClientOption.ParticleVisibility # 
+function PlayerClientOptionsChangeEvent.getParticleVisibility(self, ) end
 
 ---@return boolean # 
-function PlayerClientOptionsChangeEvent.hasTextFilteringChanged(self, ) end
+function PlayerClientOptionsChangeEvent.hasParticleVisibilityChanged(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function PlayerClientOptionsChangeEvent.getHandlers(self, ) end

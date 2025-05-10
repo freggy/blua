@@ -1,6 +1,6 @@
 ---@meta
 
----@class org.bukkit.entity.Minecart: org.bukkit.entity.Vehicle
+---@class org.bukkit.entity.Minecart: org.bukkit.entity.Vehicle,io.papermc.paper.entity.Frictional
 local Minecart = {}
 ---@param damage double over 40 to "kill" a minecart
 ---@return void # 

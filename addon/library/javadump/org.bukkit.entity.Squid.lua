@@ -1,4 +1,4 @@
 ---@meta
 
----@class org.bukkit.entity.Squid: org.bukkit.entity.WaterMob
+---@class org.bukkit.entity.Squid: org.bukkit.entity.Ageable,org.bukkit.entity.WaterMob
 local Squid = {}

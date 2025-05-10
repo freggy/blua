@@ -6,13 +6,6 @@ local VehicleEntityCollisionEvent = {}
 function VehicleEntityCollisionEvent.getEntity(self, ) end
 
 ---@return boolean # 
-function VehicleEntityCollisionEvent.isCancelled(self, ) end
-
----@param cancel boolean 
----@return void # 
-function VehicleEntityCollisionEvent.setCancelled(self, cancel) end
-
----@return boolean # 
 function VehicleEntityCollisionEvent.isPickupCancelled(self, ) end
 
 ---@param cancel boolean 
@@ -25,4 +18,11 @@ function VehicleEntityCollisionEvent.isCollisionCancelled(self, ) end
 ---@param cancel boolean 
 ---@return void # 
 function VehicleEntityCollisionEvent.setCollisionCancelled(self, cancel) end
+
+---@return boolean # 
+function VehicleEntityCollisionEvent.isCancelled(self, ) end
+
+---@param cancel boolean 
+---@return void # 
+function VehicleEntityCollisionEvent.setCancelled(self, cancel) end
 

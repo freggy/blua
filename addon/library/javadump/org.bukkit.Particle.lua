@@ -93,6 +93,8 @@
 ---@field SCULK_CHARGE_POP org.bukkit.Particle
 ---@field SHRIEK org.bukkit.Particle
 ---@field CHERRY_LEAVES org.bukkit.Particle
+---@field PALE_OAK_LEAVES org.bukkit.Particle
+---@field TINTED_LEAVES org.bukkit.Particle
 ---@field EGG_CRACK org.bukkit.Particle
 ---@field DUST_PLUME org.bukkit.Particle
 ---@field WHITE_SMOKE org.bukkit.Particle
@@ -106,6 +108,9 @@
 ---@field INFESTED org.bukkit.Particle
 ---@field ITEM_COBWEB org.bukkit.Particle
 ---@field DUST_PILLAR org.bukkit.Particle
+---@field BLOCK_CRUMBLE org.bukkit.Particle
+---@field FIREFLY org.bukkit.Particle
+---@field TRAIL org.bukkit.Particle
 ---@field OMINOUS_SPAWNING org.bukkit.Particle
 ---@field RAID_OMEN org.bukkit.Particle
 ---@field TRIAL_OMEN org.bukkit.Particle

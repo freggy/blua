@@ -2,10 +2,10 @@
 
 ---@class org.bukkit.event.entity.EntityPotionEffectEvent: org.bukkit.event.entity.EntityEvent
 local EntityPotionEffectEvent = {}
----@return org.bukkit.potion.PotionEffect # The old potion effect or null if the entity did not have the changed effect type.
+---@return org.bukkit.potion.PotionEffect # The old potion effect or {@code null} if the entity did not have the changed effect type.
 function EntityPotionEffectEvent.getOldEffect(self, ) end
 
----@return org.bukkit.potion.PotionEffect # The new potion effect or null if the effect of the changed type will be removed.
+---@return org.bukkit.potion.PotionEffect # The new potion effect or {@code null} if the effect of the changed type will be removed.
 function EntityPotionEffectEvent.getNewEffect(self, ) end
 
 ---@return org.bukkit.event.entity.EntityPotionEffectEvent.Cause # A Cause value why the effect has changed.

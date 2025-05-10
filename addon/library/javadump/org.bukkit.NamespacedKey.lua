@@ -18,6 +18,9 @@ function NamespacedKey.isValidNamespace(self, namespace) end
 ---@return boolean # 
 function NamespacedKey.isValidKey(self, key) end
 
+---@return void # 
+function NamespacedKey.validate(self, ) end
+
 ---@return java.lang.String # 
 function NamespacedKey.getNamespace(self, ) end
 

@@ -2,8 +2,16 @@
 
 ---@class org.bukkit.Registry: java.lang.Iterable
 local Registry = {}
+---@param registryKey io.papermc.paper.registry.RegistryKey 
+---@return org.bukkit.Registry # 
+function Registry.registryFor(self, registryKey) end
+
+---@param clazz java.lang.Class 
+---@return org.bukkit.Registry # 
+function Registry.legacyRegistryFor(self, clazz) end
+
 ---@param key org.bukkit.NamespacedKey non-null key
----@return T # item or null if does not exist
+---@return T # item or null if it does not exist
 function Registry.get(self, key) end
 
 ---@param key <unresolved> non-null key
@@ -38,10 +46,23 @@ function Registry.hasTag(self, key) end
 ---@return io.papermc.paper.registry.tag.Tag # the tag for the key
 function Registry.getTag(self, key) end
 
+---@return java.util.Collection # a stream of all tags in this registry
+function Registry.getTags(self, ) end
+
+---@param key org.bukkit.NamespacedKey to get the object from
+---@return T # object with the given key
+function Registry.getOrThrow(self, key) end
+
 ---@return java.util.stream.Stream # a stream of all registry items
 function Registry.stream(self, ) end
 
----@param input java.lang.String non-null input
----@return T # registered object or null if does not exist
+---@return java.util.stream.Stream # a stream of all registry keys
+function Registry.keyStream(self, ) end
+
+---@param input java.lang.String 
+---@return T # 
 function Registry.match(self, input) end
+
+---@return int # the size of the registry
+function Registry.size(self, ) end
 

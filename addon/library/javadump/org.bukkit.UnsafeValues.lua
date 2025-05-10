@@ -27,9 +27,6 @@ function UnsafeValues.legacyComponentSerializer(self, ) end
 ---@return net.kyori.adventure.text.Component # 
 function UnsafeValues.resolveWithContext(self, component,context,scoreboardSubject,bypassPermissions) end
 
----@return void # 
-function UnsafeValues.reportTimings(self, ) end
-
 ---@param material org.bukkit.Material 
 ---@return org.bukkit.Material # 
 function UnsafeValues.toLegacy(self, material) end
@@ -113,17 +110,9 @@ function UnsafeValues.getTranslationKey(self, itemStack) end
 ---@return java.lang.String # 
 function UnsafeValues.getTranslationKey(self, attribute) end
 
----@param key org.bukkit.NamespacedKey 
----@return org.bukkit.FeatureFlag # 
-function UnsafeValues.getFeatureFlag(self, key) end
-
 ---@param key org.bukkit.NamespacedKey of the potion type
 ---@return org.bukkit.potion.PotionType.InternalPotionData # an internal potion data
 function UnsafeValues.getInternalPotionData(self, key) end
-
----@param key java.lang.String 
----@return org.bukkit.damage.DamageEffect # 
-function UnsafeValues.getDamageEffect(self, key) end
 
 ---@param damageType org.bukkit.damage.DamageType the {@link DamageType} to use
 ---@return org.bukkit.damage.DamageSource.Builder # a {@link DamageSource.Builder}
@@ -134,7 +123,7 @@ function UnsafeValues.createDamageSourceBuilder(self, damageType) end
 ---@return java.lang.String # 
 function UnsafeValues.get(self, aClass,value) end
 
----@param registry org.bukkit.Registry 
+---@param registry io.papermc.paper.registry.RegistryKey 
 ---@param key org.bukkit.NamespacedKey 
 ---@return B # 
 function UnsafeValues.get(self, registry,key) end
@@ -147,9 +136,6 @@ function UnsafeValues.isSupportedApiVersion(self, apiVersion) end
 ---@return boolean # 
 function UnsafeValues.isLegacyPlugin(self, plugin) end
 
----@return java.lang.String # name
-function UnsafeValues.getTimingsServerName(self, ) end
-
 ---@return com.destroystokyo.paper.util.VersionFetcher # 
 function UnsafeValues.getVersionFetcher(self, ) end
 
@@ -161,20 +147,40 @@ function UnsafeValues.serializeItem(self, item) end
 ---@return org.bukkit.inventory.ItemStack # 
 function UnsafeValues.deserializeItem(self, data) end
 
----@param entity org.bukkit.entity.Entity 
----@return byte[] # 
+---@param itemStack org.bukkit.inventory.ItemStack 
+---@return <unresolved> # json object representing this item.
+function UnsafeValues.serializeItemAsJson(self, itemStack) end
+
+---@param data <unresolved> object representing an item in Json format
+---@return org.bukkit.inventory.ItemStack # the deserialize item stack, migrated to the latest data version if needed.
+function UnsafeValues.deserializeItemFromJson(self, data) end
+
+---@param entity org.bukkit.entity.Entity entity
+---@return byte[] # serialized entity data
 function UnsafeValues.serializeEntity(self, entity) end
 
----@param data byte[] 
----@param world org.bukkit.World 
----@return org.bukkit.entity.Entity # 
+---@param entity org.bukkit.entity.Entity entity
+---@param serializationFlags io.papermc.paper.entity.EntitySerializationFlag serialization flags
+---@return byte[] # serialized entity data
+function UnsafeValues.serializeEntity(self, entity,serializationFlags) end
+
+---@param data byte[] serialized entity data
+---@param world org.bukkit.World world
+---@return org.bukkit.entity.Entity # deserialized entity
 function UnsafeValues.deserializeEntity(self, data,world) end
 
----@param data byte[] 
----@param world org.bukkit.World 
----@param preserveUUID boolean 
----@return org.bukkit.entity.Entity # 
+---@param data byte[] serialized entity data
+---@param world org.bukkit.World world
+---@param preserveUUID boolean whether to preserve the entity's uuid
+---@return org.bukkit.entity.Entity # deserialized entity
 function UnsafeValues.deserializeEntity(self, data,world,preserveUUID) end
+
+---@param data byte[] serialized entity data
+---@param world org.bukkit.World world
+---@param preserveUUID boolean whether to preserve uuids of the entity and its passengers
+---@param preservePassengers boolean whether to preserve passengers
+---@return org.bukkit.entity.Entity # deserialized entity
+function UnsafeValues.deserializeEntity(self, data,world,preserveUUID,preservePassengers) end
 
 ---@return int # 
 function UnsafeValues.nextEntityId(self, ) end
@@ -217,9 +223,9 @@ function UnsafeValues.setBiomeKey(self, accessor,x,y,z,biomeKey) end
 ---@return java.lang.String # 
 function UnsafeValues.getStatisticCriteriaKey(self, statistic) end
 
----@param entityType org.bukkit.entity.EntityType The entity type to get the color for
----@param layer int The texture layer to get a color for
----@return org.bukkit.Color # The color of the layer for the entity's spawn egg
+---@param entityType org.bukkit.entity.EntityType the entity type to get the color for
+---@param layer int the texture layer to get a color for
+---@return org.bukkit.Color # the color of the layer for the entity's spawn egg
 function UnsafeValues.getSpawnEggLayerColor(self, entityType,layer) end
 
 ---@param plugin org.bukkit.plugin.java.JavaPlugin 
@@ -233,10 +239,14 @@ function UnsafeValues.createPluginLifecycleEventManager(self, plugin,registratio
 ---@return java.util.List # 
 function UnsafeValues.computeTooltipLines(self, itemStack,tooltipContext,player) end
 
----@param tagKey io.papermc.paper.registry.tag.TagKey 
----@return io.papermc.paper.registry.tag.Tag # 
-function UnsafeValues.getTag(self, tagKey) end
-
 ---@return org.bukkit.inventory.ItemStack # 
 function UnsafeValues.createEmptyStack(self, ) end
+
+---@param itemStack org.bukkit.inventory.ItemStack 
+---@return java.util.Map # 
+function UnsafeValues.serializeStack(self, itemStack) end
+
+---@param args java.util.Map 
+---@return org.bukkit.inventory.ItemStack # 
+function UnsafeValues.deserializeStack(self, args) end
 

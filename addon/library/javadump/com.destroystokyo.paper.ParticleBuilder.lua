@@ -21,15 +21,15 @@ function ParticleBuilder.hasReceivers(self, ) end
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.allPlayers(self, ) end
 
----@param receivers java.util.List List of players to receive this particle, or null for all players in the world
+---@param receivers java.util.List List of players to receive this particle, or null for all players in the                  world
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.receivers(self, receivers) end
 
----@param receivers java.util.Collection List of players to receive this particle, or null for all players in the world
+---@param receivers java.util.Collection List of players to receive this particle, or null for all players in the                  world
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.receivers(self, receivers) end
 
----@param receivers org.bukkit.entity.Player List of players to be receive this particle, or null for all players in the world
+---@param receivers org.bukkit.entity.Player List of players to receive this particle, or null for all players in the                  world
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.receivers(self, receivers) end
 
@@ -138,31 +138,38 @@ function ParticleBuilder.color(self, color,size) end
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.color(self, r,g,b) end
 
----@param rgb int an integer representing the red, green, and blue color components
+---@param color int an integer representing the color components. If the highest byte (alpha channel) is zero,              the color is treated as RGB. Otherwise, it is treated as ARGB.
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
-function ParticleBuilder.color(self, rgb) end
+function ParticleBuilder.color(self, color) end
+
+---@param a int alpha color component
+---@param r int red color component
+---@param g int green color component
+---@param b int blue color component
+---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
+function ParticleBuilder.color(self, a,r,g,b) end
 
 ---@param fromColor org.bukkit.Color the new particle from color
 ---@param toColor org.bukkit.Color the new particle to color
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.colorTransition(self, fromColor,toColor) end
 
----@param fromRed int red color component for the from color
----@param fromGreen int green color component for the from color
----@param fromBlue int blue color component for the from color
+---@param fromRed int red color component for the "from" color
+---@param fromGreen int green color component for the "from" color
+---@param fromBlue int blue color component for the "from" color
 ---@param toRed int red color component for the to color
 ---@param toGreen int green color component for the to color
 ---@param toBlue int blue color component for the to color
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.colorTransition(self, fromRed,fromGreen,fromBlue,toRed,toGreen,toBlue) end
 
----@param fromRgb int an integer representing the red, green, and blue color components for the from color
----@param toRgb int an integer representing the red, green, and blue color components for the to color
+---@param fromRgb int an integer representing the red, green, and blue color components for the "from" color
+---@param toRgb int an integer representing the red, green, and blue color components for the "to" color
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.colorTransition(self, fromRgb,toRgb) end
 
----@param fromColor org.bukkit.Color the new particle color for the from color.
----@param toColor org.bukkit.Color the new particle color for the to color.
+---@param fromColor org.bukkit.Color the new particle color for the "from" color.
+---@param toColor org.bukkit.Color the new particle color for the "to" color.
 ---@param size float the size of the particle
 ---@return com.destroystokyo.paper.ParticleBuilder # a reference to this object.
 function ParticleBuilder.colorTransition(self, fromColor,toColor,size) end

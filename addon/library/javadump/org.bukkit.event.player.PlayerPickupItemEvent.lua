@@ -8,11 +8,11 @@ function PlayerPickupItemEvent.getItem(self, ) end
 ---@return int # amount remaining on the ground
 function PlayerPickupItemEvent.getRemaining(self, ) end
 
----@param flyAtPlayer boolean true for item to fly at player
+---@param flyAtPlayer boolean {@code true} for item to fly at player
 ---@return void # 
 function PlayerPickupItemEvent.setFlyAtPlayer(self, flyAtPlayer) end
 
----@return boolean # true if the item will fly at the player
+---@return boolean # {@code true} if the item will fly at the player
 function PlayerPickupItemEvent.getFlyAtPlayer(self, ) end
 
 ---@return boolean # 

@@ -11,13 +11,13 @@ function InventoryClickEvent.getCursor(self, ) end
 ---@return org.bukkit.inventory.ItemStack # the item in the clicked slot
 function InventoryClickEvent.getCurrentItem(self, ) end
 
----@return boolean # true if the ClickType uses the right mouse button.
+---@return boolean # {@code true} if the ClickType uses the right mouse button.
 function InventoryClickEvent.isRightClick(self, ) end
 
----@return boolean # true if the ClickType uses the left mouse button.
+---@return boolean # {@code true} if the ClickType uses the left mouse button.
 function InventoryClickEvent.isLeftClick(self, ) end
 
----@return boolean # true if the ClickType uses Shift or Ctrl.
+---@return boolean # {@code true} if the ClickType uses Shift or Ctrl.
 function InventoryClickEvent.isShiftClick(self, ) end
 
 ---@param stack org.bukkit.inventory.ItemStack the new cursor item
@@ -28,16 +28,16 @@ function InventoryClickEvent.setCursor(self, stack) end
 ---@return void # 
 function InventoryClickEvent.setCurrentItem(self, stack) end
 
----@return org.bukkit.inventory.Inventory # inventory, or null if clicked outside
+---@return org.bukkit.inventory.Inventory # inventory, or {@code null} if clicked outside
 function InventoryClickEvent.getClickedInventory(self, ) end
 
----@return int # The slot number.
+---@return int # the slot number
 function InventoryClickEvent.getSlot(self, ) end
 
 ---@return int # the slot number
 function InventoryClickEvent.getRawSlot(self, ) end
 
----@return int # the number on the key minus 1 (range 0-8); or -1 if not     a NUMBER_KEY action
+---@return int # the number on the key minus 1 (range 0-8); or -1 if ClickType is NUMBER_KEY and player did an off-hand swap. Is also -1 if ClickType is not NUMBER_KEY
 function InventoryClickEvent.getHotbarButton(self, ) end
 
 ---@return org.bukkit.event.inventory.InventoryAction # the InventoryAction that triggered this event.

@@ -3,7 +3,14 @@
 ---@class org.bukkit.block.data.type.Vault: org.bukkit.block.data.Directional
 local Vault = {}
 ---@return org.bukkit.block.data.type.Vault.State # the 'vault_state' value
+function Vault.getVaultState(self, ) end
+
+---@return org.bukkit.block.data.type.Vault.State # the 'vault_state' value
 function Vault.getTrialSpawnerState(self, ) end
+
+---@param state org.bukkit.block.data.type.Vault.State the new 'vault_state' value
+---@return void # 
+function Vault.setVaultState(self, state) end
 
 ---@param state org.bukkit.block.data.type.Vault.State the new 'vault_state' value
 ---@return void # 

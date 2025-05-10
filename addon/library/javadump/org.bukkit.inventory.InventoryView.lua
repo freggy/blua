@@ -43,6 +43,9 @@ function InventoryView.convertSlot(self, rawSlot) end
 function InventoryView.getSlotType(self, slot) end
 
 ---@return void # 
+function InventoryView.open(self, ) end
+
+---@return void # 
 function InventoryView.close(self, ) end
 
 ---@return int # The total size
@@ -65,4 +68,7 @@ function InventoryView.getOriginalTitle(self, ) end
 ---@param title java.lang.String The new title.
 ---@return void # 
 function InventoryView.setTitle(self, title) end
+
+---@return org.bukkit.inventory.MenuType # the menu type of the inventory view or null if not applicable
+function InventoryView.getMenuType(self, ) end
 

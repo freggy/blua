@@ -2,13 +2,6 @@
 
 ---@class org.bukkit.event.player.PlayerMoveEvent: org.bukkit.event.player.PlayerEvent
 local PlayerMoveEvent = {}
----@return boolean # true if this event is cancelled
-function PlayerMoveEvent.isCancelled(self, ) end
-
----@param cancel boolean true if you wish to cancel this event
----@return void # 
-function PlayerMoveEvent.setCancelled(self, cancel) end
-
 ---@return org.bukkit.Location # Location the player moved from
 function PlayerMoveEvent.getFrom(self, ) end
 
@@ -37,6 +30,13 @@ function PlayerMoveEvent.hasExplicitlyChangedBlock(self, ) end
 
 ---@return boolean # whether the player has changed orientation or not
 function PlayerMoveEvent.hasChangedOrientation(self, ) end
+
+---@return boolean # 
+function PlayerMoveEvent.isCancelled(self, ) end
+
+---@param cancel boolean 
+---@return void # 
+function PlayerMoveEvent.setCancelled(self, cancel) end
 
 ---@param loc org.bukkit.Location 
 ---@return void # 

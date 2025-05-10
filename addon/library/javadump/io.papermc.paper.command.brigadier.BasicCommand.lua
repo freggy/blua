@@ -12,3 +12,10 @@ function BasicCommand.execute(self, commandSourceStack,args) end
 ---@return java.util.Collection # a collection of suggestions
 function BasicCommand.suggest(self, commandSourceStack,args) end
 
+---@param sender org.bukkit.command.CommandSender the command sender trying to execute the command
+---@return boolean # whether the command sender fulfills the root command requirement
+function BasicCommand.canUse(self, sender) end
+
+---@return java.lang.String # the permission for the root command used in {@link #canUse(CommandSender)}
+function BasicCommand.permission(self, ) end
+

@@ -2,13 +2,6 @@
 
 ---@class org.bukkit.event.player.PlayerChatEvent: org.bukkit.event.player.PlayerEvent
 local PlayerChatEvent = {}
----@return boolean # 
-function PlayerChatEvent.isCancelled(self, ) end
-
----@param cancel boolean 
----@return void # 
-function PlayerChatEvent.setCancelled(self, cancel) end
-
 ---@return java.lang.String # Message the player is attempting to send
 function PlayerChatEvent.getMessage(self, ) end
 
@@ -29,6 +22,13 @@ function PlayerChatEvent.setFormat(self, format) end
 
 ---@return java.util.Set # All Players who will see this chat message
 function PlayerChatEvent.getRecipients(self, ) end
+
+---@return boolean # 
+function PlayerChatEvent.isCancelled(self, ) end
+
+---@param cancel boolean 
+---@return void # 
+function PlayerChatEvent.setCancelled(self, cancel) end
 
 ---@return org.bukkit.event.HandlerList # 
 function PlayerChatEvent.getHandlers(self, ) end

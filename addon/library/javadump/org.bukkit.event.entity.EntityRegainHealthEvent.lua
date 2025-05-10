@@ -2,9 +2,6 @@
 
 ---@class org.bukkit.event.entity.EntityRegainHealthEvent: org.bukkit.event.entity.EntityEvent
 local EntityRegainHealthEvent = {}
----@return boolean # Whether the event is the result of a fast regeneration mechanic
-function EntityRegainHealthEvent.isFastRegen(self, ) end
-
 ---@return double # The amount of health regained
 function EntityRegainHealthEvent.getAmount(self, ) end
 
@@ -12,15 +9,18 @@ function EntityRegainHealthEvent.getAmount(self, ) end
 ---@return void # 
 function EntityRegainHealthEvent.setAmount(self, amount) end
 
+---@return org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason # A RegainReason detailing the reason for the entity regaining     health
+function EntityRegainHealthEvent.getRegainReason(self, ) end
+
+---@return boolean # Whether the event is the result of a fast regeneration mechanic
+function EntityRegainHealthEvent.isFastRegen(self, ) end
+
 ---@return boolean # 
 function EntityRegainHealthEvent.isCancelled(self, ) end
 
 ---@param cancel boolean 
 ---@return void # 
 function EntityRegainHealthEvent.setCancelled(self, cancel) end
-
----@return org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason # A RegainReason detailing the reason for the entity regaining     health
-function EntityRegainHealthEvent.getRegainReason(self, ) end
 
 ---@return org.bukkit.event.HandlerList # 
 function EntityRegainHealthEvent.getHandlers(self, ) end

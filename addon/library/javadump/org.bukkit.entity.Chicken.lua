@@ -2,6 +2,13 @@
 
 ---@class org.bukkit.entity.Chicken: org.bukkit.entity.Animals
 local Chicken = {}
+---@return org.bukkit.entity.Chicken.Variant # the chicken variant
+function Chicken.getVariant(self, ) end
+
+---@param variant org.bukkit.entity.Chicken.Variant the chicken variant
+---@return void # 
+function Chicken.setVariant(self, variant) end
+
 ---@return boolean # is chicken jockey
 function Chicken.isChickenJockey(self, ) end
 

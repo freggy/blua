@@ -76,13 +76,6 @@ function Panda.setIsOnBack(self, onBack) end
 ---@return void # 
 function Panda.setIsSitting(self, sitting) end
 
----@param sitting boolean is currently sitting
----@return void # 
-function Panda.setSitting(self, sitting) end
-
----@return boolean # is sitting
-function Panda.isSitting(self, ) end
-
 ---@return org.bukkit.entity.Panda.Gene # combined gene
 function Panda.getCombinedGene(self, ) end
 

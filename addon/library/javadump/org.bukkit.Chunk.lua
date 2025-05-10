@@ -51,16 +51,16 @@ function Chunk.isEntitiesLoaded(self, ) end
 ---@return Entity[] # The entities.
 function Chunk.getEntities(self, ) end
 
----@return BlockState[] # The tile entities.
+---@return BlockState[] # The block entities.
 function Chunk.getTileEntities(self, ) end
 
 ---@param useSnapshot boolean Take snapshots or direct references
----@return BlockState[] # The tile entities.
+---@return BlockState[] # The block entities.
 function Chunk.getTileEntities(self, useSnapshot) end
 
----@param blockPredicate java.util.function.Predicate The predicate of blocks to return tile entities for
+---@param blockPredicate java.util.function.Predicate The predicate of blocks to return block entities for
 ---@param useSnapshot boolean Take snapshots or direct references
----@return java.util.Collection # The tile entities.
+---@return java.util.Collection # The block entities.
 function Chunk.getTileEntities(self, blockPredicate,useSnapshot) end
 
 ---@return boolean # True if it is fully generated.
