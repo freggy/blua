@@ -36,8 +36,9 @@ Generated auto-completions for Minecraft 1.21 can be found in the `addons` folde
   * Plugin embedding luajit, so we can run lua code on the minecraft server
 
 ### Generate code completions
-* When using macos install lua and luarocks using macports
-  * `sudo port install lua lua-luarocks`
-* Run `./prepare-work`in `scripts` directory
-* `java -jar javadump.jar --config javadump.json`
-* `./codegen --in javadump.json --out lib`
+* Make sure you have installed the `luarocks` cli tool
+* Run `make install-deps`. This will install all missing dependencies for generating the completions.
+  * if on macos, you might need to do these steps additionally:
+    * brew install openssl@3 (or whatever openssl version)
+    * brew reinstall m4
+* Run `make completions`. This will generate new completions into the `addon/library` folder.
