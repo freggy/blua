@@ -1,10 +1,10 @@
 [
   {
-    "source": "wrk/paper/Paper-API/src/main/java",
+    "source": "wrk/paper-src/Paper-API/src/main/java",
     "output": "paper_dump.json",
     "solverSources": [
+      "wrk/jdk21-src/src/java.base/share/classes",
       "wrk/com.google.guava-guava-src",
-      "wrk/jdk21/src/java.base/share/classes",
       "wrk/net.kyori-adventure-api-src",
       "wrk/net.kyori-adventure-text-logger-slf4j-src",
       "wrk/net.kyori-adventure-text-minimessage-src",
@@ -18,12 +18,12 @@
     ]
   },
   {
-    "source": "wrk/jdk21/src/java.base/share/classes",
+    "source": "wrk/jdk21-src/src/java.base/share/classes",
     "output": "java_base_dump.json",
     "solverSources": []
   },
   {
-    "source": "wrk/jdk21/src/java.logging/share/classes",
+    "source": "wrk/jdk21-src/src/java.logging/share/classes",
     "output": "java_logging_dump.json",
     "solverSources": []
   }
